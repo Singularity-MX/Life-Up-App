@@ -1,13 +1,12 @@
 import React from "react";
 import './header.css';
-
+import lifeUpLogo from './images/lifeUp.svg'
 export function Header(props) {
     return (
-        <div className="header">
-            <div className="logo">
-                <h1 className="title">{props.texto}</h1>
-            </div>
-        </div>
+        <header className="header">
+            <img className="lifeUpLogo" src={lifeUpLogo} alt="Logo Life Up"/>
+            <h1 className="title">{props.texto}</h1>
+        </header>
 
     );
 }

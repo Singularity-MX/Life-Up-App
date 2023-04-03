@@ -1,22 +1,42 @@
-import React from "react";
+import React, { useState } from 'react';
 import './login.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 function Login() {
-  return (
+  const [showPassword, setShowPassword] = useState(false);
 
-      <div className='targetForm'>
-        <div className='panel_izq'><p>hola</p></div>
-        <div className='panel_der'>
-          <h1>HOLA</h1>
-          <div className='containerForm'>
-            <form>
-            <input type="text" name="usuario" /><br/>
-            <input type="password" name="contrasena" /><br/>
-            <button type="submit">Iniciar sesión</button>
+  function handleTogglePassword() {
+    setShowPassword(!showPassword);
+  }
+
+  return (
+    
+    <div className='targetForm'>
+      <div className='panel_izq'></div>
+      <div className='panel_der'>
+        <h1>INICIA SESIÓN</h1>
+        <div className='containerForm'>
+          <form>
+          <FontAwesomeIcon icon={faUser} className="icon" />
+
+            <input type="text" name="usuario" className="input" placeholder='Nombre de usuario'/><br />
+            
+            <FontAwesomeIcon icon={faLock} className="icon" />
+
+            <input className="input" type={showPassword ? 'text' : 'password'} id="password" name="password" placeholder='Contraseña'/><br />
+            
+            <button type="button" onClick={handleTogglePassword} className='btnShow'>
+            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} className="ico_show"/>{showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'} 
+            </button><br/>
+
+            <button type="submit" className='boton'>Acceder</button>
           </form>
-          </div>
         </div>
       </div>
+    </div>
 
   );
 }
