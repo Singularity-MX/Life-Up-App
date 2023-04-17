@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,700;1,900&display=swap');
+
+
+.container{
+    background-color: rgb(179, 179, 179);
+    width: 96.6%;
+    height: 100%;
+    margin-top: 4.5rem;
+    margin-left: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    
+
+}
+
+/*CONTENEDOIR DE ESTADISTICA*/
+.container-stadistic{
+    background-color: rgba(255, 238, 0, 0.712);
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+
+}
+
+
+/*divisor de  estadistticas pastel y otra*/
+.container-bottom-estadisticas{
+
+}
+
+
+
+
+/*GRAFICO DE BARRAS*/
+.contenedor_barras{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    width: 95%;
+    border-radius: 15px;
+}
+.content-title{
+    background-color: #8AD0E0;
+    text-align: center;
+    margin: 1.5rem;
+    margin-bottom: 4rem;
+    border-radius: 10px;
+    width: 60%;
+    padding: 0px;
+    box-shadow: 2px 2px 5px 1px #a8a8a8;
+}
+.titulo{
+    font-family: 'Rubik', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    margin: 10px;
+}
+
+
+/*estilos de grafica pastel*/
+.contenedor-bottom-estadisticas{
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.contenedor_botom{
+    width: 50%;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding-bottom: 1rem;
+    margin: 1.5rem;
+}
+
+.ejemplo{
+    width: 80%;
+
+}
+
+
+
+/*------USUARIO HOME----------*/
+
+.container-info{
+    background-color: rgb(255, 255, 255);
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+/*HEADER DE USUARIO HOME*/
+.conainer_header_user{
+    width: 98%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/*div container de title card*/
+.title-header{
+    background-color: #DADADA;
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 17px;
+}
+
+.title_user{
+margin: 1rem;
+}
+
+.icon_info{
+    width: 50px;
+    margin: 0px;
+}
+
+/*Buttons*/
+.buttons-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #ff007300;
+}
+
+button {
+    margin-left: 5rem;
+    margin-right: 2rem;
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: inline-block;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.7em 2em;
+    border: 3px solid #FBC834;
+    border-radius: 2px;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+    color: #FBC834;
+    text-decoration: none;
+    transition: 0.3s ease all;
+    z-index: 1;
+    cursor: pointer;
+  }
+  
+  button:before {
+    transition: 0.5s all ease;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    opacity: 0;
+    content: '';
+    background-color: #FBC834;
+    z-index: -1;
+  }
+  
+  button:hover, button:focus {
+    color: black;
+  }
+  
+  button:hover:before, button:focus:before {
+    transition: 0.5s all ease;
+    left: 0;
+    right: 0;
+    opacity: 1;
+  }
+  
+  button:active {
+    transform: scale(0.9);
+  }
+
+
+  
+  /*buscar*/
+  .container-input {
+    position: relative;
+  }
+  
+  .input {
+    width: 150px;
+    padding: 10px 0px 10px 40px;
+    border-radius: 9999px;
+    transition: all .2s ease-in-out;
+    outline: none;
+    background-color: #DADADA;
+  }
+  
+  .container-input svg {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translate(0, -50%);
+  }
+  
+  .input:focus {
+    opacity: 1;
+    width: 250px;
+    color: #000;
+  }
+
+
+
+
+
+
+
+
+
+
+/*-------INFO USUARIO------------------------------*/
+.container_info_user{
+    background-color: #DADADA;
+    width: 98%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-top: 1rem;
+    border-radius: 17px;
+    margin-top: 0.5rem;
+}
+.IMG_USER{
+    margin-left: 2rem;
+    margin-right: 3rem;
+}
+.titulo_nombre{
+    font-size: 35px;
+    margin-bottom: 0px;
+    color: #000;
+}
+.txt_user_general{
+    font-size: 25px;
+    margin: 10px 0px 0px 0px;
+}
+
+/*----------------INFO ADICIONA------------------------------*/
+.container_info_adicional{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 98%;
+    background-color: #fbc93400;
+
+
+}
+.card_container{
+    background-color: rgba(0, 255, 255, 0);
+    width: 32.5%;
+    margin-bottom: 1rem;
+    
+
+}
+.title_card{
+    background-color: #DADADA;
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 17px;
+    margin-top: 0.5rem;
+}
+.title_user{
+    margin-right: 0px;
+}
+.card_info{
+    background-color: #DADADA;
+    border-radius: 17px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+
+.title_card_info, .txt_card{
+    margin-left: 2rem;
+    
+}
+.title_card_info{
+    margin-top: 0px;
+    color: #2E2E2E;
+}
+.txt_card{
+    margin-top: 0px;
+    color: #2E2E2E;
+
+}
+.icon_info{
+    width: 50px;
+}
+
+
+
+
+.imagen_pastel{
+    width: 50px;
+}
+body{
+    background-color: #DADADA;
+}
+
+
+
+
+@media (max-height: 607px) {
+    .containerMenu{
+display: none;
+    }
+}

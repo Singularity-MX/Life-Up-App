@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-
+import {Header, Loader} from "../Header";
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -13,8 +13,9 @@ function Login() {
   }
 
   return (
-    
+    <div ><Header texto="Inicia Sesión" />
     <div className='targetForm'>
+      
       <div className='panel_izq'></div>
       <div className='panel_der'>
         <h1>INICIA SESIÓN</h1>
@@ -36,6 +37,7 @@ function Login() {
           </form>
         </div>
       </div>
+    </div>
     </div>
 
   );

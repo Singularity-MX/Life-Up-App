@@ -1,6 +1,6 @@
 import React from "react";
 import './header.css';
-import lifeUpLogo from './images/lifeUp.svg'
+import lifeUpLogo from '../Componentes/images/lifeUp.svg';
 export function Header(props) {
     return (
         <header className="header">

@@ -12,7 +12,7 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  background-color: #1C9CDC;
+  background-color: #00807B;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   z-index: 9999;
 }
@@ -123,7 +123,7 @@ margin-left: 1rem;
 }
 
 .boxes .box > div:nth-child(2) {
-  --background: #145af2;
+  --background: #000000;
   --right: 0;
   --rotateY: 90deg;
 }

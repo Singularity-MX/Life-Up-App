@@ -2,14 +2,14 @@
 import logo from './logo.svg';
 import './App.css';
 /*Funciones importadas*/
-import {Header, Loader} from "./Header";
-import Login from './Login/login'
-
+import Login from './Componentes/Login/login';
+import Header from './Componentes/Header';
+import Home from './Componentes/Home/Home';
 function App() {
   return (
     <div className="App">
-       <Header texto="Inicia Sesión" />
-       <Login />
+       
+       <Home />
     </div>
    
   );
