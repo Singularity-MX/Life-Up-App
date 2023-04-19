@@ -58,6 +58,7 @@
     width: 60%;
     padding: 0px;
     box-shadow: 2px 2px 5px 1px #a8a8a8;
+    cursor: pointer;
 }
 .titulo{
     font-family: 'Rubik', sans-serif;
@@ -98,7 +99,7 @@
 /*------USUARIO HOME----------*/
 
 .container-info{
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(155, 57, 57);
     width: 60%;
     height: 100%;
     display: flex;
@@ -145,7 +146,7 @@ margin: 1rem;
     background-color: #ff007300;
 }
 
-button {
+.btn-buscar button {
     margin-left: 5rem;
     margin-right: 2rem;
     font-size: 18px;
@@ -166,7 +167,7 @@ button {
     cursor: pointer;
   }
   
-  button:before {
+  .btn-buscar button:before {
     transition: 0.5s all ease;
     position: absolute;
     top: 0;
@@ -179,7 +180,7 @@ button {
     z-index: -1;
   }
   
-  button:hover, button:focus {
+  .btn-buscar button:hover, button:focus {
     color: black;
   }
   
@@ -190,7 +191,7 @@ button {
     opacity: 1;
   }
   
-  button:active {
+  .btn-buscar button:active {
     transform: scale(0.9);
   }
 
@@ -333,8 +334,41 @@ body{
 
 
 
-@media (max-height: 607px) {
-    .containerMenu{
-display: none;
+@media (max-width: 1450px) {
+    .container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .container-stadistic{
+        width: 80%;
+    }
+    .container-info{
+    width: 80%;
+    }
+}
+
+.btn-user{
+    width: 60%;
+    margin: 0;
+}
+
+@media (max-width: 1010px) {
+    .container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .container-stadistic{
+        width: 80%;
+    }
+    .container-info{
+    width: 80%;
+    display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 }

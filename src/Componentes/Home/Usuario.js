@@ -29,7 +29,7 @@ function User() {
                         </svg>
                     </div>
 
-                    <button>Buscar</button>
+                    <button className='btn-buscar'>Buscar</button>
                 </div>
             </div>
 
