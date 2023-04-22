@@ -10,4 +10,4 @@ npm install -g firebase-tools
 npm install react-router-dom
 npm install @fontsource/roboto
 npm install @mui/material @emotion/react @emotion/styled
-
+npm install firebase
