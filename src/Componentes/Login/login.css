@@ -2,7 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,700;1,900&display=swap');
-
+body{
+  background-image: url("../images/background-triangle.png");
+  background-size: 100vw 100vh;
+}
 .targetFormLogin{
     width: 1200px;
     height: 70%;
