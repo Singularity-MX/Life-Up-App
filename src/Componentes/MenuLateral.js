@@ -13,9 +13,40 @@ import actividad from './images/icons/actividad.svg';
 import estadisticas from './images/icons/estadisticas.svg';
 import salir from './images/icons/exit.svg';
 
+import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {endSession, getSession, isLoggedIn} from "../session";
+
+
+
+
 export function Menu(props) {
     const color = "#FFF";
 
+    let navigate = useNavigate();
+
+    let [email, setEmail] = useState("");
+  
+    useEffect(() => {
+      if (!isLoggedIn()) {
+        navigate("/login");
+      }
+  
+      let session = getSession();
+      setEmail(session.email);
+  
+      console.log("Your access token is: " + session.accessToken);
+    }, [navigate]);
+  
+    const onLogout = () => {
+      endSession();
+      navigate("/loader-Login");
+    }
+
+    const addUser = () => {
+      navigate("/addUserPersonal");
+    }
+  
 
     return (
     <div>
@@ -24,7 +55,7 @@ export function Menu(props) {
                <img src={home} className="icon"/>
             </div>
             <div className="Option">
-            <img src={user} className="icon"/>
+            <img src={user} className="icon" onClick={addUser}/>
             </div>
             <div className="Option">
             <img src={buscar} className="icon"/>
@@ -45,7 +76,7 @@ export function Menu(props) {
 
 
             <div className="Option">
-            <img src={salir} className="icon"/>
+            <img src={salir} className="icon" onClick={onLogout}/>
             </div>
 
 
