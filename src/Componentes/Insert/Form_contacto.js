@@ -24,6 +24,7 @@ return(
             <input type="text" className="txt-inputs" placeholder="Ciudad" />
             <input type="text" className="txt-inputs" placeholder="Estado" />
             <button type="submit" className='btn-user'>Siguiente</button>
+            
           </form>
         </div>
       </div>

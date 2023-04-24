@@ -4,9 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,700;1,900&display=swap');
 
 
-body{
-   background-color: #343541;
-}
+
 
 /*contenedor base */
 .contenedor-base{
@@ -118,6 +116,24 @@ justify-content: center;
 
   }
 
+  .btn-Cancelar{
+    background-color: #ec2222   ;
+    border-radius: 6px;
+    width: 60%;
+    height: 3rem;
+    font-size: 15px;
+    margin-top: 0;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    transition: all 0.4s ease-in-out;
+    color: white;
+  }
+  .btn-Cancelar:hover{
+   
+    color: white;
+    scale: 1.1;
+   }
 
   .btn-user{
     background-color: #4CAF50   ;
@@ -128,7 +144,7 @@ justify-content: center;
     margin-top: 1rem;
     border: none;
     cursor: pointer;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     transition: all 0.4s ease-in-out;
   }
 
