@@ -3,6 +3,8 @@ import logo from '../images/lifeUp.svg';
 import Graficos from './graficas';
 import Usuarios from './Usuario';
 
+
+
 //importar los componentes propios
 
 function Display(){

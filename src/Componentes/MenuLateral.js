@@ -46,6 +46,9 @@ export function Menu(props) {
     const addUser = () => {
       navigate("/addUserPersonal");
     }
+    const ejemploADD = () => {
+      navigate("/ejemplo");
+    }
   
 
     return (

@@ -5,9 +5,21 @@ import phil from '../images/Home/phil.png';
 import medico from '../images/Home/medico.png';
 import psicp from '../images/Home/psicologia.png';
 import taller from '../images/Home/talleres.png';
+import {useEffect, useState} from "react";
+import {obtenerDatosDeFirebase} from '../../services/firebaseHome';
+import {useNavigate} from "react-router-dom";
+
+const User = () => {
+
+    const [datos, setDatos] = useState(null);
+
+    useEffect(() => {
+      obtenerDatosDeFirebase((datos) => {
+        setDatos(datos);
+      });
+    }, []);
 
 
-function User() {
     return (
         <div className='container-info'>
             {/* Aqui es el panel derecho de la info de usuario */}
@@ -38,8 +50,9 @@ function User() {
                 <div className='info_value'>
                     <h1 className='titulo_nombre'>Jose Eduardo Perez Ruiz</h1>
                     <p className='txt_user_general'>Última asistencia: 29/03/20</p>
-                    <p className='txt_user_general'>Usuario: 189245</p>
+                    <p className='txt_user_general'>Usuario: {datos}</p>
                     <p className='txt_user_general'>Edad: 89 años</p>
+                    {datos ? <h1>{datos}</h1> : <p>Cargando datos...</p>}
                 </div>
             </div>
 

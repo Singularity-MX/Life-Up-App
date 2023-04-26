@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth} from "firebase/auth";
+import 'firebase/compat/database';
+import firebase from 'firebase/compat/app';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -13,6 +15,8 @@ const firebaseConfig = {
   measurementId: "G-RXE56TBBRB"
 };
 
+
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
@@ -23,3 +27,10 @@ export const createUser = async (email, password) => {
 export const signInUser = async (email, password) => {
   return signInWithEmailAndPassword(getAuth(app), email, password);
 }
+
+
+firebase.initializeApp(firebaseConfig);
+
+const storage = firebase.storage;
+
+export default firebase.database();

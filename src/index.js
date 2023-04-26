@@ -20,6 +20,10 @@ import InicioSesionRoute from './routes/InicioSesionRoute';
 import HomeRoute from "./routes/home";
 import Loader from './Componentes/Loader/Loader';
 import Form_personal from './Componentes/Insert/Form_personal';
+import FormContacto from './Componentes/Insert/Form_contacto';
+import FormEmergencia from './Componentes/Insert/Form_emergencia';
+import Form_Foto from './Componentes/Insert/Form_foto';
+import Form_final from './Componentes/Insert/Form_final';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +43,23 @@ const router = createBrowserRouter([
     path: "/addUserPersonal",
     element: <Form_personal/>,
   },
+  {
+    path: "/addUserContacto",
+    element: <FormContacto/>,
+  },
+  {
+    path: "/addUserEmergencia",
+    element: <FormEmergencia/>,
+  },
+  {
+    path: "/addUserFoto",
+    element: <Form_Foto/>,
+  },
+  {
+    path: "/formFinal",
+    element: <Form_final/>,
+  },
+
 
   /*--------------------------------------------------RUTAS PARA ACCESO CON LOADER*/
   {
