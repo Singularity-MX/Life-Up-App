@@ -6,6 +6,15 @@ import { storage } from '../firebase';
 //04->MES DE REGISTRO
 //01->NUMERO DE USUARIO INCREMENTABLE
 
+//Agregar usuario activo
+function addUserActive(ID) {
+   
+
+    firebase.ref('/UltimosUsuarios/UserAdd').set(ID); //Add USER
+  
+  }
+
+  
 function construccionID(){
 //Se crea el id user
 const year = new Date().getFullYear().toString().slice(-2);//
@@ -106,11 +115,13 @@ function addEmergenciaInfo(ID, Nombre, AP, AM, Tel, Parentesco) {
     firebase.ref(bucket+'/'+ID+'/InfoEmergencia'+'/Am').set(AM); //Add ciudad
     firebase.ref(bucket+'/'+ID+'/InfoEmergencia'+'/Tel').set(Tel); //Add cp
     firebase.ref(bucket+'/'+ID+'/InfoEmergencia'+'/Parentesco').set(Parentesco); //Add estado
+
+    addUserActive(ID);// -> se agrega el ultimo usuario
     
 }
 
 
-export {addPersonalInfo, addUserNew, addContactoInfo, addContacto, construccionID, addEmergenciaInfo, addEmergencia, uploadFoto};
+export {addPersonalInfo, addUserNew, addContactoInfo, addContacto, construccionID, addEmergenciaInfo, addEmergencia, uploadFoto, addUserActive};
 
 
 

@@ -22,7 +22,7 @@ const FormEmergencia = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     addEmergencia(nombre, ap, am, tel, parentesco);/*se agrega a firebase*/
-    navigate("/addUserFoto");
+    navigate("/formFinal"); //sigue foto pero puse final por el momento
   }
 
   const handleInputNombre = (event) => {

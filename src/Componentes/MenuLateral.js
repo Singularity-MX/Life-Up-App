@@ -49,8 +49,19 @@ export function Menu(props) {
     const ejemploADD = () => {
       navigate("/ejemplo");
     }
-  
 
+    const salud = () => {
+      navigate("/saludDashboard");
+    }
+    const psicologia = () => {
+      navigate("/psicologia-Dashboard");
+    }
+    const buscarUser = () => {
+      navigate("/BuscarUsuarioHome");
+    }
+    
+  
+    
     return (
     <div>
         <div className="containerMenu">
@@ -61,13 +72,13 @@ export function Menu(props) {
             <img src={user} className="icon" onClick={addUser}/>
             </div>
             <div className="Option">
-            <img src={buscar} className="icon"/>
+            <img src={buscar} className="icon" onClick={buscarUser}/>
             </div>
             <div className="Option">
-            <img src={clinico} className="icon"/>
+            <img src={clinico} className="icon" onClick={salud}/>
             </div>
             <div className="Option">
-            <img src={psico} className="icon"/>
+            <img src={psico} className="icon" onClick={psicologia}/>
             </div>
             <div className="Option">
             <img src={actividad} className="icon"/>

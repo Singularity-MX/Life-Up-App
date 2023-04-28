@@ -112,7 +112,7 @@ const Form_personal = () => {
               <input type="number" className="txt-inputs" placeholder="Edad" value={edad} onChange={handleInputEdad} required/>
               <select name="select" className="txt-inputs" value={sexo} onChange={handleInputSexo} required>
                 <option value="Masculino">Masculino</option>
-                <option value="Femenino" selected>Femenino</option>
+                <option value="Femenino" >Femenino</option>
               </select>
               <input type="tel" className="txt-inputs" placeholder="Teléfono" value={tel} onChange={handleInputTel} required/>
               <button type="submit" className='btn-user' >Siguiente</button>
