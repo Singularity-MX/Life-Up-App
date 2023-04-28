@@ -28,11 +28,15 @@ import Form_final from './Componentes/Insert/Form_final';
 //modulo de salud
 import Salud_dashboard from './Componentes/Salud/Salud_home';
 import Form_salud from './Componentes/Salud/form_captura';
+import Form_consulta from './Componentes/Salud/consulta';
+
 
 //modulo psicologia
 import PsicologiaDashboard from './Componentes/Psicologia/psicologiaDashboard';
-import Form_psico from './Componentes/Psicologia/Form_psico';
-import Form_consulta from './Componentes/Salud/consulta';
+import Consulta from './Componentes/Psicologia/NuevaConsulta';
+
+
+
 
 //buscvar user
 import DashboardBuscar from './Componentes/BuscarUsuarios/Buscar_dashboard';
@@ -84,16 +88,17 @@ const router = createBrowserRouter([
   path: "/formConsulta",
   element: <Form_consulta/>,
 },
+
+
 //modulo psicologia
 {
   path: "/psicologia-Dashboard",
   element: <PsicologiaDashboard/>,
 },
 {
-  path: "/formPsico",
-  element: <Form_salud/>,
+  path: "/consultaPsico",
+  element: <Consulta/>,
 },
-
 //buscar usuarios
 {
   path: "/BuscarUsuarioHome",
