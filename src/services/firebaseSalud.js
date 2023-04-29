@@ -47,17 +47,17 @@ function NuevaConsulta(temp, fc, fr, presion, sos, medic, motivo, recom, glucosa
     const s= new Date().getSeconds();
     const hora= h+":"+m+":"+s;
     const bucket = "/Salud"; //nodo inicial
-    firebase.ref(bucket+'/Consultas'+'/'+fecha+'/'+ID+'/SignosVitales/Temperatura').set(temp); //Add Nombre
-    firebase.ref(bucket+'/Consultas'+'/'+fecha+'/'+ID+'/SignosVitales/FrecuenciaCardiaca').set(fc); //Add Nombre
-    firebase.ref(bucket+'/Consultas'+'/'+fecha+'/'+ID+'/SignosVitales/FrecuenciaRespiratoria').set(fr); //Add Nombre
-    firebase.ref(bucket+'/Consultas'+'/'+fecha+'/'+ID+'/SignosVitales/Presion').set(presion); //Add Nombre
-    firebase.ref(bucket+'/Consultas'+'/'+fecha+'/'+ID+'/SignosVitales/O2Sat').set(sos); //Add Nombre
-    firebase.ref(bucket+'/Consultas'+'/'+fecha+'/'+ID+'/SignosVitales/Medicamentos').set(medic); //Add Nombre
-    firebase.ref(bucket+'/Consultas'+'/'+fecha+'/'+ID+'/SignosVitales/Glucosa').set(glucosa); //Add Nombre
+    firebase.ref(bucket+'/Consultas'+'/'+ID+'/'+fecha+'/SignosVitales/Temperatura').set(temp); //Add Nombre
+    firebase.ref(bucket+'/Consultas'+'/'+ID+'/'+fecha+'/SignosVitales/FrecuenciaCardiaca').set(fc); //Add Nombre
+    firebase.ref(bucket+'/Consultas'+'/'+ID+'/'+fecha+'/SignosVitales/FrecuenciaRespiratoria').set(fr); //Add Nombre
+    firebase.ref(bucket+'/Consultas'+'/'+ID+'/'+fecha+'/SignosVitales/Presion').set(presion); //Add Nombre
+    firebase.ref(bucket+'/Consultas'+'/'+ID+'/'+fecha+'/SignosVitales/O2Sat').set(sos); //Add Nombre
+    firebase.ref(bucket+'/Consultas'+'/'+ID+'/'+fecha+'/SignosVitales/Medicamentos').set(medic); //Add Nombre
+    firebase.ref(bucket+'/Consultas'+'/'+ID+'/'+fecha+'/SignosVitales/Glucosa').set(glucosa); //Add Nombre
 
-    firebase.ref(bucket+'/Consultas'+'/'+fecha+'/'+ID+'/ConsultaInfo/Motivo').set(motivo); //Add Nombre
-    firebase.ref(bucket+'/Consultas'+'/'+fecha+'/'+ID+'/ConsultaInfo/Recomendaciones').set(recom); //Add Nombre
-    firebase.ref(bucket+'/Consultas'+'/'+fecha+'/'+ID+'/ConsultaInfo/Hora').set(hora); //Add Nombre
+    firebase.ref(bucket+'/Consultas'+'/'+ID+'/'+fecha+'/ConsultaInfo/Motivo').set(motivo); //Add Nombre
+    firebase.ref(bucket+'/Consultas'+'/'+ID+'/'+fecha+'/ConsultaInfo/Recomendaciones').set(recom); //Add Nombre
+    firebase.ref(bucket+'/Consultas'+'/'+ID+'/'+fecha+'/ConsultaInfo/Hora').set(hora); //Add Nombre
     
     firebase.ref(bucket+'/Expedientes'+'/'+ID+'/UltimaConsulta').set(fecha); //Add Nombre
 

@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 
 import {addNuevoPaciente, showAlertNewPacient, addUserActive} from '../../services/firebaseSalud';
 
+import InfoPaciente from "./Info_Paciente";
 
 function Salud_dashboard() {
 
@@ -154,6 +155,9 @@ function handleInputChange(event) {
                 </div>
 
             </div>
+
+                <InfoPaciente id={selectedRowId} />
+
         </div>
     );
 
