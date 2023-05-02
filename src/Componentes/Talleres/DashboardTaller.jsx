@@ -7,14 +7,12 @@ import firebase from "../../firebase";
 
 import Swal from 'sweetalert2';
 
-import {addUserActive} from '../../services/firebasePsicologia';
- import InfoPsico from "./infoPacientePsicologia";
- import Menu from '../MenuLateral';
- import Header from '../Header';
 
- import './psico.css';
- 
-function PsicologiaDashboard() {
+import Menu from '../MenuLateral';
+import Header from '../Header';
+import './tallerDash.css';
+
+function TallerDashboard() {
 
 
     //navigate
@@ -23,12 +21,18 @@ function PsicologiaDashboard() {
     const regresar = () => {
         navigate("/loader-Home");
     }
-    const Formulario = () => {
-        navigate("/formPsico");
+    const AddTaller = () => {
+        navigate("/addTaller");
     }
-    const Consulta = () => {
-        addUserActive(selectedRowId);
-        navigate("/consultaPsico");
+    const Eliminar = () => {
+       // addUserActive(selectedRowId);
+        navigate("/deleteTaller");
+    }
+    const actualizar = () => {
+        navigate('/ActualizarTaller');
+    }
+    const asistencia = () => {
+        navigate('/AsistenciaTaller');
     }
 
     
@@ -54,7 +58,7 @@ function PsicologiaDashboard() {
 
     useEffect(() => {
         let newID = "";
-        const id_user = firebase.ref("/User");
+        const id_user = firebase.ref("/Actividades/Talleres/Registrados/");
         id_user.on('value', snapshot => {
             const firebaseData = snapshot.val();
             const dataArray = [];
@@ -81,7 +85,7 @@ function handleInputChange(event) {
   function handleButtonClick() {
     if(selectedRowId != null){
         toggleVisible(); //hacer visble los btns
-        addUserActive(parseInt(selectedRowId));//insert a firebase el id activo
+        //addUserActive(parseInt(selectedRowId));//insert a firebase el id activo
     }
     else{
         //alert de que input esta vacio
@@ -104,47 +108,52 @@ function handleInputChange(event) {
         <div className="bodyContent">
         <div className="contenedorCompleto">
             <Menu />
-            <Header texto="DASHBOARD PSICOLOGÍA"/>
+            <Header texto="DASHBOARD TALLERES"/>
             <div className="containerForm">
-            <h2>Usuario seleccionado: {selectedRowId}</h2>
+            <h2>TABLA DE TALLERES HABILITADOS {selectedRowId}</h2>
                 <div className="containerOptions">
                    
                     
                     
-                    <button className="btn_VerOpciones" onClick={handleButtonClick}>Ver opciones</button>
+                   
+                   
 
 
-                    <button className="btn_VerOpciones" onClick={regresar}>Regresar</button>
+                    <button className="btn_Oculto" onClick={regresar}>Regresar</button>
+                    <button className="btn_Oculto" onClick={AddTaller}>AGREGAR TALLER</button>
+                <button className="btn_Oculto" onClick={Eliminar}>ELIMINAR TALLER</button>
+                <button  className="btn_Oculto" onClick={actualizar}>EDITAL TALLER</button>
+                <button className="btn_Oculto" onClick={asistencia}>REGISTRAR ASISTENCIA</button>
                 </div>
 
-                {visible && (<div className="containerOcultos">
-                    
-                    <button className="btn_Oculto"  onClick={Consulta} >Crear consulta nueva</button>
-                </div>
-                )}
+              
+          
+                
 
                 <div className="table_container">
-                    <table>
+                <table>
                         <thead>
                             <tr>
-                                <th>ID USER</th>
-                                <th>NOMBRE</th>
-                                <th>APELLIDO PATERNO</th>
-                                <th>APELLIDO MATERNO</th>
-                                <th>EDAD</th>
-                                <th>SEXO</th>
+                                <th>ID Taller</th>
+                                <th>Nombre del taller</th>
+                                <th>Duración</th>
+                                <th>Lugar</th>
+                                <th>Días</th>
+                                <th>Hora</th>
+                                <th>Instructor</th>
                             </tr>
                         </thead>
                         <tbody>
                             {data.map(item => (
                                 <tr className="fila" key={item.id} onClick={() => setSelectedRowId(item.id)} >
 
-                                    <td >{item.id}</td>
-                                    <td>{item.InfoPersonal.Nombre}</td>
-                                    <td>{item.InfoPersonal.AP}</td>
-                                    <td>{item.InfoPersonal.AM}</td>
-                                    <td>{item.InfoPersonal.Edad}</td>
-                                    <td>{item.InfoPersonal.Sexo}</td>
+                                    <td>{item.id}</td>
+                                    <td>{item.Nombre}</td>
+                                    <td>{item.Duracion} Minutos</td>
+                                    <td>{item.Lugar}</td>
+                                    <td>{item.Dias}</td>
+                                    <td>{item.Hora}</td>
+                                    <td>{item.Instructor}</td>
 
                                 </tr>
                             ))}
@@ -155,15 +164,19 @@ function handleInputChange(event) {
                 </div>
 
             </div>
-            <InfoPsico id={selectedRowId} />
+         
 
         </div>
         </div>
     );
 
+
 }
 
-export default PsicologiaDashboard;
+export default TallerDashboard;
+
+
+
 
 
 

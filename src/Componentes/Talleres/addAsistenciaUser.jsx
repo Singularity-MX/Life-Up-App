@@ -7,11 +7,8 @@ import { useState, useEffect} from 'react';
 import {NuevaConsulta} from '../../services/firebasePsicologia';
 
 import firebase from "../../firebase";
-import imgImageForm from './images/psicologia-form.png';
-import './styleFormPsico.css';
-import Header from '../Header';
 
-const Consulta_psico = () =>  {
+const AddAsistenciaUser = ({ id }) =>  {
 
 
   const handleInput = (event) => {
@@ -70,33 +67,29 @@ const Consulta_psico = () =>  {
 
 
 
-  return (
-    <div className="containerBody_PsicoForm">
-      
-      <Header texto="CREAR UN NUEVO EXPENDIENTE" />
+    return (
+        <div>
+            
 
-      <div className="containerFormulario_PsicoForm">
-        <img className="imageLateral" src={imgImageForm}></img>
-        <form onSubmit={handleSubmit} className="Formulario_PsicoForm">
-          <div className="containerTitleFormulario_PsicoForm"><h1 className="title-form">NUEVA CONSULTA</h1></div>
-          <input type="number" className="inputsPsico" placeholder="ID_USUARIO" value={id} disabled />
-
-
-          <input type="text" className="inputsPsico" placeholder="Motivo de consulta" value={motivo} onChange={handleInputMotivo} onInput={handleInput} required />
-                    <textarea type="text" className="inputsPsico" placeholder="Objetivos terapeuticos" value={objetivos} onChange={handleObje} onInput={handleInput} required />
-                    <textarea type="text" className="inputsPsico" placeholder="Recomendaciones" value={recomendaciones} onChange={handleRecom} onInput={handleInput} required />
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <h1>Registre sus datos</h1>
+                    <input type="number" className="" placeholder="ID_USUARIO" value={id} disabled />
                     
-
-
-          <input type="submit" className="btn"/>
-          <input type="button" className="btn-Volver" value="Volver al dashboard " onClick={regresar} />
-        </form>
-        
-      </div>
-
-    </div>
-  );
+                    
+                    <input type="text" className="" placeholder="Motivo de consulta" value={motivo} onChange={handleInputMotivo} onInput={handleInput} required />
+                    <textarea type="text" className="" placeholder="Objetivos terapeuticos" value={objetivos} onChange={handleObje} onInput={handleInput} required />
+                    <textarea type="text" className="" placeholder="Recomendaciones" value={recomendaciones} onChange={handleRecom} onInput={handleInput} required />
+                    
+                 
+                    <input type="submit" />
+                </form>
+                <input type="button" className="" value="Volver al dashboard " onClick={regresar} />
+            </div>
+       
+        </div>
+    );
 
 }
 
-export default Consulta_psico;
+export default AddAsistenciaUser;

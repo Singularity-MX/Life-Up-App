@@ -18,8 +18,8 @@ function addNuevoPaciente(Padecimientos, Alergias, Sangre) {
 
     addUserActive(ID); //agrega el user active
     const year = new Date().getFullYear().toString().slice(-2);//
-    const month = new Date().getMonth();
-    const day = new Date().getDay();
+    const month = new Date().getMonth()+1;
+    const day = new Date().getDate();
     let fecha = "";
     fecha=day +"/"+ month+"/"+ year;
 
@@ -38,8 +38,8 @@ function NuevaConsulta(temp, fc, fr, presion, sos, medic, motivo, recom, glucosa
     const ID = snapshot.val(); //obtiene el value del ultimo user activo
 
     const year = new Date().getFullYear().toString().slice(-2);//
-    const month = new Date().getMonth();
-    const day = new Date().getDay();
+    const month = new Date().getMonth()+1;
+    const day = new Date().getDate();
     let fecha = "";
     fecha=day +"-"+ month+"-"+ year;
     const h= new Date().getHours();

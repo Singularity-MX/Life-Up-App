@@ -4,6 +4,11 @@ import React, { useState, useEffect } from 'react';
 import firebase from "../../firebase";
 
 import Swal from 'sweetalert2';
+import './salud.css';
+import imgInfo from './images/info-icon.png';
+import imgConsulta from './images/consulta-icon.png';
+import imgExp from './images/exp-icon.png';
+import imgSignos from './images/signos-icon.png';
 
 function InfoPaciente({ id }) {
 
@@ -36,7 +41,7 @@ function InfoPaciente({ id }) {
     let [Presion, setPresion] = useState([]);
     let [Temperatura, setTemp] = useState([]);
 
-
+    const [fechaFormateada, setFechaFormat] = useState('');
 
 
 
@@ -85,10 +90,7 @@ function InfoPaciente({ id }) {
             setSangre(snapshot.val());
         });
         //Obtener el ultima
-        firebase.ref('/Salud/Expedientes/' + myID + '/UltimaConsulta').once('value').then((snapshot) => {
-            const ID = snapshot.val();
-            setUltima(snapshot.val());
-        });
+       
         //Obtener el ultima
         firebase.ref('/Salud/Expedientes/' + myID + '/PadecimientosCronicos').once('value').then((snapshot) => {
             setPad(snapshot.val());
@@ -110,7 +112,8 @@ function InfoPaciente({ id }) {
         //Obtener el ultima
         firebase.ref('/Salud/Expedientes/' + myID + '/UltimaConsulta').once('value').then((snapshot) => {
             const ID = snapshot.val();
-            setUltima(snapshot.val());
+            let f = ID.replace(/-/g, "/");
+            setUltima(f);
         });
         //Obtener el ultima
         firebase.ref('/Salud/Expedientes/' + myID + '/PadecimientosCronicos').once('value').then((snapshot) => {
@@ -121,56 +124,76 @@ function InfoPaciente({ id }) {
 
 
         //Oconsultas-----------------------------------------
-        firebase.ref('/Salud/Consultas/' + myID + '/' + Ultima + '/ConsultaInfo/Motivo').once('value').then((snapshot) => {
-            const ID = snapshot.val();
-            setMotivo(snapshot.val());
-        });
-        //Obtener el ultima
-        firebase.ref('/Salud/Consultas/' + myID + '/' + Ultima + '/ConsultaInfo/Hora').once('value').then((snapshot) => {
-            const ID = snapshot.val();
-            setHora(snapshot.val());
-        });
-        //Obtener el ultima
-        firebase.ref('/Salud/Consultas/' + myID + '/' + Ultima + '/ConsultaInfo/Recomendaciones').once('value').then((snapshot) => {
-            const ID = snapshot.val();
-            setRecomendaciones(snapshot.val());
+
+        firebase.ref('/Salud/Expedientes/' + myID + '/UltimaConsulta').once('value').then((snapshot) => {
+            const UC = snapshot.val();
+
+            firebase.ref('/Salud/Consultas/' + myID + '/' + UC + '/ConsultaInfo/Motivo').once('value').then((snapshot) => {
+                const ID = snapshot.val();
+                setMotivo(snapshot.val());
+                
+            });
+
+            firebase.ref('/Salud/Consultas/' + myID + '/' + UC + '/ConsultaInfo/Motivo').once('value').then((snapshot) => {
+                const ID = snapshot.val();
+                setMotivo(snapshot.val());
+                console.log();
+            });
+            //Obtener el ultima
+            firebase.ref('/Salud/Consultas/' + myID + '/' + UC + '/ConsultaInfo/Hora').once('value').then((snapshot) => {
+                const ID = snapshot.val();
+                setHora(snapshot.val());
+            });
+            //Obtener el ultima
+            firebase.ref('/Salud/Consultas/' + myID + '/' + UC + '/ConsultaInfo/Recomendaciones').once('value').then((snapshot) => {
+                const ID = snapshot.val();
+                setRecomendaciones(snapshot.val());
+            });
+
+            //Obtener el ultima
+            firebase.ref('/Salud/Consultas/' + myID + '/' + UC + '/SignosVitales/FrecuenciaCardiaca').once('value').then((snapshot) => {
+                const ID = snapshot.val();
+                setFC(snapshot.val());
+
+
+            });
+            firebase.ref('/Salud/Consultas/' + myID + '/' + UC + '/SignosVitales/FrecuenciaRespiratoria').once('value').then((snapshot) => {
+                const ID = snapshot.val();
+                setFR(snapshot.val());
+            });
+            firebase.ref('/Salud/Consultas/' + myID + '/' + UC + '/SignosVitales/Glucosa').once('value').then((snapshot) => {
+                const ID = snapshot.val();
+                setGlucosa(snapshot.val());
+            });
+            firebase.ref('/Salud/Consultas/' + myID + '/' + UC + '/SignosVitales/Medicamentos').once('value').then((snapshot) => {
+                const ID = snapshot.val();
+                setMedi(snapshot.val());
+                console.log(snapshot.val());
+            });
+            firebase.ref('/Salud/Consultas/' + myID + '/' + UC + '/SignosVitales/O2Sat').once('value').then((snapshot) => {
+                const ID = snapshot.val();
+                
+                setSos(snapshot.val());
+            });
+            firebase.ref('/Salud/Consultas/' + myID + '/' + UC + '/SignosVitales/Presion').once('value').then((snapshot) => {
+                const ID = snapshot.val();
+                setPresion(snapshot.val());
+            });
+            firebase.ref('/Salud/Consultas/' + myID + '/' + UC + '/SignosVitales/Temperatura').once('value').then((snapshot) => {
+                const ID = snapshot.val();
+                setTemp(snapshot.val());
+            });
+
         });
 
 
 
 
 
-        //Obtener el ultima
-        firebase.ref('/Salud/Consultas/' + myID + '/' + Ultima + '/SignosVitales/FrecuenciaCardiaca').once('value').then((snapshot) => {
-            const ID = snapshot.val();
-            setFC(snapshot.val());
 
 
-        });
-        firebase.ref('/Salud/Consultas/' + myID + '/' + Ultima + '/SignosVitales/FrecuenciaRespiratoria').once('value').then((snapshot) => {
-            const ID = snapshot.val();
-            setFR(snapshot.val());
-        });
-        firebase.ref('/Salud/Consultas/' + myID + '/' + Ultima + '/SignosVitales/Glucosa').once('value').then((snapshot) => {
-            const ID = snapshot.val();
-            setGlucosa(snapshot.val());
-        });
-        firebase.ref('/Salud/Consultas/' + myID + '/' + Ultima + '/SignosVitales/Medicamenos').once('value').then((snapshot) => {
-            const ID = snapshot.val();
-            setMedi(snapshot.val());
-        });
-        firebase.ref('/Salud/Consultas/' + myID + '/' + Ultima + '/SignosVitales/02Sat').once('value').then((snapshot) => {
-            const ID = snapshot.val();
-            setSos(snapshot.val());
-        });
-        firebase.ref('/Salud/Consultas/' + myID + '/' + Ultima + '/SignosVitales/Presion').once('value').then((snapshot) => {
-            const ID = snapshot.val();
-            setPresion(snapshot.val());
-        });
-        firebase.ref('/Salud/Consultas/' + myID + '/' + Ultima + '/SignosVitales/Temperatura').once('value').then((snapshot) => {
-            const ID = snapshot.val();
-            setTemp(snapshot.val());
-        });
+
+
 
 
 
@@ -180,52 +203,100 @@ function InfoPaciente({ id }) {
 
 
     return (
-        <div>
-            <h1>INFO PACIENTES</h1>
+        <div className='contenedorComponenteInfo'>
+            <div className='cont_title_info_paciente'>
+                <h1>INFORMACIÓN DEL PACIENTE</h1>
+            </div>
+            <div className='containerTargerts'>
+            <div className='target' id='infoPersonalContent'>
+            <div className='contTitleTarget'><img className='Icons' src={imgInfo}/><h2>INFORMACIÓN</h2></div>
+                <div className=''>
+                <p className='titleValor'>Nombre:</p>
+                <p className='value'>{Nombre}&nbsp;{AP}&nbsp;{AM}</p>
+                </div>
+                <div className='rowItemsTarget'>
+                <p className='titleValor'>ID de Usuario:&nbsp;</p>
+                <p className='value'>{Id}</p>
+                </div>
+                <div className='rowItemsTarget'>
+                <p className='titleValor'>Edad:&nbsp;</p>
+                <p className='value'>{Edad} años</p>
+                </div>
+                <div className='rowItemsTarget'>
+                <p className='titleValor'>Sexo:&nbsp;</p>
+                <p className='value'>{Sexo}</p>
+                </div>
+            </div>
 
-            <h4>Inform personal</h4>
-            <p>Nombre:</p>
-            <p>{Nombre}&nbsp;{AP}&nbsp;{AM}</p>
-            <p>ID:</p>
-            <p>{Id}</p>
-            <p>Edad:</p>
-            <p>{Edad} años</p>
-            <p>Sexo:</p>
-            <p>{Sexo}</p>
+            <div className='target' id='ExpedienteContent'>
+                
+            <div className='contTitleTarget'><img className='Icons' src={imgExp}/><h2>EXPEDIENTE</h2></div>
+                
+                <p className='titleValor'>Alergias:</p>
+                <p className='value'>{Alergias}</p>
+                
+               
+                <p className='titleValor'>Tipo de Sangre:</p>
+                <p className='value'>{Sangre}</p>
+                
+                
+                <p className='titleValor'>Padecimientos Crónicos:</p>
+                <p className='value'>{Pad}</p>
+               
+               
+                <p className='titleValor'>Última Consulta:</p>
+                <p className='value'>{Ultima}</p>
+                
+            </div>
 
-            <h4>Expediente</h4>
-            <p>Alergias:</p>
-            <p>{Alergias}</p>
-            <p>Sangre:</p>
-            <p>{Sangre}</p>
-            <p>Padecimientos cronicos:</p>
-            <p>{Pad}</p>
-            <p>Ultima consulta:</p>
-            <p>{Ultima}</p>
+            <div className='target' id='ConsultaContent'>
+            <div className='contTitleTarget'><img className='Icons' src={imgConsulta}/><h2>CONSULTA</h2></div>
+                
+                <p className='titleValor'>Hora de atención:&nbsp;</p>
+                <p className='value'>{Hora}</p>
+             
+                
+                <p className='titleValor'>Motivo:</p>
+                <p className='value'>{Motivo}</p>
+              
+                
+                <p className='titleValor'>Recomendaciones:</p>
+                <p className='value'>{Recomendaciones}</p>
+               
+            </div>
 
-            <h4>Consulta</h4>
-            <p>Hora:</p>
-            <p>{Hora}</p>
-            <p>Motivo:</p>
-            <p>{Motivo}</p>
-            <p>Recomendaciones:</p>
-            <p>{Recomendaciones}</p>
-
-            <h4>Signos vitales</h4>
-            <p>FC:</p>
-            <p>{FC}</p>
-            <p>FR:</p>
-            <p>{FR}</p>
-            <p>Glucosa:</p>
-            <p>{Glucosa}</p>
-            <p>Medicamentos:</p>
-            <p>{Medicamento}</p>
-            <p>02Sat:</p>
-            <p>{Sos}</p>
-            <p>Presion:</p>
-            <p>{Presion}</p>
-            <p>Temperatura:</p>
-            <p>{Temperatura}</p>
+            <div className='target' id='SignosVitales'>
+            <div className='contTitleTarget'><img className='Icons' src={imgSignos}/><h2>SIGNOS VITALES</h2></div>
+                <div className='rowItemsTarget'>
+                <p className='titleValor'>Frecuencia Cardíaca:&nbsp;</p>
+                <p className='value'>{FC}&nbsp;LPM</p>
+                </div>
+                <div className='rowItemsTarget'>
+                <p className='titleValor'>Frecuencia Respiratoria:&nbsp;</p>
+                <p className='value'>{FR}&nbsp;RPM</p>
+                </div>
+                <div className='rowItemsTarget'>
+                <p className='titleValor'>Glucosa:&nbsp;</p>
+                <p className='value'>{Glucosa}&nbsp;mg/dl</p>
+                </div>
+                <div className='rowItemsTarget'>
+                <p className='titleValor'>Medicamentos:</p>
+                <p className='value'>{Medicamento}</p>
+                </div>
+                <div className='rowItemsTarget'>
+                <p className='titleValor'>02Sat:&nbsp;</p>
+                <p className='value'>{Sos}&nbsp;%</p>
+                </div>
+                <div className='rowItemsTarget'>
+                <p className='titleValor'>Presion Arterial:&nbsp;</p>
+                <p className='value'>{Presion}</p>
+                </div>
+                <div className='rowItemsTarget'>
+                <p className='titleValor'>Temperatura:&nbsp;</p>
+                <p className='value'>{Temperatura}&nbsp;°C</p>
+                </div>
+            </div>
+            </div>
         </div>
     );
 }

@@ -1,0 +1,415 @@
+/*ESTILOS PRINCIPALES DE CONTENEDORES DEL DASHBOARD*/
+body{
+  background-color: #00807B;
+}
+.bodyContentPsico{
+  background-color: #e0e0e0;
+ width: 100vw;
+  height: 93vh;
+}
+.contenedorCompletoPsico {
+  margin-top: 65px;
+  background-color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  /* Establece una altura fija para el div */
+  flex-direction: column;
+}
+
+.containerFormPsico {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  /* Establece una altura fija para el div */
+  flex-direction: column;
+  width: 100%;
+}
+
+.containerOptionsPsico {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  /* Establece una altura fija para el div */
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.containerOcultosPsico {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  /* Establece una altura fija para el div */
+  flex-direction: column;
+  width: 100%;
+}
+
+.table_containerPsico {
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/*ESTILOS DE LOS TARGEST PARA MOSTRAR INFO DEL DASHBOARD*/
+.contenedorComponenteInfoPsico {
+
+  width: 80%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-content: center;
+
+}
+
+.cont_title_info_pacientePsico {
+
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+}
+
+.containerTargertsPsico {
+ 
+  width: 70%;
+  
+}
+
+.targetPsico {
+
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+ 
+  border: 1px solid white;
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+margin-top: 15px;
+  border-radius: 17px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-weight: bolder;
+  color: black;
+  flex-direction: column;
+  
+}
+.targetPsico:hover {
+  border: 1px solid black;
+  transform: scale(1.05);
+  background-color: rgba(255, 255, 255, 0.897);
+}
+
+.targetPsico:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+
+.targetPsico:hover h2 {
+  color: #2e2e2e;
+}
+.targetPsico:hover .contTitleTargetPsico {
+  background-color: #84c8ffa9;
+  width: 100%;
+  border-radius: 17px 17px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.22);
+}
+
+
+
+
+/*RESPONDIVE PÁRA tablets*/
+@media (max-width: 540px) {
+  .containerTargertsPsico {
+      
+      width: 100%;
+      
+  }
+
+}
+
+@media (min-width: 1310px) {
+  .containerOptionsPsico {
+     
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      /* Establece una altura fija para el div */
+      flex-direction: row;
+  
+      width: 100%;
+  }
+ 
+  .contenedorComponenteInfoPsico {
+     
+      width: 50%;
+     
+      
+  }
+
+  .containerTargertsPsico {
+     
+      width: 100%;
+      /*display: grid;
+      grid-template-columns: repeat(2, 1fr); 
+      grid-template-rows: repeat(2, 1fr); 
+      justify-content: center; 
+      align-items: center; 
+      justify-items: center; */
+      display: flex;
+      
+  }
+  .containerOcultosPsico {
+     
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      /* Establece una altura fija para el div */
+      flex-direction: row;
+      width: 100%;
+  }
+
+  .targetPsico {
+      background: rgba(230, 230, 230, 0.596);
+      
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content:flex-start;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  margin: 1rem;
+  }
+  .rowItemsTargetPsico{
+      display: flex;
+      flex-direction: row;
+     
+      width: 90%;
+      
+  }
+  table{
+      width: 70%;
+  }
+}
+
+
+@media (min-width: 900px) and (max-width: 1310px){
+  .containerOptionsPsico {
+   
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      /* Establece una altura fija para el div */
+      flex-direction: row;
+  
+      width: 100%;
+  }
+  .containerOcultosPsico {
+      
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      /* Establece una altura fija para el div */
+      flex-direction: row;
+      width: 100%;
+  }
+
+  .containerTargertsPsico {
+    
+      width: 60%;
+      /*display: grid;
+      grid-template-columns: repeat(2, 1fr); 
+      grid-template-rows: repeat(2, 1fr); 
+      justify-content: center; 
+      align-items: center; 
+      justify-items: center; */
+      display: flex;
+      justify-content: center; 
+      align-items: center; 
+      justify-items: center;
+      flex-direction: column;
+
+  }
+
+  .targetPsico {
+      
+      
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content:flex-start;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  margin: 1rem;
+  }
+  .rowItemsTargetPsico{
+      display: flex;
+      flex-direction: row;
+    
+      width: 90%;
+     justify-content:flex-start;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  }
+  table{
+      width: 80%;
+  }
+
+}
+
+/*-------------------------------------STYLE DE COMPONENTES---------------------------------------------------------*/
+/*BUTTONS*/
+.btn_VerOpciones{
+  width: 200px;
+  
+  appearance: none;
+background-color: transparent;
+border: 0.125em solid #1A1A1A;
+border-radius: 0.6em;
+box-sizing: border-box;
+color: #3B3B3B;
+cursor: pointer;
+display: inline-block;
+font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+font-size: 16px;
+font-weight: 600;
+line-height: normal;
+margin: 8px;
+min-height: 1em;
+min-width: 0;
+outline: none;
+padding: 0.7em ;
+text-align: center;
+text-decoration: none;
+transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+user-select: none;
+-webkit-user-select: none;
+touch-action: manipulation;
+will-change: transform;
+}
+
+.btn_VerOpciones:disabled {
+  pointer-events: none;
+ }
+ 
+ .btn_VerOpciones:hover {
+  color: #fff;
+  background-color: #1A1A1A;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+ }
+ 
+ .btn_VerOpciones:active {
+  box-shadow: none;
+  transform: translateY(0);
+ }
+
+ /*btn ocultos*/
+ 
+ .btn_Oculto {
+  padding: 1.3em 1em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  margin: 13px;
+}
+
+.btn_Oculto:hover {
+  background-color: #23c483;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+.btn_Oculto:active {
+  transform: translateY(-1px);
+}
+
+
+/*TABLE*/
+table{
+  background-color: #fafafa;
+  transition: all 0.5s;
+  margin-top: 30px;
+  margin-bottom: 30px;
+ 
+}
+th{
+  background-color: #00807B;
+  
+
+}
+td{
+  background-color: #ffffff;
+  cursor: pointer;
+  scale: 1.05;
+}
+.fila:hover{
+  scale: 1.05;
+}
+
+tr{
+  background-color: #383838;
+  text-align: center;
+  transition: all 0.5s;
+
+}
+
+.titleValorPsico{
+  color: #050508;
+  margin: 12px;
+}
+.value{
+  color: #1e2031;
+  margin-top: 12px ;
+}
+h2{
+  color: #1c1c22;
+}
+h1{
+  color: #343541;
+}
+.IconsPsico{
+  width: 40px;
+  margin-right: 15px;
+}
+.contTitleTargetPsico{
+  display: flex;
+      flex-direction: row;
+     justify-content:flex-start;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 10px;
+}

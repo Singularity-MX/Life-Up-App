@@ -96,6 +96,15 @@ function addPersonalInfo(ID, Nombre, AP, AM, Edad, Sexo, Tel) {
     firebase.ref(bucket+'/'+ID+'/InfoPersonal'+'/Edad').set(Edad); //Add Edad
     firebase.ref(bucket+'/'+ID+'/InfoPersonal'+'/Sexo').set(Sexo); //Add Sexo
     firebase.ref(bucket+'/'+ID+'/InfoPersonal'+'/Tel').set(Tel); //Add Tel
+
+    //INSERT ULTIMA ASISTENCIA
+    const year = new Date().getFullYear().toString().slice(-2);//
+    const month = new Date().getMonth();
+    const day = new Date().getDay();
+    let fecha = "";
+    fecha=day +"-"+ month+"-"+ year;
+    firebase.ref(bucket+'/'+ID+'/UltimaAsistencia').set(fecha); //Add Nombre
+
 }
 //Add_Info personal
 function addContactoInfo(ID, calle, col, cp, ciudad, estado) {

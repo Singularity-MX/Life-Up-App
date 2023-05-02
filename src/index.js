@@ -34,13 +34,20 @@ import Form_consulta from './Componentes/Salud/consulta';
 //modulo psicologia
 import PsicologiaDashboard from './Componentes/Psicologia/psicologiaDashboard';
 import Consulta from './Componentes/Psicologia/NuevaConsulta';
+import InfoPsico from './Componentes/Psicologia/infoPacientePsicologia';
 
-
-
+//taller
+import TallerDashboard from './Componentes/Talleres/DashboardTaller';
+import AddTaller from './Componentes/Talleres/addTaller';
+import TallerDelete from './Componentes/Talleres/deleteTaller';
+import ActualizarTaller from './Componentes/Talleres/updateTaller';
+import RegistrarAsistencia from './Componentes/Talleres/registrarAsistencia';
 
 //buscvar user
 import DashboardBuscar from './Componentes/BuscarUsuarios/Buscar_dashboard';
 
+//estadis
+import DashboardEstadistica from './Componentes/Estadistica/dashboardEstadistica';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -99,10 +106,41 @@ const router = createBrowserRouter([
   path: "/consultaPsico",
   element: <Consulta/>,
 },
+{
+  path: "/infoPsico",
+  element: <InfoPsico/>,
+},
 //buscar usuarios
 {
   path: "/BuscarUsuarioHome",
   element: <DashboardBuscar/>,
+},
+
+//taller
+{
+  path: "/dashboardTaller",
+  element: <TallerDashboard/>,
+},
+{
+  path: "/addTaller",
+  element: <AddTaller/>,
+},
+{
+  path: "/deleteTaller",
+  element: <TallerDelete/>,
+},
+{
+  path: "/ActualizarTaller",
+  element: <ActualizarTaller/>,
+},
+{
+  path: "/AsistenciaTaller",
+  element: <RegistrarAsistencia/>,
+},
+//stats
+{
+  path: "/EstadisticaDash",
+  element: <DashboardEstadistica/>,
 },
 
   /*--------------------------------------------------RUTAS PARA ACCESO CON LOADER*/

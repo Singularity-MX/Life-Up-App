@@ -59,8 +59,14 @@ export function Menu(props) {
     const buscarUser = () => {
       navigate("/BuscarUsuarioHome");
     }
+    const dashboardTaller = () => {
+      navigate("/dashboardTaller");
+    }
+    const Estadis = () => {
+      navigate("/EstadisticaDash");
+    }
     
-  
+    
     
     return (
     <div>
@@ -81,10 +87,10 @@ export function Menu(props) {
             <img src={psico} className="icon" onClick={psicologia}/>
             </div>
             <div className="Option">
-            <img src={actividad} className="icon"/>
+            <img src={actividad} className="icon" onClick={dashboardTaller}/>
             </div>
             <div className="Option">
-            <img src={estadisticas} className="icon" alt='Estadísticas'/>
+            <img src={estadisticas} className="icon" alt='Estadísticas' onClick={Estadis}/>
             </div>
 
 

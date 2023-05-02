@@ -7,9 +7,13 @@ import firebase from "../../firebase";
 
 import Swal from 'sweetalert2';
 
-import {addNuevoPaciente, showAlertNewPacient, addUserActive} from '../../services/firebaseSalud';
+import { addNuevoPaciente, showAlertNewPacient, addUserActive } from '../../services/firebaseSalud';
 
 import InfoPaciente from "./Info_Paciente";
+
+import './salud.css';
+import Menu from '../MenuLateral';
+import Header from '../Header';
 
 function Salud_dashboard() {
 
@@ -27,7 +31,7 @@ function Salud_dashboard() {
         navigate("/formConsulta");
     }
 
-    
+
     //------------------------ocultar form
     const [visible, setVisible] = useState(false);
 
@@ -69,26 +73,26 @@ function Salud_dashboard() {
 
 
 
-//validar si ya clickeo en una fila
-function handleInputChange(event) {
-    setSelectedRowId(event.target.value);
-  }
+    //validar si ya clickeo en una fila
+    function handleInputChange(event) {
+        setSelectedRowId(event.target.value);
+    }
 
-  function handleButtonClick() {
-    if(selectedRowId != null){
-        toggleVisible(); //hacer visble los btns
-        addUserActive(parseInt(selectedRowId));//insert a firebase el id activo
+    function handleButtonClick() {
+        if (selectedRowId != null) {
+            toggleVisible(); //hacer visble los btns
+            addUserActive(parseInt(selectedRowId));//insert a firebase el id activo
+        }
+        else {
+            //alert de que input esta vacio
+            Swal.fire(
+                'Error!',
+                'Por favor da click en un usuario de la tabla',
+                'error'
+            )
+        }
+
     }
-    else{
-        //alert de que input esta vacio
-        Swal.fire(
-            'Error!',
-            'Por favor da click en un usuario de la tabla',
-            'error'
-          )
-    }
-    
-  }
 
 
 
@@ -97,33 +101,29 @@ function handleInputChange(event) {
 
     //----------------------------------------------------------render
     return (
-        <div>
-            <h1>Dashboard salud</h1>
-            <div className="">
-                <h1>Form nuevo paciente</h1>
-                <input type="text" value={selectedRowId} onChange={handleInputChange} readOnly disabled />
-                
-                <button onClick={handleButtonClick}>Aceptar</button>
-
-              
-                <input type="button" className="" value="Volver al home " onClick={regresar} />
-            </div>
-
-            {visible && (<div>
-                <input type="button" className="" value="Expediente nuevo" onClick={Formulario} />
-                <input type="button" className="" value="Crear consulta medica" onClick={Consulta} />
-            </div>
-            )}
+        <div className="bodyContent">
+        <div className="contenedorCompleto">
+            <Menu />
+            <Header texto="DASHBOARD SALUD"/>
+            <div className="containerForm">
+            <h2>Usuario seleccionado: {selectedRowId}</h2>
+                <div className="containerOptions">
+                   
+                    
+                    
+                    <button className="btn_VerOpciones" onClick={handleButtonClick}>Ver opciones</button>
 
 
+                    <button className="btn_VerOpciones" onClick={regresar}>Regresar</button>
+                </div>
 
+                {visible && (<div className="containerOcultos">
+                    <button className="btn_Oculto" onClick={Formulario} >Expediente nuevo</button>
+                    <button className="btn_Oculto"  onClick={Consulta} >Crear consulta medica</button>
+                </div>
+                )}
 
-
-
-
-            <div>
-
-                <div>
+                <div className="table_container">
                     <table>
                         <thead>
                             <tr>
@@ -137,9 +137,9 @@ function handleInputChange(event) {
                         </thead>
                         <tbody>
                             {data.map(item => (
-                                <tr key={item.id} onClick={() => setSelectedRowId(item.id)} >
+                                <tr className="fila" key={item.id} onClick={() => setSelectedRowId(item.id)} >
 
-                                    <td>{item.id}</td>
+                                    <td >{item.id}</td>
                                     <td>{item.InfoPersonal.Nombre}</td>
                                     <td>{item.InfoPersonal.AP}</td>
                                     <td>{item.InfoPersonal.AM}</td>
@@ -155,9 +155,9 @@ function handleInputChange(event) {
                 </div>
 
             </div>
+            <InfoPaciente id={selectedRowId} />
 
-                <InfoPaciente id={selectedRowId} />
-
+        </div>
         </div>
     );
 

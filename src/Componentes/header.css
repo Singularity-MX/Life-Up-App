@@ -15,6 +15,7 @@ header {
   background-color: #00807B;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   z-index: 9999;
+  height: 40px;
 }
 
 .lifeUpLogo{
@@ -24,7 +25,8 @@ margin-left: 1rem;
 
 .title{
   text-align: center;
-  margin: 0;
+  margin-left: -10%;
+  margin-top: 1%;
   flex: 1;
   color: #fff;
   font-family: 'Rubik', sans-serif;
