@@ -65,14 +65,16 @@ export function Menu(props) {
     const Estadis = () => {
       navigate("/EstadisticaDash");
     }
-    
+    const Home = () => {
+      navigate("/loader-Home");
+    }
     
     
     return (
     <div>
         <div className="containerMenu">
             <div className="Option"> 
-               <img src={home} className="icon"/>
+               <img src={home} className="icon" onClick={Home}/>
             </div>
             <div className="Option">
             <img src={user} className="icon" onClick={addUser}/>

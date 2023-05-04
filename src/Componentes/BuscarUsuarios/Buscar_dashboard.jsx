@@ -12,7 +12,9 @@ import {addNuevoPaciente, showAlertNewPacient, addUserActive} from '../../servic
 
 import QRGenerator from './QR';
 
-
+import TargestSalud from "./targetsSalud";
+import TargetPersonal from "./targetInfoPersonal";
+import TargetPsico from "./targetPsicologia";
 //funcion qr
 
 
@@ -116,7 +118,7 @@ function handleInputChange(event) {
                 <h1>usuarios</h1>
                 <input type="text" value={selectedRowId} onChange={handleInputChange} readOnly disabled />
                 
-                <button onClick={handleButtonClick}>Aceptar</button>
+                <button onClick={handleButtonClick}>generar qr</button>
 
               
                 <input type="button" className="" value="Volver al home " onClick={regresar} />
@@ -171,9 +173,12 @@ function handleInputChange(event) {
             </div>
 
 
-
-
             
+            <TargetPersonal id={selectedRowId} />
+
+            <TargestSalud id={selectedRowId} />
+
+            <TargetPsico id={selectedRowId} />
         </div>
     );
 

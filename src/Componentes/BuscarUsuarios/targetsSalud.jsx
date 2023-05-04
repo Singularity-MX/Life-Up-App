@@ -4,14 +4,13 @@ import React, { useState, useEffect } from 'react';
 import firebase from "../../firebase";
 
 import Swal from 'sweetalert2';
-import './salud.css';
+import './styleSalud.css';
 import imgInfo from './images/info-icon.png';
 import imgConsulta from './images/consulta-icon.png';
 import imgExp from './images/exp-icon.png';
 import imgSignos from './images/signos-icon.png';
 
-import { revisarSignos } from '../../services/firebaseSalud';
-function InfoPaciente({ id }) {
+function TargestSalud({ id }) {
 
 
 
@@ -43,9 +42,7 @@ function InfoPaciente({ id }) {
     let [Temperatura, setTemp] = useState([]);
 
     const [fechaFormateada, setFechaFormat] = useState('');
-    const checar = ()  => {
-        revisarSignos(FC, FR, Glucosa, Sos, Presion, Temperatura);
-    }
+
 
 
     useEffect(() => {
@@ -208,7 +205,7 @@ function InfoPaciente({ id }) {
     return (
         <div className='contenedorComponenteInfo'>
             <div className='cont_title_info_paciente'>
-                <h1>INFORMACIÓN DEL PACIENTE</h1>
+                <h1>INFORMACIÓN DE SALUD</h1>
             </div>
             <div className='containerTargerts'>
             <div className='target' id='infoPersonalContent'>
@@ -268,7 +265,7 @@ function InfoPaciente({ id }) {
                
             </div>
 
-            <div className='target' id='SignosVitales' onClick={checar}>
+            <div className='target' id='SignosVitales'>
             <div className='contTitleTarget'><img className='Icons' src={imgSignos}/><h2>SIGNOS VITALES</h2></div>
                 <div className='rowItemsTarget'>
                 <p className='titleValor'>Frecuencia Cardíaca:&nbsp;</p>
@@ -304,4 +301,4 @@ function InfoPaciente({ id }) {
     );
 }
 
-export default InfoPaciente;
+export default TargestSalud;

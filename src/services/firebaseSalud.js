@@ -94,5 +94,16 @@ function showAlertNewPacient() {
       })
  }
 
+ function revisarSignos(fc, fr, g, sos, pa, t){
+  let msjFR = 'Su frecuencia crespiratoria es ';
 
-export {addNuevoPaciente, showAlertNewPacient, addUserActive, NuevaConsulta};
+  Swal.fire({
+    icon: 'success',
+    title: 'Registro exitoso',
+    html: 'Se completó el registro exitosamente. ¡Nuevo paciente!',
+    showConfirmButton: true,
+ 
+  })
+ }
+
+export {addNuevoPaciente, showAlertNewPacient, addUserActive, NuevaConsulta, revisarSignos};
