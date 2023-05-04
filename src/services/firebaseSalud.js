@@ -96,14 +96,27 @@ function showAlertNewPacient() {
 
  function revisarSignos(fc, fr, g, sos, pa, t){
   let msjFR = 'Su frecuencia crespiratoria es ';
+  let statusFR ='';
+  let recoFR='';
 
-  Swal.fire({
-    icon: 'success',
-    title: 'Registro exitoso',
-    html: 'Se completó el registro exitosamente. ¡Nuevo paciente!',
-    showConfirmButton: true,
- 
-  })
+  //validar frecuencia respiratoria
+  //buena
+  if(fr<20){
+    msjFR=msjFR+' ' +fr +' respiraciones por minuto';
+    statusFR= 'Buena';
+    recoFR='';
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Signos vitales',
+      html: msjFR + statusFR,
+      showConfirmButton: true,
+   
+    })
+  }
+
+
+
  }
 
 export {addNuevoPaciente, showAlertNewPacient, addUserActive, NuevaConsulta, revisarSignos};

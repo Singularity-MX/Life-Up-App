@@ -2,6 +2,7 @@ import './Display.css';
 import general from '../images/Home/general.png';
 import React from 'react';
 import phil from '../images/Home/phil.png';
+
 import medico from '../images/Home/medico.png';
 import psicp from '../images/Home/psicologia.png';
 import taller from '../images/Home/talleres.png';
