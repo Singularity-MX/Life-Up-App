@@ -125,23 +125,40 @@ function Asistencia(newID, idTaller) {
  
   firebase.ref('/Actividades/Talleres/Registrados/'+idTaller+'/Asistentes').once('value').then((snapshot) => {
     let asistentes = snapshot.val() + 1;
+    
   firebase.ref('/Actividades/Talleres/Registrados/'+idTaller+'/Asistentes').set(asistentes); //registrar asistencia taller
  });
 
+
+ 
  firebase.ref('/User/'+newID+'/UltimaAsistencia').set(fecha); //registrar asistencia taller
  
 
- firebase.ref('/Asistencia/30-4-23/'+newID+'/IdTaller').once('value').then((snapshot) => {
+ firebase.ref('/Asistencia/'+fecha+'/'+newID+'/IdTaller').once('value').then((snapshot) => {
   let taller = snapshot.val() ;
-  let nuevo= taller.toString() + ','+idTaller;
-  firebase.ref('/Asistencia/'+fecha+'/'+newID+'/IdTaller').set(nuevo); //registrar asistencia taller
+  if(taller==null){ //si no existe asistencia
+    firebase.ref('/Asistencia/'+fecha+'/'+newID+'/IdTaller').set(idTaller); //registrar asistencia taller
+  }
+  else{
+    let nuevo= taller.toString() + ','+idTaller;
+    firebase.ref('/Asistencia/'+fecha+'/'+newID+'/IdTaller').set(nuevo); //registrar asistencia taller
+  }
+
+  //registrar taller en usuario
+
+  
 });
 
- 
+  
 firebase.ref('/User/'+newID+'/TalleresAsistidos').once('value').then((snapshot) => {
   let taller = snapshot.val() ;
-  let nuevo= taller.toString() + ','+idTaller;
-  firebase.ref('/User/'+newID+'/TalleresAsistidos/id').set(nuevo); //registrar asistencia taller
+  if(taller==null){ //si no existe asistencia
+    firebase.ref('/User/'+newID+'/TalleresAsistidos').set(idTaller); //registrar asistencia taller
+  }
+  else{
+    let nuevo= taller.toString() + ','+idTaller;
+    firebase.ref('/User/'+newID+'/TalleresAsistidos').set(nuevo); //registrar asistencia taller
+  }
 });
 
  const today = new Date();

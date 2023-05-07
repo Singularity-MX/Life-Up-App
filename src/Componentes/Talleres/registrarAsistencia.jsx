@@ -74,7 +74,7 @@ const RegistrarAsistencia = () => {
 
     function handleInputChange(event) {
         setSelectedRowId(event.target.value);
-
+        
     }
 
 
@@ -97,6 +97,7 @@ const RegistrarAsistencia = () => {
     function handleSelectChange(event) {
         setSelectedValue(event.target.value); // Actualiza el estado con el valor seleccionado
         console.log(selectedValue);
+        //alert(selectedValue);
     }
 
 
@@ -104,7 +105,7 @@ const RegistrarAsistencia = () => {
         event.preventDefault();
 
         Asistencia(selectedRowId, selectedValue);
-
+        
 
 
 
