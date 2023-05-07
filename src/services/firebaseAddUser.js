@@ -99,8 +99,8 @@ function addPersonalInfo(ID, Nombre, AP, AM, Edad, Sexo, Tel) {
 
     //INSERT ULTIMA ASISTENCIA
     const year = new Date().getFullYear().toString().slice(-2);//
-    const month = new Date().getMonth();
-    const day = new Date().getDay();
+    const month = new Date().getMonth()+1;
+    const day = new Date().getDate();
     let fecha = "";
     fecha=day +"-"+ month+"-"+ year;
     firebase.ref(bucket+'/'+ID+'/UltimaAsistencia').set(fecha); //Add Nombre
@@ -129,8 +129,22 @@ function addEmergenciaInfo(ID, Nombre, AP, AM, Tel, Parentesco) {
     
 }
 
+function addReferenciaImagen(Url) {
+    
+    firebase.ref('/UltimosUsuarios/UserAdd').once('value').then((snapshot) => {
+        const valor = snapshot.val();
+        const ID = construccionID()+valor;
+        console.log(ID);
+        //Se hace el registro set
+        const bucket = "/ImagesReferences"; //nodo inicial
+        firebase.ref(bucket+'/'+valor).set(Url); //Add calle
+      });
+   
 
-export {addPersonalInfo, addUserNew, addContactoInfo, addContacto, construccionID, addEmergenciaInfo, addEmergencia, uploadFoto, addUserActive};
+}
+
+
+export {addPersonalInfo, addUserNew, addContactoInfo, addContacto, construccionID, addEmergenciaInfo, addEmergencia, uploadFoto, addUserActive, addReferenciaImagen};
 
 
 

@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth} from "firebase/auth";
 import 'firebase/compat/database';
 import firebase from 'firebase/compat/app';
+import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -31,6 +32,6 @@ export const signInUser = async (email, password) => {
 
 firebase.initializeApp(firebaseConfig);
 
-const storage = firebase.storage;
 
+export const storage = getStorage(app);
 export default firebase.database();

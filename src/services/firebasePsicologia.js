@@ -21,7 +21,7 @@ function NuevaConsulta(motivo, objetivos, recom) {
   
       const year = new Date().getFullYear().toString().slice(-2);//
       const month = new Date().getMonth();
-      const day = new Date().getDay();
+      const day = new Date().getDate();
       let fecha = "";
       fecha=day +"-"+ month+"-"+ year;
       const h= new Date().getHours();

@@ -7,6 +7,7 @@ import imagen from "../images/User_add/emergencia.png";
 import {useEffect, useState} from "react";
 import {addEmergencia} from '../../services/firebaseAddUser';
 import {useNavigate} from "react-router-dom";
+import imgImageForm from './images/emergencia.png';
 
 const FormEmergencia = () => {
 
@@ -29,7 +30,7 @@ const FormEmergencia = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     addEmergencia(nombre, ap, am, tel, parentesco);/*se agrega a firebase*/
-    navigate("/formFinal"); //sigue foto pero puse final por el momento
+    navigate("/addUserFoto"); //sigue foto pero puse final por el momento /formFinal
   }
 
   const handleInputNombre = (event) => {
@@ -49,22 +50,22 @@ const FormEmergencia = () => {
   }
 
 //------------------------------------------------------------ >  RETURN()
-return(
-    <div>
-    <Header texto="REGISTRAR USUARIO" />
-    <div className="contenedor-base">
-      <div className="form-container">
-        <div className="img-container">
-          <div className="imgCont"><img src={imagen} className='img-form' /></div>
-        </div>
-        <div className="inputs-container">
-          <form className="form-user" onSubmit={handleSubmit}>
-            <h1 className="title-form">Información de emergencia</h1>
-            <input type="text" className="txt-inputs" placeholder="Nombre(s)" value={nombre} onChange={handleInputNombre} onInput={handleInput} required/>
-            <input type="text" className="txt-inputs" placeholder="Apellido Paterno" value={ap} onChange={handleInputAp} onInput={handleInput} required/>
-            <input type="text" className="txt-inputs" placeholder="Apellido Materno" value={am} onChange={handleInputAm} onInput={handleInput} required/>
-            <input type="tel" className="txt-inputs" placeholder="Teléfono" pattern="[0-9]{10}" value={tel} onChange={handleInputTel} onInput={handleInput} required/>
-            <select name="select" className="txt-inputs" placeholder="Parentesco" value={parentesco} onChange={handleInputPar} required>
+return (
+  <div className="containerBody_InsertUser">
+    
+    <Header texto="CREAR UN NUEVO EXPENDIENTE" />
+
+    <div className="containerFormulario_InsertUser">
+      <img className="imageLateral" src={imgImageForm}></img>
+      <form onSubmit={handleSubmit} className="Formulario_PsicoForm">
+        <div className="containerTitleFormulario_PsicoForm"><h1 className="title-form">CONTACTO DE EMERGERNCIA</h1></div>
+          
+             
+        <input type="text" className="inputsPsico" placeholder="Nombre(s)" value={nombre} onChange={handleInputNombre} onInput={handleInput} required/>
+            <input type="text" className="inputsPsico" placeholder="Apellido Paterno" value={ap} onChange={handleInputAp} onInput={handleInput} required/>
+            <input type="text" className="inputsPsico" placeholder="Apellido Materno" value={am} onChange={handleInputAm} onInput={handleInput} required/>
+            <input type="tel" className="inputsPsico" placeholder="Teléfono" pattern="[0-9]{10}" value={tel} onChange={handleInputTel} onInput={handleInput} required/>
+            <select name="select" className="inputsPsico" placeholder="Parentesco" value={parentesco} onChange={handleInputPar} required>
                 <option value="" selected>Selecciona un parentesco</option>
                 <option value="Hijo">Hijo/as</option>
                 <option value="Hermano">Hermano/as</option>
@@ -72,11 +73,13 @@ return(
                 <option value="Biznieto">Biznieto/as</option>
                 <option value="Conyuge">Conyuge</option>
               </select>
-            <button type="submit" className='btn-user'>Siguiente</button>
-          </form>
-        </div>
-      </div>
+            <button type="submit" className='btn' >Siguiente</button>
+          
+
+      </form>
+      
     </div>
+
   </div>
 );
 }

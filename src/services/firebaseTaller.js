@@ -21,7 +21,7 @@ function AddTallerFirebase(nombre, duracion, lugar, instructor, dias, hora) {
 
     const year = new Date().getFullYear().toString();//
     const month = new Date().getMonth().toString();
-    const day = new Date().getDay().toString();
+    const day = new Date().getDate().toString();
     let newID = "";
     console.log(day);
     newID = day + "1" + "117" + year + ID;

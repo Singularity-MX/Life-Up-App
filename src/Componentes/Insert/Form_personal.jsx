@@ -8,8 +8,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getSession, isLoggedIn } from "../../session";
 import { addUserNew } from '../../services/firebaseAddUser';
-
-
+import imgImageForm from './images/icon_inf general.png';
+import './styleForm.css';
 /*----------------------------  FUNCION PRINCIPAL  ---------------------------------- */
 
 const Form_personal = () => {
@@ -61,34 +61,35 @@ const Form_personal = () => {
 
   //------------------------------------------------------------ >  RETURN()
   return (
-    <div>
-      <Header texto="REGISTRAR USUARIO" />
-      <div className="contenedor-base">
-        <div className="form-container">
-          <div className="img-container">
-            <div className="imgCont"><img src={imagen} className='img-form' /></div>
-          </div>
-          <div className="inputs-container">
-            <form className="form-user" onSubmit={handleSubmit}>
-              <h1 className="title-form">Información personal</h1>
-              <input type="text" className="txt-inputs" placeholder="Nombre(s)" value={nombre} onChange={handleInputNombre} onInput={handleInput} required />
-              <input type="text" className="txt-inputs" placeholder="Apellido Paterno" value={ap} onChange={handleInputAp} onInput={handleInput} required />
-              <input type="text" className="txt-inputs" placeholder="Apellido Materno" value={am} onChange={handleInputAm} onInput={handleInput} required />
-              <input type="number" className="txt-inputs" placeholder="Edad" value={edad} onChange={handleInputEdad} onInput={handleInput} required />
-              <select name="select" className="txt-inputs" value={sexo} onChange={handleInputSexo} required>
+    <div className="containerBody_InsertUser">
+      
+      <Header texto="CREAR UN NUEVO EXPENDIENTE" />
+
+      <div className="containerFormulario_InsertUser">
+        <img className="imageLateral" src={imgImageForm}></img>
+        <form onSubmit={handleSubmit} className="Formulario_PsicoForm">
+          <div className="containerTitleFormulario_PsicoForm"><h1 className="title-form">INFORMACIÓN PERSONAL</h1></div>
+          
+          <input type="text" className="inputsPsico" placeholder="Nombre(s)" value={nombre} onChange={handleInputNombre} onInput={handleInput} required />
+              <input type="text" className="inputsPsico" placeholder="Apellido Paterno" value={ap} onChange={handleInputAp} onInput={handleInput} required />
+              <input type="text" className="inputsPsico" placeholder="Apellido Materno" value={am} onChange={handleInputAm} onInput={handleInput} required />
+              <input type="number" className="inputsPsico" placeholder="Edad" value={edad} onChange={handleInputEdad} onInput={handleInput} required />
+              <select name="select" className="inputsPsico" value={sexo} onChange={handleInputSexo} required>
                 <option value="" selected>Seleccionar Sexo</option>
                 <option value="Masculino" >Masculino</option>
                 <option value="Femenino" >Femenino</option>
               </select>
-              <input type="tel" className="txt-inputs" placeholder="Teléfono a 10 dígitos" value={tel} onChange={handleInputTel} onInput={handleInput} pattern="[0-9]{10}" required />
-              <button type="submit" className='btn-user' >Siguiente</button>
-              <button type="button" className='btn-Cancelar' onClick={Home}>Cancelar</button>
-            </form>
-          </div>
-        </div>
+              <input type="tel" className="inputsPsico" placeholder="Teléfono a 10 dígitos" value={tel} onChange={handleInputTel} onInput={handleInput} pattern="[0-9]{10}" required />
+              <button type="submit" className='btn' >Siguiente</button>
+              <button type="button" className='btn-Volver' onClick={Home}>Cancelar</button>
+
+        </form>
+        
       </div>
+
     </div>
   );
+
 }
 
 export default Form_personal;

@@ -19,6 +19,8 @@
     height: auto;
     border-radius: 15px;    
     min-height: 650px;
+    display: flex;
+    align-items: center;justify-content: center;
 }
 
 /*panel izquierdo de imagen*/
@@ -47,13 +49,15 @@ justify-content: center;
     justify-content: center;
     align-items: center;
     border-radius: 30px;
-    
-    
+  
+    margin: 0;
+    padding: 0;
 }
 
 /*imagen lateral*/
 .img-form{
     width: 200px;
+   
 }
 .img-form:hover{
     
@@ -69,6 +73,7 @@ justify-content: center;
     display: flex;
     align-items: start;
     justify-content: center;
+   
 }
 
 .form-user{
@@ -79,6 +84,7 @@ justify-content: center;
     flex-direction: column;
     width: 100%;
     height: 100%;
+
 }
 
 .title-form{
@@ -86,6 +92,7 @@ justify-content: center;
     color: #343541;
     margin-top: 2em;
     margin-bottom: 2rem;
+ 
 }
 
 
@@ -230,7 +237,7 @@ justify-content: center;
         align-items: center;
         justify-content: start;
         height: auto;
-        background-color: #343541;
+    
         padding: bottom 0rem; ;
 
     }

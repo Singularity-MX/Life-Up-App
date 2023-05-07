@@ -6,6 +6,7 @@ import imagen from "../images/User_add/hogar.png";
 import { useNavigate } from "react-router-dom";
 import { addContacto } from '../../services/firebaseAddUser';
 import { useEffect, useState } from "react";
+import imgImageForm from './images/hogar.png';
 
 const FormContacto = () => {
   const handleInput = (event) => {
@@ -43,29 +44,33 @@ const FormContacto = () => {
   let navigate = useNavigate();
 
 //------------------------------------------------------------ >  RETURN()
-  return (
-    <div>
-      <Header texto="REGISTRAR USUARIO" />
-      <div className="contenedor-base">
-        <div className="form-container">
-          <div className="img-container">
-            <div className="imgCont"><img src={imagen} className='img-form' /></div>
-          </div>
-          <div className="inputs-container">
-            <form className="form-user" onSubmit={handleSubmit}>
-              <h1 className="title-form">Información de contacto</h1>
-              <input type="text" className="txt-inputs" placeholder="Calle y número" value={calle} onChange={handleInputCalle} onInput={handleInput} required />
-              <input type="text" className="txt-inputs" placeholder="Colonia" value={col} onChange={handleInputCol} onInput={handleInput} required />
-              <input type="tel" pattern="[0-9]{5}" className="txt-inputs" placeholder="Código postal" value={cp} onChange={handleInputCp} onInput={handleInput} required />
-              <input type="text" className="txt-inputs" placeholder="Ciudad" value={ciudad} onChange={handleInputCiudad} onInput={handleInput} required />
-              <input type="text" className="txt-inputs" placeholder="Estado" value={estado} onChange={handleInputEstado} onInput={handleInput} required />
-              <button type="submit" className='btn-user'>Siguiente</button>
-            </form>
-          </div>
-        </div>
-      </div>
+return (
+  <div className="containerBody_InsertUser">
+    
+    <Header texto="CREAR UN NUEVO EXPENDIENTE" />
+
+    <div className="containerFormulario_InsertUser">
+      <img className="imageLateral" src={imgImageForm}></img>
+      <form onSubmit={handleSubmit} className="Formulario_PsicoForm">
+        <div className="containerTitleFormulario_PsicoForm"><h1 className="title-form">DATOS DE CONTACTO</h1></div>
+        
+       
+            
+        <input type="text" className="inputsPsico" placeholder="Calle y número" value={calle} onChange={handleInputCalle} onInput={handleInput} required />
+              <input type="text" className="inputsPsico" placeholder="Colonia" value={col} onChange={handleInputCol} onInput={handleInput} required />
+              <input type="tel" pattern="[0-9]{5}" className="inputsPsico" placeholder="Código postal" value={cp} onChange={handleInputCp} onInput={handleInput} required />
+              <input type="text" className="inputsPsico" placeholder="Ciudad" value={ciudad} onChange={handleInputCiudad} onInput={handleInput} required />
+              <input type="text" className="inputsPsico" placeholder="Estado" value={estado} onChange={handleInputEstado} onInput={handleInput} required />
+
+            <button type="submit" className='btn' >Siguiente</button>
+          
+
+      </form>
+      
     </div>
-  );
+
+  </div>
+);
 }
 
 export default FormContacto;
