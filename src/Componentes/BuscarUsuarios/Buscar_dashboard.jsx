@@ -17,7 +17,7 @@ import TargetPersonal from "./targetInfoPersonal";
 import TargetPsico from "./targetPsicologia";
 //funcion qr
 
-
+import './buscarUserStyle.css'
 
 function DashboardBuscar() {
 
@@ -112,21 +112,21 @@ function handleInputChange(event) {
 
     //----------------------------------------------------------render
     return (
-        <div>
+        <div className="cont_bodyUser">
             <h1>Dashboard buscar user</h1>
-            <div className="">
+            <div className="cont_Buttons">
                 <h1>usuarios</h1>
                 <input type="text" value={selectedRowId} onChange={handleInputChange} readOnly disabled />
                 
-                <button onClick={handleButtonClick}>generar qr</button>
+                <button onClick={handleButtonClick}  className="btn" >generar qr</button>
 
               
-                <input type="button" className="" value="Volver al home " onClick={regresar} />
+                <input type="button"  className="btn" value="Volver al home " onClick={regresar} />
             </div>
 
-            {visible && (<div>
+            {visible && (<div className="cont_QR">
                 <div>
-      <QRGenerator value={selectedRowId} />
+      <QRGenerator value={selectedRowId} className="qr_image"/>
             </div>
             </div>
             )}

@@ -1,0 +1,45 @@
+.cont_bodyUser{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color:  rgb(214, 214, 214);
+}
+.cont_Buttons{
+    width: 80%;
+    background-color: blue;
+    display:  flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.cont_QR{
+    background-color: brown;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+/*pantallas pequeñas y tablets*/
+@media (min-width: 400px )and ( max-width: 1299px){
+    .cont_Buttons{
+        width: 60%;
+        display:  flex;
+        flex-direction: column;
+    }
+}
+
+/*monitor grande*/
+@media (min-width: 1300px){
+    .cont_Buttons{
+        width: 50%;
+        display:  flex;
+        flex-direction: column;
+    }
+}
