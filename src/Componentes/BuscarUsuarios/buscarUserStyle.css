@@ -10,22 +10,92 @@
 }
 .cont_Buttons{
     width: 80%;
-    background-color: blue;
+    background-color: rgb(243, 243, 243);
+    border-color: 1px solid white;
+    border-radius: 20px;
+    box-shadow: 10px 5px 10px rgba(10, 10, 10, 0.178);
     display:  flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 20px;
+    margin-top: 6rem;
 }
 .cont_QR{
-    background-color: brown;
-    width: 80%;
+    width: 51%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
+    align-content: center;
     margin: 20px;
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+    border-color: 1px solid white;
+    border-radius: 20px;
+    box-shadow: 10px 5px 10px rgba(10, 10, 10, 0.178);
 }
 
+.button {
+    position: relative;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid #17795E;
+    background-color: #209978;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  
+  .button, .button__icon, .button__text {
+    transition: all 0.3s;
+  }
+  
+  .button .button__text {
+    transform: translateX(22px);
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  .button .button__icon {
+    position: absolute;
+    transform: translateX(109px);
+    height: 100%;
+    width: 39px;
+    background-color: #17795E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .button .svg {
+    width: 20px;
+    fill: #fff;
+  }
+  
+  .button:hover {
+    background: #17795E;
+  }
+  
+  .button:hover .button__text {
+    color: transparent;
+  }
+  
+  .button:hover .button__icon {
+    width: 148px;
+    transform: translateX(0);
+  }
+  
+  .button:active .button__icon {
+    background-color: #146c54;
+  }
+  
+  .button:active {
+    border: 1px solid #146c54;
+  }
 /*pantallas pequeñas y tablets*/
 @media (min-width: 400px )and ( max-width: 1299px){
     .cont_Buttons{
@@ -33,6 +103,10 @@
         display:  flex;
         flex-direction: column;
     }
+    .cont_QR{
+    flex-direction: row;
+    }
+  
 }
 
 /*monitor grande*/
