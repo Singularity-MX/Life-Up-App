@@ -92,7 +92,7 @@ export function Menu(props) {
             <img src={actividad} className="icon" onClick={dashboardTaller}/>
             </div>
             <div className="Option">
-            <img src={estadisticas} className="icon" alt='Estadísticas' onClick={Estadis}/>
+            <img src={estadisticas} className="icon" alt='Estadísticas' />
             </div>
 
 

@@ -4,8 +4,8 @@ import './buscarUserStyle.css'
 
 function QRGenerator({ value }) {
   return (
-    <div>
-      <QRCode value={value} className='qr'/>
+    <div id='qr-container'>
+      <QRCode value={value} className='qr' id='qr-canvas'/>
     </div>
   );
 }

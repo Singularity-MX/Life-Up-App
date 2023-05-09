@@ -1,3 +1,7 @@
+.QR{
+  cursor: pointer;
+}
+
 .cont_bodyUser{
     
     display: flex;

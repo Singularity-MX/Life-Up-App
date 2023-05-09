@@ -119,11 +119,12 @@ function handleInputChange(event) {
                    
 
 
-                    <button className="btn_Oculto" onClick={regresar}>Regresar</button>
-                    <button className="btn_Oculto" onClick={AddTaller}>AGREGAR TALLER</button>
-                <button className="btn_Oculto" onClick={Eliminar}>ELIMINAR TALLER</button>
-                <button  className="btn_Oculto" onClick={actualizar}>EDITAL TALLER</button>
+                    
+                    <button className="btn_Oculto" onClick={AddTaller}>AGREGAR </button>
+                <button className="btn_Oculto" onClick={Eliminar}>ELIMINAR </button>
+                <button  className="btn_Oculto" onClick={actualizar}>EDITAR</button>
                 <button className="btn_Oculto" onClick={asistencia}>REGISTRAR ASISTENCIA</button>
+                <button className="btn_Oculto" onClick={regresar}>Regresar</button>
                 </div>
 
               
