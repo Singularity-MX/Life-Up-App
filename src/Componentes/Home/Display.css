@@ -79,7 +79,7 @@
 
 .contenedor_botom{
     width: 50%;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -99,7 +99,7 @@
 /*------USUARIO HOME----------*/
 
 .container-info{
-    background-color: rgb(155, 57, 57);
+    background-color: rgba(155, 57, 57, 0);
     width: 60%;
     height: 100%;
     display: flex;
@@ -108,7 +108,10 @@
     align-items: center;
     border-radius: 20px;
 }
-
+.container_info_adicional{
+    background-color: #000;
+    width: 100%;
+}
 /*HEADER DE USUARIO HOME*/
 .conainer_header_user{
     width: 98%;
@@ -143,7 +146,7 @@ margin: 1rem;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: #ff007300;
+    background-color: #ffffff00;
 }
 
 .btn-buscar button {
@@ -246,8 +249,12 @@ margin: 1rem;
     margin-top: 0.5rem;
 }
 .IMG_USER{
+    border-radius: 50%;
+    border: 5px solid black;
+    width: 150px;
     margin-left: 2rem;
     margin-right: 3rem;
+    margin-bottom: 1rem;
 }
 .titulo_nombre{
     font-size: 35px;

@@ -6,9 +6,9 @@ import phil from '../images/Home/phil.png';
 import medico from '../images/Home/medico.png';
 import psicp from '../images/Home/psicologia.png';
 import taller from '../images/Home/talleres.png';
-import {useEffect, useState} from "react";
-import {obtenerDatosDeFirebase} from '../../services/firebaseHome';
-import {useNavigate} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { obtenerDatosDeFirebase } from '../../services/firebaseHome';
+import { useNavigate } from "react-router-dom";
 import firebase from "../../firebase";
 
 const User = () => {
@@ -27,74 +27,94 @@ const User = () => {
     let [MotivoSalud, setMotivoSalud] = useState([]);
 
     let [UltimaAsistenciaPsico, setUltimaAsistenciaPsico] = useState([]);
-    let [MotivoPsico, setMotivoPsico] = useState([]); 
+    let [MotivoPsico, setMotivoPsico] = useState([]);
+    let [Taller, setTaller] = useState([]);
+    let [URL_IMG, setURL] = useState([]);
 
-   
-    useEffect(() => {
-        
+    let [MS, setMS] = useState([]);
 
-     
+    function cargarDatos(ID_user) {
+        //cargar foto
 
-        firebase.ref('/UltimosUsuarios/UserAdd').once('value').then((snapshot) => {
-            const ID = snapshot.val();
-            setID(snapshot.val());
-          
+        //cargar foto
+        firebase.ref('/ImagesReferences/' + ID_user).once('value').then((snapshot) => {
+            setURL(snapshot.val());
         });
-         //----------------------------------Obtener info personal
-         firebase.ref('/User/' + myID + '/InfoPersonal/Nombre').once('value').then((snapshot) => {
-            const ID = snapshot.val();
+
+        //----------------------------------Obtener nombre
+        firebase.ref('/User/' + ID_user + '/InfoPersonal/Nombre').once('value').then((snapshot) => {
             setNom(snapshot.val());
-           
-        }); 
-        //Obtener el ap
-        firebase.ref('/User/' + myID + '/InfoPersonal/AP').once('value').then((snapshot) => {
-            const ID = snapshot.val();
+        });
+        //Obtener el apellido paterno
+        firebase.ref('/User/' + ID_user + '/InfoPersonal/AP').once('value').then((snapshot) => {
             setAP(snapshot.val());
 
         });
-        //Obtener el am
-        firebase.ref('/User/' + myID + '/InfoPersonal/AM').once('value').then((snapshot) => {
-            const ID = snapshot.val();
+        //Obtener el apellido materno
+        firebase.ref('/User/' + ID_user + '/InfoPersonal/AM').once('value').then((snapshot) => {
             setAM(snapshot.val());
 
         });
         //Obtener el edad
-        firebase.ref('/User/' + myID + '/InfoPersonal/Edad').once('value').then((snapshot) => {
-            const ID = snapshot.val();
+        firebase.ref('/User/' + ID_user + '/InfoPersonal/Edad').once('value').then((snapshot) => {
             setEdad(snapshot.val());
         });
-
-          //Obtener el edad
-          firebase.ref('/User/' + myID + '/UltimaAsistencia').once('value').then((snapshot) => {
-            const ID = snapshot.val();
+        //Obtener  ultima asistencia
+        firebase.ref('/User/' + ID_user + '/UltimaAsistencia').once('value').then((snapshot) => {
+            let nuevaAsistencia = snapshot.val().replace(/-/g, "/");
             setAsistencia(snapshot.val());
         });
+        //---------------------------------------------------------------SALUD
+        //Obtener la ultima consulta de salud
+        firebase.ref('/Salud/Expedientes/' + ID_user + '/UltimaConsulta').once('value').then((snapshot) => {
+            let nuevaAsistencia = snapshot.val().replace(/-/g, "/");
+            setConsultaSalud(snapshot.val());
+            ObtenerMotivoSalud(ID_user, snapshot.val());
+        });
+       
+        //-----------------------------------------------------------------PSICOLOGIA
+
+        //Obtener la fecha de psico
+        firebase.ref('/Psicologia/Consultas/' + ID_user + '/UltimaConsulta').once('value').then((snapshot) => {
+            const ID = snapshot.val();
+            let nuevaAsistencia = snapshot.val().replace(/-/g, "/");
+            setUltimaAsistenciaPsico(snapshot.val());
+            ObtenerMotivoPsico(ID_user,snapshot.val() );
+        });
+       
+
+//---------------------------------------------------------------------Talleres
+        //Obtener taller
+        firebase.ref('/User/' + ID_user + '/UltimoTaller').once('value').then((snapshot) => {
+            const ID = snapshot.val();
+            setTaller(snapshot.val());
+        });
+    }
+
+    function ObtenerMotivoSalud(id, ultimaFecha){
+         //Obtener el motivo de consulta de salud
+         firebase.ref('/Salud/Consultas/' + id + '/' + ultimaFecha + '/ConsultaInfo/Motivo').once('value').then((snapshot) => {
+            setMotivoSalud(snapshot.val());
+        });
+    }
+
+    function ObtenerMotivoPsico(id, ultimaFecha){
+        //Obtener el motivo psico
+        firebase.ref('/Psicologia/Consultas/' + id + '/' + ultimaFecha + '/Motivo').once('value').then((snapshot) => {
+
+            setMotivoPsico(snapshot.val());
+        });
+   }
 
 
-             //Obtener el edad
-             firebase.ref('/Salud/Expedientes/' + myID + '/UltimaConsulta').once('value').then((snapshot) => {
-                const ID = snapshot.val();
-                setConsultaSalud(snapshot.val());
-                
-            });
-             //Obtener el edad
-             firebase.ref('/Salud/Consultas/' + myID + '/'+UltimaAsistenciaSalud+'/ConsultaInfo/Motivo').once('value').then((snapshot) => {
-                const ID = snapshot.val();
-                setMotivoSalud(snapshot.val());
-                
-            });
+    useEffect(() => {
 
+        firebase.ref('/UltimosUsuarios/UserAdd').once('value').then((snapshot) => {
+            setID(snapshot.val());
 
-              //Obtener el edad
-              firebase.ref('/Psicologia/Consultas/' + myID + '/UltimaConsulta').once('value').then((snapshot) => {
-                const ID = snapshot.val();
-                setUltimaAsistenciaPsico(snapshot.val());
-            });
-             //Obtener el edad
-             firebase.ref('/Psicologia/Consultas/' + myID + '/'+ UltimaAsistenciaPsico+'/Motivo').once('value').then((snapshot) => {
-                const ID = snapshot.val();
-                setMotivoPsico(snapshot.val());
-            });
+            //cargar la información del usuario
+            cargarDatos(snapshot.val());
+        });
 
     }, []);
 
@@ -125,13 +145,13 @@ const User = () => {
             </div>
 
             <div className='container_info_user'>
-                <img src={phil} className='IMG_USER' />
+                <img src={URL_IMG} className='IMG_USER' />
                 <div className='info_value'>
                     <h1 className='titulo_nombre'>{Nombre}&nbsp;{AP}&nbsp;{AM}</h1>
                     <p className='txt_user_general'>Última asistencia: {Asistencia}</p>
                     <p className='txt_user_general'>Usuario: {myID}</p>
                     <p className='txt_user_general'>Edad: {Edad} años</p>
-                  
+
                 </div>
             </div>
 
@@ -139,7 +159,7 @@ const User = () => {
                 <div className='card_container'>
                     <div className='title_card'>
                         <img src={medico} className='icon_info' />
-                        <h3 className='title_user'>Información general</h3>
+                        <h3 className='title_user'>Información Médica</h3>
                     </div>
                     <div className='card_info'>
                         <h3 className='title_card_info'>Última visita:</h3>
@@ -148,11 +168,11 @@ const User = () => {
                         <p className='txt_card'>{MotivoSalud}</p>
                     </div>
                 </div>
-
+ 
                 <div className='card_container'>
                     <div className='title_card'>
                         <img src={psicp} className='icon_info' />
-                        <h3 className='title_user'>Información general</h3>
+                        <h3 className='title_user'>Información Psicológica</h3>
                     </div>
                     <div className='card_info'>
                         <h3 className='title_card_info'>Última visita:</h3>
@@ -166,13 +186,13 @@ const User = () => {
                 <div className='card_container'>
                     <div className='title_card'>
                         <img src={taller} className='icon_info' />
-                        <h3 className='title_user'>Información general</h3>
+                        <h3 className='title_user'>Talleres y actividades</h3>
                     </div>
                     <div className='card_info'>
                         <h3 className='title_card_info'>Última visita:</h3>
-                        <p className='txt_card'>12/02/2023</p>
-                        <h3 className='title_card_info'>Padecimientos crónicos:</h3>
-                        <p className='txt_card'>Hipertensión</p>
+                        <p className='txt_card'>{Asistencia}</p>
+                        <h3 className='title_card_info'>Último Taller Asistido:</h3>
+                        <p className='txt_card'>{Taller}</p>
                     </div>
                 </div>
 
