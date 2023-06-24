@@ -2,7 +2,7 @@ USE [Life-Up-DB]
 /*----------------------------------------TABLA DE SUPER USUARIOS----------------------------------------*/
    CREATE TABLE SuperUsuarios
    (
-      ID int IDENTITY(1,1) PRIMARY KEY,
+      SU_ID int IDENTITY(1,1) PRIMARY KEY,
       Username varchar(255),
       Contraseña varchar(255)
    )

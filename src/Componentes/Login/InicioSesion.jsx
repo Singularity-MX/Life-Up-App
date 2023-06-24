@@ -75,9 +75,14 @@ function InicioSesion() {
     }
   }
 
+  function handleUserAdmin(){
+    navigate("/LoginSU")
+  }
+
   //-----------------------------------------------------------------return
   return (
     <div ><Header texto="Inicia Sesión" />
+    
       <div className='targetFormLogin'>
 
         <div className='panel_izqLogin'></div>
@@ -95,9 +100,10 @@ function InicioSesion() {
               <button type="button" onClick={handleTogglePassword} className='btnShow'>
                 <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} className="ico_show" />{showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
               </button><br />
-
+              
               <button type="submit" className='boton-login'>Acceder</button>
             </form>
+            <button type="button" className='boton-login' onClick={handleUserAdmin}>AdminUsers</button>
           </div>
         </div>
       </div>

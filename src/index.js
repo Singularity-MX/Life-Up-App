@@ -48,6 +48,11 @@ import DashboardBuscar from './Componentes/BuscarUsuarios/Buscar_dashboard';
 
 //estadis
 import DashboardEstadistica from './Componentes/Estadistica/dashboardEstadistica';
+
+//ADMIN SUPER USUARIOS
+import LoginSU from './Componentes/AdminUsers/LoginSU';
+import PanelAdmin from './Componentes/AdminUsers/PanelSU';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -143,6 +148,17 @@ const router = createBrowserRouter([
   element: <DashboardEstadistica/>,
 },
 
+// ADMIN SUIPER USUARIOS
+{
+  path: "/LoginSU",
+  element: <LoginSU/>,
+},
+{
+  path: "/DashboardRoles",
+  element: <PanelAdmin/>,
+  
+},
+
   /*--------------------------------------------------RUTAS PARA ACCESO CON LOADER*/
   {
     path: "/loader-Home",
@@ -151,6 +167,10 @@ const router = createBrowserRouter([
   {
     path: "/loader-Login",
     element:  <Loader to="/login" delay={3000} />,
+  },
+  {
+    path: "/loader-DashboardSU",
+    element:  <Loader to="/DashboardRoles" delay={3000} />,
   },
 
 
