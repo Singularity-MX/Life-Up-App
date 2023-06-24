@@ -52,6 +52,7 @@ import DashboardEstadistica from './Componentes/Estadistica/dashboardEstadistica
 //ADMIN SUPER USUARIOS
 import LoginSU from './Componentes/AdminUsers/LoginSU';
 import PanelAdmin from './Componentes/AdminUsers/PanelSU';
+import Formulario from './Componentes/AdminUsers/addUser';
 
 const router = createBrowserRouter([
   {
@@ -157,6 +158,10 @@ const router = createBrowserRouter([
   path: "/DashboardRoles",
   element: <PanelAdmin/>,
   
+},
+{
+  path: "/FormularioPersonal",
+  element: <Formulario/>,
 },
 
   /*--------------------------------------------------RUTAS PARA ACCESO CON LOADER*/

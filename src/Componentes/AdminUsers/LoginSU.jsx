@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import {useNavigate} from "react-router-dom";
+import backendUrl from '../../serverConfig';
+
 
 const LoginSU = () => {
     const navigate = useNavigate();
@@ -11,7 +13,7 @@ const LoginSU = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://192.168.1.66:3000/api/login', {
+            const response = await fetch(backendUrl+'/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
