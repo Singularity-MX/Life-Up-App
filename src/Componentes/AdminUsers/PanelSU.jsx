@@ -12,7 +12,7 @@ const PanelAdmin = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch(backendUrl+'/api/tabla');
+                const response = await fetch(backendUrl+'/api/tableRol');
                 const responseData = await response.json();
                 if (response.ok) {
                     setUsers(responseData);
@@ -43,20 +43,20 @@ const PanelAdmin = () => {
                     <th>Rol</th>
                     <th>ID Centro</th>
                     <th>Email</th>
-                    <th>Password</th>
+                
                     <th>Acceso</th>
-                    <th>Referencia SuperUsuario</th>
+                  
                 </tr>
             </thead>
             <tbody>
                 {users.map(user => (
-                    <tr key={user.PersolanlID}>
+                    <tr key={user.PersonalID}>
+                        <td>{user.PersonalID}</td>
                         <td>{user.Rol}</td>
                         <td>{user.ID_Centro}</td>
                         <td>{user.Email}</td>
-                        <td>{user.Password}</td>
                         <td>{user.Acceso}</td>
-                        <td>{user.ReferenciaSU}</td>
+                     
                     </tr>
                 ))}
             </tbody>
