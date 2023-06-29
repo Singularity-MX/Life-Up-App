@@ -53,6 +53,8 @@ import DashboardEstadistica from './Componentes/Estadistica/dashboardEstadistica
 import LoginSU from './Componentes/AdminUsers/LoginSU';
 import PanelAdmin from './Componentes/AdminUsers/PanelSU';
 import Formulario from './Componentes/AdminUsers/addUser';
+import DeleteUser from './Componentes/AdminUsers/DeleteUserForm';
+import EditSuperUsuario from './Componentes/AdminUsers/EditUser';
 
 const router = createBrowserRouter([
   {
@@ -163,6 +165,16 @@ const router = createBrowserRouter([
   path: "/FormularioPersonal",
   element: <Formulario/>,
 },
+{
+  path: "/DeleteUserPersonal",
+  element: <DeleteUser/>,
+},
+{
+  path: "/EditUserPersonal",
+  element: <EditSuperUsuario/>,
+},
+
+
 
   /*--------------------------------------------------RUTAS PARA ACCESO CON LOADER*/
   {
@@ -175,7 +187,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/loader-DashboardSU",
-    element:  <Loader to="/DashboardRoles" delay={3000} />,
+    element:  <Loader to="/DashboardRoles" delay={1000} />,
   },
 
 

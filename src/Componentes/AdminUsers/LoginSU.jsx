@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import backendUrl from '../../serverConfig';
 
+import '../../GlobalStyles/Resources.css';
+import './styleLogin.css';
+
+import logo from '../../GlobalStyles/images/logo.svg';
+import { useSpring, animated } from 'react-spring';
 
 const LoginSU = () => {
+    const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -13,7 +19,7 @@ const LoginSU = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch(backendUrl+'/api/login', {
+            const response = await fetch(backendUrl + '/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,23 +55,54 @@ const LoginSU = () => {
         })
     }
 
-
+const salir = () => {
+    navigate("/loader-Login");
+}
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                placeholder="Correo electrónico"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-                type="password"
-                placeholder="Contraseña"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button type="submit">Iniciar sesión</button>
-        </form>
+        <body className='BodyLogin'>
+            <div className='cont_login'>
+                <div id='headerLogin'>
+                <img id="logoLogin" src={logo}/>
+                </div>
+               
+                <div className='formContainer'>
+                    <animated.h1 style={fade} id="titleLogin">Inicia Sesión</animated.h1>
+                    <label>Por favor accede con tus credenciales: </label>
+                    <form onSubmit={handleSubmit}>
+                        <div className='cont_inputs'>
+                            <label className='labelInput'>Correo Electrónico</label>
+                            <input
+                                type="text"
+                                class="inputGlobalLogin"
+                                placeholder="admin@example.com"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
+
+                        <div className='cont_inputs'>
+                            <label className='labelInput'>Contraseña</label>
+                            <input
+                                type="password"
+                                class="inputGlobalLogin"
+                                placeholder="************"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </div>
+                        <div className='cont_inputs'>
+                        <button className='buttonPrincipalGlobal_Login' type="submit">Iniciar sesión</button>
+                        <button className='buttonPrincipalGlobal_Login' type="button" onClick={salir}>Atrás</button>
+                        </div>
+
+
+
+                       
+
+                    </form>
+                </div>
+            </div>
+        </body>
     );
 };
 

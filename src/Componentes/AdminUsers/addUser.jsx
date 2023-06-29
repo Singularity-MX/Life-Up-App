@@ -4,18 +4,24 @@ import backendUrl from '../../serverConfig';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { calculateHash } from '../../hashUtils';
+import Swal from 'sweetalert2';
 
-import {button, TextField} from '@mui/material';
+import { button, TextField } from '@mui/material';
 import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 
 import { useSpring, animated } from 'react-spring';
 
 
+import '../../GlobalStyles/Resources.css';
+import './styleAdd.css';
+
+import logo from '../../GlobalStyles/images/logo.svg';
+import imagen from '../../GlobalStyles/images/image1.png';
 
 const Formulario = () => {
   const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
 
-//////////////////////////////////////////////////////////////---------------> Variables a utilizar
+  //////////////////////////////////////////////////////////////---------------> Variables a utilizar
   const [PersonalID, setPersonalId] = useState('');
   const [Rol, setRol] = useState('');
   const [ID_Centro, setCentroId] = useState('');
@@ -71,6 +77,10 @@ const Formulario = () => {
       y -= defaultFontSize + fieldMargin;
     };
 
+
+
+
+
     addFormField('ID de Personal', PersonalID);
     addFormField('Rol', Rol);
     addFormField('ID Centro', ID_Centro);
@@ -88,15 +98,17 @@ const Formulario = () => {
     // Crear un enlace de descarga y hacer clic automáticamente
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'formulario.pdf';
+    link.download = 'Comprobante - ' + User_ID + '.pdf';
     link.click();
+
+    Alerta('success', 'Datos generados', 'Se descargó correctamente')
   };
 
 
-//////////////////////////////////////////////////////////////---------------> USE EFFECT()
+  //////////////////////////////////////////////////////////////---------------> USE EFFECT()
   useEffect(() => {
 
-//-----------------------------------------------> Obtener los datos de los centros del servidor al cargar el componente
+    //-----------------------------------------------> Obtener los datos de los centros del servidor al cargar el componente
     const fetchCentro = async () => {
       try {
         const response = await fetch(backendUrl + '/api/GetCentros');
@@ -112,7 +124,7 @@ const Formulario = () => {
     };
 
 
-   //-----------------------------------------------> Obtener el numero de usuarios
+    //-----------------------------------------------> Obtener el numero de usuarios
     const fetchNumUser = async () => {
       try {
         const response = await fetch(backendUrl + '/api/GetNumUser');
@@ -133,7 +145,7 @@ const Formulario = () => {
     fetchNumUser();
   }, []);
 
-//////////////////////////////////////////////////////////////---------------> Funcion de crear ID de usuario
+  //////////////////////////////////////////////////////////////---------------> Funcion de crear ID de usuario
   function CrearID(idCentro, NumUsuario) {
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
@@ -141,11 +153,11 @@ const Formulario = () => {
     //id de personal = ID_Centro + P + Año + Numero de usuario
     const ID = idCentro + "P" + lastTwoDigits + (NumUsuario + 1);
     setPersonalId(ID);
-    setIndice(NumUsuario+1);
+    setIndice(NumUsuario + 1);
     setUserID(ID);
   }
 
-//////////////////////////////////////////////////////////////---------------> Metodo para hacer el envío del formulario
+  //////////////////////////////////////////////////////////////---------------> Metodo para hacer el envío del formulario
   const handleSubmit = () => {
     // Envía los datos al servidor
     // Crear un objeto con los datos del formulario
@@ -162,7 +174,7 @@ const Formulario = () => {
       Indice,
       User_ID
     }
-    
+
 
     // Enviar los datos al servidor utilizando Axios
     axios.post(backendUrl + '/api/AddUser', formData)
@@ -171,9 +183,9 @@ const Formulario = () => {
         console.log(response.data);
         if (response.status === 200) {
           // Autenticación exitosa, puedes redirigir al usuario a otra página
-          //alert('Inicio de sesión exitoso');
+          //Alerta(icono, titulo, texto) ('Inicio de sesión exitoso');
           //            navigate("/loader-DashboardSU");
-         alert('chido user');
+
           //navigate("/loader-DashboardSU");
 
 
@@ -181,7 +193,7 @@ const Formulario = () => {
 
         } else {
           // Autenticación fallida
-          alert('Insert fallido');
+          Alerta('error', 'Sin éxito', 'Falló al registrar la información');
         }
       })
       .catch(error => {
@@ -189,20 +201,20 @@ const Formulario = () => {
         console.error(error);
       });
 
-      // increment a user
-      axios.post(backendUrl + '/api/IncrementUSerNum', Data)
+    // increment a user
+    axios.post(backendUrl + '/api/IncrementUSerNum', Data)
       .then(response => {
         // Manejar la respuesta del servidor si es necesario
         console.log(response.data);
         if (response.status === 200) {
           // Autenticación exitosa, puedes redirigir al usuario a otra página
-          //alert('Inicio de sesión exitoso');
+          //Alerta(icono, titulo, texto) ('Inicio de sesión exitoso');
           //            navigate("/loader-DashboardSU");
-          alert('chido increment');
+          Alerta('success', 'Completado', 'Se ha reistrado correctamente');
           navigate("/loader-DashboardSU");
         } else {
           // Autenticación fallida
-          alert('Insert fallido');
+          Alerta('error', 'Sin éxito', 'Falló al registrar la información');
         }
       })
       .catch(error => {
@@ -211,12 +223,12 @@ const Formulario = () => {
       });
 
 
-      
 
-  ///---------------------Incrementar el numero de usuario
+
+    ///---------------------Incrementar el numero de usuario
   };
 
-//////////////////////////////////////////////////////////////---------------> Metodo para manejar el cambio de estado del combo de Rol
+  //////////////////////////////////////////////////////////////---------------> Metodo para manejar el cambio de estado del combo de Rol
   const handleRolChange = (e) => {
     const selectedRol = e.target.value;
     setRol(selectedRol);
@@ -224,7 +236,7 @@ const Formulario = () => {
     // Verificar el rol seleccionado y ajustar el campo de acceso
     if (selectedRol === 'Psicología') {
       setAcceso('ÁREA DE PSICOLOGÍA');
-    } else if (selectedRol === 'Emfermería') {
+    } else if (selectedRol === 'Enfermería') {
       setAcceso('ÁREA DE ENFERMERÍA');
     } else if (selectedRol === 'Instructor') {
       setAcceso('ÁREA DE TALLERES Y ACTIVIDADES');
@@ -237,7 +249,7 @@ const Formulario = () => {
     }
   };
 
-//////////////////////////////////////////////////////////////---------------> Método para validar si los textbox tienen texto y crear el user ID
+  //////////////////////////////////////////////////////////////---------------> Método para validar si los textbox tienen texto y crear el user ID
   const handleValidation = () => {
     // Realizar la validación de las variables aquí
     // Si las variables tienen información, establece validated en true
@@ -248,81 +260,158 @@ const Formulario = () => {
       setValidated(true);
       setShowButtons(true);
       setShowDiv(false); // Ocultar el div
-//-------------------------------> Metodo para obtener el hASh de la contraseña
+      //-------------------------------> Metodo para obtener el hASh de la contraseña
       calculateHash(Password)
         .then(hash => {
-         // alert(hash)
+          // Alerta(icono, titulo, texto) (hash)
           setPassword(hash); //-------------> Pasar el Hash de la contraseña
         })
         .catch(error => {
           console.error('Error al calcular el hash:', error);
         });
+      AlertaTimer('success', 'Datos validados', 1500);
     } else {
       setValidated(false);
       setShowButtons(false);
       setShowDiv(true); // Mostrar el div
-      alert('Por favor, complete todos los campos');
+      Alerta('error', 'No completado', 'Por favor, complete todos los campos');
     }
   };
 
 
+  function Alerta(icono, titulo, texto) {
+    Swal.fire({
+      icon: icono,
+      title: titulo,
+      text: texto,
+      confirmButtonColor: '#4CAF50',
+      confirmButtonText: 'Aceptar'
+    })
+  }
+  function AlertaTimer(icono, titulo, tiempo) {
+    Swal.fire({
+      position: 'center',
+      icon: icono,
+      title: titulo,
+      showConfirmButton: false,
+      timer: tiempo
+    })
+  }
 
-  //////////////////////////////////////////////////////////////---------------RETURN()-------------//////////////////////////////////////////////////////////////////////////////////
+  const Menu = () => {
+    navigate("/loader-DashboardSU");
+  }
+
   
+  //////////////////////////////////////////////////////////////---------------RETURN()-------------//////////////////////////////////////////////////////////////////////////////////
+
   return (
-    <div>
-      {showDiv && (
-        <div>
-          <h1>Formulario</h1>
-
-          <animated.h1 style={fade}>¡Bienvenido!</animated.h1>
-
-          <label>Rol:</label>
-          <select value={Rol} onChange={handleRolChange}>
-            <option value="">Seleccionar Rol</option>
-            <option value="Psicología">Psicóloga/o</option>
-            <option value="Emfermería">Enfermera/o</option>
-            <option value="Instructor">Instructora/or</option>
-            <option value="Administración">Administradora/or</option>
-            <option value="Recepción">Recepcionista</option>
-          </select>
-
-          <label>ID Centro:</label>
-
-          <select value={ID_Centro} onChange={e => setCentroId(e.target.value.split(" - ")[0])}>
-            <option value="">Seleccionar centro</option>
-            {centros.map(centro => (
-              <option key={centro.ID_Centro} value={centro.ID_Centro}>
-                {centro.ID_Centro} - {centro.Nombre}
-              </option>
-            ))}
-          </select>
-
-          <label>Email:</label>
-          <input type="email" value={Email} onChange={e => setEmail(e.target.value)} />
-
-          <label>Password:</label>
-          <input type="password" value={pass} onChange={e => setpass(e.target.value)} />
-
-          <label>Acceso:</label>
-          <textarea value={Acceso} readOnly />
-
-          <button onClick={handleValidation}>Validar</button>
+    <body>
+      <div className="left-panel">
+        <img src={logo} className='logo' />
+        <div className='contTitleLeft' >
+          <label className='labelPanelLeft'>Agregar personal</label>
+          <div className='line'></div>
         </div>
+        <div className='contMenu' >
+          <div className='optionBtn' onClick={Menu}>
+            <label className='txtBTN'>Volver al menú</label>
+          </div>
+
+        </div>
+        <div className='contentImage'>
+          <img src={imagen} className='imagen' />
+        </div>
+      </div>
+
+
+      {showDiv && (
+
+        <div className="right-panel">
+          <div className="right-panel-content">
+            <div className='formContainer'>
+              <animated.h1 style={fade} className="titleForm">¡Bienvenido!</animated.h1>
+              <div className='containerInputLabel'>
+                <label className='labelInput'>Elige un rol:</label>
+                <select class="inputGlobal" value={Rol} onChange={handleRolChange} required>
+                  <option value="" disabled selected>Seleccionar Rol</option>
+                  <option value="Psicología">Psicóloga/o</option>
+                  <option value="Enfermería">Enfermera/o</option>
+                  <option value="Instructor">Instructora/or</option>
+                  <option value="Administración">Administradora/or</option>
+                  <option value="Recepción">Recepcionista</option>
+                </select>
+              </div>
+
+              <div className='containerInputLabel'>
+                <label className='labelInput'>Elige un centro:</label>
+
+                <select class="inputGlobal" value={ID_Centro} onChange={e => setCentroId(e.target.value.split(" - ")[0])} required>
+                  <option disabled selected value="">Seleccionar centro</option>
+                  {centros.map(centro => (
+                    <option key={centro.ID_Centro} value={centro.ID_Centro}>
+                      {centro.ID_Centro} - {centro.Nombre}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className='containerInputLabel'>
+                <label className='labelInput'>Ingresa un correo electrónico:</label>
+                <input class="inputGlobal" placeholder="example@mail.com" type="email" value={Email} onChange={e => setEmail(e.target.value)} required />
+              </div>
+
+              <div className='containerInputLabel'>
+                <label className='labelInput'>Ingresa una contraseña:</label>
+                <input class="inputGlobal" placeholder="*********" type="text" value={pass} onChange={e => setpass(e.target.value)} required />
+              </div>
+
+              <div className='containerInputLabel'>
+                <label className='labelInput'>Verifica los permisos de acceso:</label>
+                <textarea class="inputGlobal" value={Acceso} readOnly />
+              </div>
+
+              <button className='buttonPrincipalGlobal' onClick={handleValidation}>Validar</button>
+              <button className='buttonPrincipalGlobal' onClick={Menu}>Cancelar</button>
+
+            </div>
+          </div>
+          
+        </div>
+
+
+
+
+
+
+
+
       )}
 
-
-      <div>
+      <div className="">
 
 
         {validated && (
-          <div>
-            <button onClick={handleDownloadPDF}>Descargar PDF</button>
-            <button onClick={handleSubmit}>Enviar al servidor</button>
+
+          <div className="right-panel">
+            <div className="right-panel-content">
+              <div className="formSecundario">
+                <h1 className="titleForm">Finalizar registro</h1>
+                <p>Se ha generado un comprobante de registro, lo puedes descargar a continuación, no olvides seleccionar en finalizar registro para guardar los cambios.</p>
+                <button className='buttonPrincipalGlobal' onClick={handleDownloadPDF}>Descargar PDF</button>
+                <button className='buttonPrincipalGlobal' onClick={handleSubmit}>Finalizar registro</button>
+
+
+                
+
+              </div>
+            </div>
           </div>
         )}
       </div>
-    </div>
+
+
+    </body>
   );
 };
 
