@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { calculateHash } from '../../hashUtils';
 import Swal from 'sweetalert2';
-
+import { SHA256 } from 'crypto-js';
 import { button, TextField } from '@mui/material';
 import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 
@@ -261,14 +261,9 @@ const Formulario = () => {
       setShowButtons(true);
       setShowDiv(false); // Ocultar el div
       //-------------------------------> Metodo para obtener el hASh de la contraseña
-      calculateHash(Password)
-        .then(hash => {
-          // Alerta(icono, titulo, texto) (hash)
-          setPassword(hash); //-------------> Pasar el Hash de la contraseña
-        })
-        .catch(error => {
-          console.error('Error al calcular el hash:', error);
-        });
+      const hash = SHA256(pass).toString();
+      setPassword(hash); //-------------> Pasar el Hash de la contraseña
+      
       AlertaTimer('success', 'Datos validados', 1500);
     } else {
       setValidated(false);
