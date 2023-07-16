@@ -210,7 +210,7 @@ const Formulario = () => {
           // Autenticación exitosa, puedes redirigir al usuario a otra página
           //Alerta(icono, titulo, texto) ('Inicio de sesión exitoso');
           //            navigate("/loader-DashboardSU");
-          Alerta('success', 'Completado', 'Se ha reistrado correctamente');
+          Alerta('success', 'Completado', 'Se ha registrado correctamente');
           navigate("/loader-DashboardSU");
         } else {
           // Autenticación fallida

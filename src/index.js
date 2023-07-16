@@ -25,6 +25,9 @@ import FormEmergencia from './Componentes/Insert/Form_emergencia';
 import Form_Foto from './Componentes/Insert/Form_foto';
 import Form_final from './Componentes/Insert/Form_final';
 
+//user
+import Form_user_personal from './Componentes/Modulos/Usuarios/Form_personal';
+
 //modulo de salud
 import Salud_dashboard from './Componentes/Salud/Salud_home';
 import Form_salud from './Componentes/Salud/form_captura';
@@ -56,6 +59,11 @@ import Formulario from './Componentes/AdminUsers/addUser';
 import DeleteUser from './Componentes/AdminUsers/DeleteUserForm';
 import EditSuperUsuario from './Componentes/AdminUsers/EditUser';
 
+//menus roles
+import MenuAdmin from './Componentes/ROLES_MENUS/Administracion/Dashboard_Admin';
+import MenuPsico from './Componentes/ROLES_MENUS/Psicologia/Dashboard_Psicologia';
+import MenuUsers from './Componentes/Modulos/Usuarios/Menu-usuarios';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -72,7 +80,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/addUserPersonal",
-    element: <Form_personal/>,
+    element: <Form_user_personal/>,
   },
   {
     path: "/addUserContacto",
@@ -174,7 +182,19 @@ const router = createBrowserRouter([
   element: <EditSuperUsuario/>,
 },
 
-
+///MENU ROLES DE USUARIOS
+{
+  path: "/MenuAdmin",
+  element: <MenuAdmin/>,
+},
+{
+  path: "/MenuPsico",
+  element: <MenuPsico/>,
+},
+{
+  path: "/MenuUsers",
+  element: <MenuUsers/>,
+},
 
   /*--------------------------------------------------RUTAS PARA ACCESO CON LOADER*/
   {
@@ -189,7 +209,13 @@ const router = createBrowserRouter([
     path: "/loader-DashboardSU",
     element:  <Loader to="/DashboardRoles" delay={1000} />,
   },
+/*--------------------------------------------------rutas menu roles*/
+  {
+    path: "/loader-MenuAdmin",
+    element:  <Loader to="/MenuAdmin" delay={1000} />,
+  },
 
+  
 
 
 ]);

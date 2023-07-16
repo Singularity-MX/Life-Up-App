@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import { useNavigate } from "react-router-dom";
-import backendUrl from '../../serverConfig';
+import { useNavigate,useLocation } from "react-router-dom";
+import backendUrl from '../../../serverConfig';
 
-import '../../GlobalStyles/Resources.css';
-import './styleDash.css';
+import '../../../GlobalStyles/Resources.css';
 
-import logo from '../../GlobalStyles/images/logo.svg';
-import imagen from '../../GlobalStyles/images/image1.png';
+import logo from '../../../GlobalStyles/images/logo.svg';
+import imagen from '../../../GlobalStyles/images/image1.png';
 
 
-const PanelAdmin = () => {
+const MenuAdmin = () => {
+    const routeLocation = useLocation();
+    const ID =  routeLocation.state && routeLocation.state.ID_PERSONAL;
+
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
     const [copiedPersonalID, setCopiedPersonalID] = useState('');
@@ -49,11 +51,12 @@ const PanelAdmin = () => {
         fetchUsers();
     }, []);
 
-    function GoAddUser() {
-        navigate("/FormularioPersonal");
+    //usuarios
+    function GoUser() {
+        navigate("/MenuUsers" , { state: { ID_PERSONAL: ID } });
     }
     function GoLogOut() {
-        navigate("/LoginSU");
+        navigate("/loader-Login");
     }
     const DeleteUser = () => {
         navigate("/DeleteUserPersonal");
@@ -71,14 +74,21 @@ const PanelAdmin = () => {
                     <div className='line'></div>
                 </div>
                 <div className='contMenu' >
-                    <div className='optionBtn' onClick={GoAddUser}>
-                        <label className='txtBTN'>Agregar personal</label>
+                <div className='optionBtn' onClick={GoUser}>
+                        <label className='txtBTN'>Usuarios</label>
+                    </div>
+                    <div className='optionBtn' onClick={GoUser}>
+                        <label className='txtBTN'>Psicología</label>
                     </div>
                     <div className='optionBtn' onClick={ModifyUser}>
-                        <label className='txtBTN'>Modificar personal</label>
+                        <label className='txtBTN'>Enfermería</label>
                     </div>
-                    <div className='optionBtn' onClick={DeleteUser}>
-                        <label className='txtBTN'>Eliminar personal</label>
+
+                    <div className='optionBtn' onClick={GoLogOut}>
+                        <label className='txtBTN'>Talleres</label>
+                    </div>
+                    <div className='optionBtn' onClick={GoLogOut}>
+                        <label className='txtBTN'>Estadística general</label>
                     </div>
                     <div className='optionBtn' onClick={GoLogOut}>
                         <label className='txtBTN'>Cerrar sesión</label>
@@ -95,40 +105,18 @@ const PanelAdmin = () => {
             <div className="right-panel">
                 <div className="right-panel-content">
                     <div className='formSecundarioBTN'>
-                        <button className='buttonPrincipalGlobal' onClick={GoAddUser}>Agregar personal</button>
-                        <button className='buttonPrincipalGlobal' onClick={ModifyUser}>Modificar personal</button>
-                        <button className='buttonPrincipalGlobal' onClick={DeleteUser}>Eliminar personal</button>
+                        <button className='buttonPrincipalGlobal' onClick={GoUser}>Psicología</button>
+                        <button className='buttonPrincipalGlobal' onClick={ModifyUser}>Enfermería</button>
+                        <button className='buttonPrincipalGlobal' onClick={DeleteUser}>Estadística General</button>
+                        <button className='buttonPrincipalGlobal' onClick={DeleteUser}>Agregar Usuarios</button>
+                        <button className='buttonPrincipalGlobal' onClick={DeleteUser}>Talleres</button>
                         <button className='buttonPrincipalGlobal' onClick={GoLogOut}>Cerrar Sesión</button>
 
                     </div>
 
                     <div className='table_container'>
-                        <h1 className='titleForm'>Personal registrado</h1>
-                        <table className='table'>
-
-                            <thead>
-                                <tr>
-                                    <th>ID de Personal</th>
-                                    <th>Rol</th>
-                                    <th>ID Centro</th>
-                                    <th>Email</th>
-
-                                    <th>Acceso</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {users.map((user) => (
-                                    <tr key={user.PersonalID} onClick={() => handleRowClick(user.PersonalID)}>
-                                        <td>{user.PersonalID}</td>
-                                        <td>{user.Rol}</td>
-                                        <td>{user.ID_Centro}</td>
-                                        <td>{user.Email}</td>
-                                        <td>{user.Acceso}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                        <h1 className='titleForm'>ROL ADMIN</h1>
+                     
                     </div>
                 </div>
             </div>
@@ -138,4 +126,4 @@ const PanelAdmin = () => {
     );
 };
 
-export default PanelAdmin;
+export default MenuAdmin;
