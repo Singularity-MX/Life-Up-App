@@ -113,7 +113,7 @@ const MenuUsers = () => {
                     </div>
 
                     <div className='table_container'>
-                        <h1 className='titleForm'>usuarios</h1>
+                        <h1 className='titleForm'>usuarioID: {ID}</h1>
                      
                     </div>
                 </div>

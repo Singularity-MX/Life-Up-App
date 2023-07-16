@@ -1,7 +1,7 @@
 
 
 /*Funciones importadas*/
-import './Insertar.css';
+
 import Header from "../Header";
 import imagen from "../images/User_add/icon_inf general.png";
 import { useEffect, useState } from "react";
@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { getSession, isLoggedIn } from "../../session";
 import { addUserNew } from '../../services/firebaseAddUser';
 import imgImageForm from './images/icon_inf general.png';
-import './styleForm.css';
+
 /*----------------------------  FUNCION PRINCIPAL  ---------------------------------- */
 
 const Form_personal = () => {

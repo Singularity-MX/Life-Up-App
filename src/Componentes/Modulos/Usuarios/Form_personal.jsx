@@ -6,10 +6,18 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios';
 import backendUrl from '../../../serverConfig';
+import "./styleAdd.css";
+import { useSpring, animated } from 'react-spring';
+import logo from '../../../GlobalStyles/images/logo.svg';
+import imagen from '../../../GlobalStyles/images/image1.png';
+import Swal from 'sweetalert2';
+
+
 
 /*----------------------------  FUNCION PRINCIPAL  ---------------------------------- */
 
 const Form_user_personal = () => {
+  const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
 
   //Función que permite escribir en mayusculas solamente.
   const handleInput = (event) => {
@@ -24,8 +32,8 @@ const Form_user_personal = () => {
   const [sexo, setSexo] = useState('');
   const [tel, setTel] = useState('');
 
-  const [ID, setID] = useState('fsdf');
-
+  const [ID, setID] = useState('');
+  const [Indice, setIndice] = useState('');
   const routeLocation = useLocation();
   const ID_Personal = routeLocation.state && routeLocation.state.ID_PERSONAL;
 
@@ -36,7 +44,106 @@ const Form_user_personal = () => {
   //Función que permite agregar los datos a firebase usando una función llamada addUserNew que se encuentra en services.
   const handleSubmit = (event) => {
 
+    //variables de base de datos
+    const UserID = ID;
+    const CentroID = centroID;
+    const Nombre = nombre;
+    const ApellidoPaterno = ap;
+    const ApellidoMaterno = am;
+    const Edad = edad;
+    const Telefono = tel;
 
+    const User_ID = UserID;
+
+    const formData = {
+      UserID,
+      CentroID,
+      Nombre,
+      ApellidoPaterno,
+      ApellidoMaterno,
+      Edad,
+      Telefono
+    };
+
+
+    const Data = {
+      Indice,
+      User_ID
+    }
+
+
+    // Enviar los datos al servidor utilizando Axios
+    axios.post(backendUrl + '/api/addInformationPersonalUser', formData)
+      .then(response => {
+        // Manejar la respuesta del servidor si es necesario
+        
+        if (response.status === 200) {
+          // Autenticación exitosa, puedes redirigir al usuario a otra página
+          //Alerta(icono, titulo, texto) ('Inicio de sesión exitoso');
+          //            navigate("/loader-DashboardSU");
+        
+          //navigate("/loader-DashboardSU");
+
+          
+          // increment a user
+          axios.post(backendUrl + '/api/IncrementUSerNum', Data)
+            .then(response => {
+              // Manejar la respuesta del servidor si es necesario
+              console.log(response.data);
+              if (response.status === 200) {
+                // Autenticación exitosa, puedes redirigir al usuario a otra página
+                //Alerta(icono, titulo, texto) ('Inicio de sesión exitoso');
+                //            navigate("/loader-DashboardSU");
+                Alerta('success', 'Completado', 'Se ha registrado correctamente');
+                navigate('/MenuUsers');
+              } else {
+                // Autenticación fallida
+                Alerta('error', 'Sin éxito', 'Falló al registrar la información');
+              }
+            })
+            .catch(error => {
+              // Manejar errores si ocurre alguno
+              console.error(error);
+            });
+
+            
+
+
+        } else {
+          // Autenticación fallida
+          Alerta('error', 'Sin éxito', 'Falló al registrar la información');
+        }
+      })
+      .catch(error => {
+        // Manejar errores si ocurre alguno
+        console.error(error);
+      });
+
+
+
+
+
+  }
+
+
+
+  function Alerta(icono, titulo, texto) {
+    Swal.fire({
+      icon: icono,
+      title: titulo,
+      text: texto,
+      confirmButtonColor: '#4CAF50',
+      confirmButtonText: 'Aceptar'
+    })
+  }
+  function AlertaTimer(icono, titulo, tiempo) {
+    Swal.fire({
+      position: 'center',
+      icon: icono,
+      title: titulo,
+      showConfirmButton: false,
+      timer: tiempo
+    })
   }
 
   //-----Funciones para establecer los valores a las declaraciones de estados
@@ -57,10 +164,11 @@ const Form_user_personal = () => {
     //id de personal = ID_Centro + P + Año + Numero de usuario
     const ID = idCentro + "U" + lastTwoDigits + (NumUsuario + 1);
     setID(ID);
+    setIndice(NumUsuario + 1);
   }
 
   const fetchCentro = async () => {
- 
+
     try {
       // Hacer una solicitud POST al punto final de inicio de sesión en el servidor
       const response = await fetch(backendUrl + '/api/GetCentroID', {
@@ -76,6 +184,7 @@ const Form_user_personal = () => {
         const idCentro = responseData.Centro; // Reemplaza "numUs" con el nombre de la propiedad adecuada en "responseData"
         setCentro(idCentro);//obten el numero de usuario ultimo
         CrearID(idCentro, ultimoUserNum);
+     
       }
       // Verificar el estado de la respuesta
 
@@ -94,6 +203,7 @@ const Form_user_personal = () => {
         if (response.ok) {
           const numUs = responseData.Indice; // Reemplaza "numUs" con el nombre de la propiedad adecuada en "responseData"
           setNumUs(numUs);//obten el numero de usuario ultimo
+          
           fetchCentro();
           //crear id
 
@@ -116,39 +226,102 @@ const Form_user_personal = () => {
     navigate("/loader-Home");
   }
 
+  const Regresar = () => {
+    navigate(-1);
+  }
+ 
   //ID - > es el id de usuario
   //------------------------------------------------------------ >  RETURN()
   return (
-    <div className="containerBody_InsertUser">
-
-
-
-      <div className="containerFormulario_InsertUser">
-
-        <form onSubmit={handleSubmit} className="Formulario_PsicoForm">
-          <h1>{ID}</h1>
-          <h2>id personal: {ID_Personal}</h2>
-          <h2>id personal: {ID}</h2>
-          <div className="containerTitleFormulario_PsicoForm"><h1 className="title-form">INFORMACIÓN PERSONAL</h1></div>
-
-          <input type="text" className="inputsPsico" placeholder="Nombre(s)" value={nombre} onChange={handleInputNombre} onInput={handleInput} required />
-          <input type="text" className="inputsPsico" placeholder="Apellido Paterno" value={ap} onChange={handleInputAp} onInput={handleInput} required />
-          <input type="text" className="inputsPsico" placeholder="Apellido Materno" value={am} onChange={handleInputAm} onInput={handleInput} required />
-          <input type="number" className="inputsPsico" placeholder="Edad" value={edad} onChange={handleInputEdad} onInput={handleInput} required />
-          <select name="select" className="inputsPsico" value={sexo} onChange={handleInputSexo} required>
-            <option value="" selected>Seleccionar Sexo</option>
-            <option value="Masculino" >Masculino</option>
-            <option value="Femenino" >Femenino</option>
-          </select>
-          <input type="tel" className="inputsPsico" placeholder="Teléfono a 10 dígitos" value={tel} onChange={handleInputTel} onInput={handleInput} pattern="[0-9]{10}" required />
-          <button type="submit" className='btn' >Siguiente</button>
-          <button type="button" className='btn-Volver' onClick={Home}>Cancelar</button>
-
-        </form>
+    <body>
+    <div className="left-panel">
+      <img src={logo} className='logo' />
+      <div className='contTitleLeft' >
+        <label className='labelPanelLeft'>Secciones completadas</label>
+        <div className='line'></div>
+      </div>
+      <i class="fi fi-br-check"></i>
+      <label className='txtBTN' >  Marcar como completado</label>
+      <div className='contMenu' >
+        <div className='optionBtn' >
+          <label className='txtBTN' onClick={Regresar}>Regresar</label>
+        </div>
 
       </div>
-
+      <div className='contentImage'>
+        <img src={imagen} className='imagen' />
+      </div>
     </div>
+
+
+    
+
+      <div className="right-panel">
+        <div className="right-panel-content">
+          <div className='formContainer'>
+            <animated.h1 style={fade} className="titleForm">Información personal</animated.h1>
+    <h1>{Indice}</h1>
+            <div className='containerInputLabel'>
+            <label className='labelInput'>Ingresa el nombre:</label>
+            <input type="text" class="inputGlobal" placeholder="Nombre(s)" value={nombre} onChange={handleInputNombre} onInput={handleInput} required />
+          </div>
+
+          <div className='containerInputLabel'>
+            <label className='labelInput'>Ingresa el Apellido Paterno:</label>
+            <input type="text" class="inputGlobal" placeholder="Apellido Paterno" value={ap} onChange={handleInputAp} onInput={handleInput} required />
+          </div>
+
+          <div className='containerInputLabel'>
+            <label className='labelInput'>Ingresa el Apellido Materno:</label>
+            <input type="text" class="inputGlobal" placeholder="Apellido Materno" value={am} onChange={handleInputAm} onInput={handleInput} required />
+          </div>
+
+          <div className='containerInputLabel'>
+            <label className='labelInput'>Ingresa su edad:</label>
+            <input type="number" class="inputGlobal" placeholder="Edad" value={edad} onChange={handleInputEdad} onInput={handleInput} required />
+          </div>
+
+          <div className='containerInputLabel'>
+            <label className='labelInput'>Selecciona el sexo:</label>
+            <select name="select" className="inputGlobal" value={sexo} onChange={handleInputSexo} required>
+              <option value="" selected>Seleccionar Sexo</option>
+              <option value="Masculino" >Masculino</option>
+              <option value="Femenino" >Femenino</option>
+            </select>
+          </div>
+
+          <div className='containerInputLabel'>
+            <label className='labelInput'>Ingresa su teléfono(a 10 dígitos):</label>
+            <input type="number" class="inputGlobal" placeholder="Teléfono a 10 dígitos" value={tel} onChange={handleInputTel} onInput={handleInput} pattern="[0-9]{10}" required />
+          </div>
+
+          <button type="submit" className='buttonPrincipalGlobal' onClick={handleSubmit} >Siguiente</button>
+          
+
+            
+
+          </div>
+        </div>
+        
+      </div>
+
+
+
+
+
+
+
+
+    
+
+    <div className="">
+
+
+     
+    </div>
+
+
+  </body>
   );
 
 }

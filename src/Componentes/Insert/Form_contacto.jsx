@@ -1,6 +1,6 @@
 
 import React from "react";
-import './Insertar.css';
+
 import Header from "../Header";
 import imagen from "../images/User_add/hogar.png";
 import { useNavigate } from "react-router-dom";
