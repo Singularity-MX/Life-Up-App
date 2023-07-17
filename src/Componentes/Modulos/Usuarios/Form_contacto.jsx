@@ -11,12 +11,14 @@ import { useSpring, animated } from 'react-spring';
 import logo from '../../../GlobalStyles/images/logo.svg';
 import imagen from '../../../GlobalStyles/images/image1.png';
 import Swal from 'sweetalert2';
+import { FaCheck } from 'react-icons/fa';
+
 
 
 
 /*----------------------------  FUNCION PRINCIPAL  ---------------------------------- */
 
-const Form_user_personal = () => {
+const Form_user_contacto = () => {
   const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
 
   //Función que permite escribir en mayusculas solamente.
@@ -35,7 +37,7 @@ const Form_user_personal = () => {
   const [ID, setID] = useState('');
   const [Indice, setIndice] = useState('');
   const routeLocation = useLocation();
-  const ID_Personal = routeLocation.state && routeLocation.state.ID_PERSONAL;
+  const ID_recibido = routeLocation.state && routeLocation.state.ID_USER;
 
   const [centroID, setCentro] = useState('');
   //nunmero de usuarios
@@ -97,8 +99,8 @@ const Form_user_personal = () => {
                 // Autenticación exitosa, puedes redirigir al usuario a otra página
                 //Alerta(icono, titulo, texto) ('Inicio de sesión exitoso');
                 //            navigate("/loader-DashboardSU");
-                AlertaTimer('success', 'Sección completada', 1000);
-                navigate('/addUserContacto', { state: { ID_USER: ID } });
+                Alerta('success', 'Completado', 'Se ha registrado correctamente');
+                navigate('/MenuUsers', { state: { ID_PERSONAL: ID_Personal } });
               } else {
                 // Autenticación fallida
                 Alerta('error', 'Sin éxito', 'Falló al registrar la información');
@@ -251,18 +253,17 @@ const Form_user_personal = () => {
       <div className="left-panel">
         <img src={logo} className='logo' />
         <div className='contTitleLeft' >
-          <label className='labelPanelLeft'>Secciones completadas</label>
+          <label className='labelPanelLeft'><strong>Secciones completadas</strong></label>
           <div className='line'></div>
         </div>
-        <i class="fi fi-br-check"></i>
-        <label className='txtBTN' >Sección pendiente</label>
+        
+        <label className='txtBTN' ><FaCheck /> Información personal</label>
+        
         <label className='txtBTN' >Sección pendiente</label>
         <label className='txtBTN' >Sección pendiente</label>
         <label className='txtBTN' >Sección pendiente</label>
         <div className='contMenu' >
-          <div className='optionBtn' >
-            <label className='txtBTN' onClick={Regresar}>Regresar</label>
-          </div>
+        
 
         </div>
         <div className='contentImage'>
@@ -276,8 +277,8 @@ const Form_user_personal = () => {
       <div className="right-panel">
         <div className="right-panel-content">
           <div className='formContainer'>
-            <animated.h1 style={fade} className="titleForm">Información personal</animated.h1>
-    
+            <animated.h1 style={fade} className="titleForm">Información de contacto</animated.h1>
+        <h1>{ID_recibido}</h1>
             <div className='containerInputLabel'>
               <label className='labelInput'>Ingresa el nombre:</label>
               <input type="text" class="inputGlobal" placeholder="Nombre(s)" value={nombre} onChange={handleInputNombre} onInput={handleInput} required />
@@ -343,4 +344,4 @@ const Form_user_personal = () => {
 
 }
 
-export default Form_user_personal;
+export default Form_user_contacto;

@@ -73,7 +73,7 @@ const MenuUsers = () => {
                 <img src={logo} className='logo' />
                 <div className='contTitleLeft' >
                     
-                    <label className='labelPanelLeft'>USUARIOS</label>
+                    <label className='labelPanelLeft'><strong>USUARIOS</strong></label>
                     <div className='line'></div>
                 </div>
                 <div className='contMenu' >
