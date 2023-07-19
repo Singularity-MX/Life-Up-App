@@ -18,7 +18,7 @@ import { FaCheck } from 'react-icons/fa';
 
 /*----------------------------  FUNCION PRINCIPAL  ---------------------------------- */
 
-const Form_user_contacto = () => {
+const Form_user_emergencia = () => {
   const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
 
   //Función que permite escribir en mayusculas solamente.
@@ -33,7 +33,8 @@ const Form_user_contacto = () => {
   const [edad, setEdad] = useState('');
   const [sexo, setSexo] = useState('');
   const [tel, setTel] = useState('');
-
+    const [parentesco, setPar] = useState('');
+  
   const [ID, setID] = useState('');
   const [Indice, setIndice] = useState('');
   const routeLocation = useLocation();
@@ -55,6 +56,22 @@ const Form_user_contacto = () => {
 
   const [año, setAño] = useState('');
 
+  //-----Funciones para establecer los valores a las declaraciones de estados
+  const handleInputNombre = (event) => {
+    setNombre(event.target.value);
+  }
+  const handleInputAp = (event) => {
+    setAp(event.target.value);
+  }
+  const handleInputAm = (event) => {
+    setAm(event.target.value);
+  }
+  const handleInputTel = (event) => {
+    setTel(event.target.value);
+  }
+  const handleInputPar = (event) => {
+    setPar(event.target.value);
+  }
 
   //Función que permite agregar los datos a firebase usando una función llamada addUserNew que se encuentra en services.
   const handleSubmit = (event) => {
@@ -100,7 +117,7 @@ const Form_user_contacto = () => {
           //redigir y pasar el ID
           //navigate("/loader-DashboardSU");
           Alerta('success', 'Completado', 'Se ha registrado correctamente');
-         navigate('/addUserEmergencia', { state: { ID_USER: ID_recibido } });
+          navigate('/addUserEmergencia', { state: { ID_USER: ID_recibido } });
 
         } else {
           // Autenticación fallida
@@ -115,7 +132,7 @@ const Form_user_contacto = () => {
 
 
 
-//Alerta('success', 'id: '+ID_recibido);
+    //Alerta('success', 'id: '+ID_recibido);
 
   }
 
@@ -140,35 +157,19 @@ const Form_user_contacto = () => {
     })
   }
 
-  //-----Funciones para establecer los valores a las declaraciones de estados
-  const handleInputCalle = (event) => {
-    setCalle(event.target.value);
-  }
-  const handleInputCol = (event) => {
-    setCol(event.target.value);
-  }
-  const handleInputCp = (event) => {
-    setCp(event.target.value);
-  }
-  const handleInputCiudad = (event) => {
-    setCiudad(event.target.value);
-  }
-  const handleInputEstado = (event) => {
-    setEstado(event.target.value);
-  }
-  const handleInputDelegacion = (event) => {
-    setDelegacion(event.target.value);
-  }
+
+
+
 
   const handleInputSexo = (event) => { setSexo(event.target.value); }
-  const handleInputTel = (event) => { setTel(event.target.value); }
+
 
   let navigate = useNavigate();
   let [email, setEmail] = useState("");
 
   function CrearID(idCentro, indice, ultimosDigitosAño) {
-    
-    
+
+
     //id de personal = ID_Centro + P + Año + Numero de usuario
     const ID = idCentro + "U" + ultimosDigitosAño + indice;
     setID(ID);
@@ -180,11 +181,11 @@ const Form_user_contacto = () => {
   };
 
   useEffect(() => {
-    
+
 
   }, [navigate]);
 
-  const Home = () => { 
+  const Home = () => {
     navigate("/loader-Home");
   }
 
@@ -202,15 +203,14 @@ const Form_user_contacto = () => {
           <label className='labelPanelLeft'><strong>Secciones completadas</strong></label>
           <div className='line'></div>
         </div>
-        
+
         <label className='txtBTN' ><FaCheck /> Información personal</label>
-      
-       
-        <label className='txtBTN' >Sección pendiente</label>
+        <label className='txtBTN' ><FaCheck /> Información de contacto</label>
+
         <label className='txtBTN' >Sección pendiente</label>
         <label className='txtBTN' >Sección pendiente</label>
         <div className='contMenu' >
-        
+
 
         </div>
         <div className='contentImage'>
@@ -224,44 +224,45 @@ const Form_user_contacto = () => {
       <div className="right-panel">
         <div className="right-panel-content">
           <div className='formContainer'>
-            <animated.h1 style={fade} className="titleForm">Información de contacto</animated.h1>
-        <h1>{ID_recibido}</h1>
-        
+            <animated.h1 style={fade} className="titleForm">Información de emer</animated.h1>
+            <h1>{ID_recibido}</h1>
+
             <div className='containerInputLabel'>
               <label className='labelInput'>Ingresa la calle:</label>
-              <input type="text" class="inputGlobal" placeholder="Calle y número" value={calle} onChange={handleInputCalle} onInput={handleInput} required />
+              <input type="text" class="inputGlobal" placeholder="Nombre(s)" value={nombre} onChange={handleInputNombre} onInput={handleInput} required />
             </div>
 
             <div className='containerInputLabel'>
               <label className='labelInput'>Ingresa la colonia:</label>
-              <input type="text" class="inputGlobal" placeholder="Colonia" value={col} onChange={handleInputCol} onInput={handleInput} required />
-            </div>
-
-            <div className='containerInputLabel'>
-              <label className='labelInput'>Ingresa el Código postal:</label>
-              <input type="text" class="inputGlobal" placeholder="Código postal" value={cp} onChange={handleInputCp} onInput={handleInput} required />
+              <input type="text" class="inputGlobal" placeholder="Apellido Paterno" value={ap} onChange={handleInputAp} onInput={handleInput} required />
             </div>
 
             <div className='containerInputLabel'>
               <label className='labelInput'>Ingresa el delegacion:</label>
-              <input type="number" class="inputGlobal" placeholder="Estado" value={delegacion} onChange={handleInputDelegacion} onInput={handleInput} required />
+              <input type="number" class="inputGlobal" placeholder="Apellido Materno" value={am} onChange={handleInputAm} onInput={handleInput} required />
             </div>
 
             <div className='containerInputLabel'>
               <label className='labelInput'>Ingresa la ciudad:</label>
-              <input type="number" class="inputGlobal" placeholder="Ciudad" value={ciudad} onChange={handleInputCiudad} onInput={handleInput} required />
+              <input type="number" class="inputGlobal" placeholder="Teléfono" pattern="[0-9]{10}" value={tel} onChange={handleInputTel} onInput={handleInput} required />
             </div>
 
             <div className='containerInputLabel'>
               <label className='labelInput'>Ingresa el estado:</label>
-              <input type="number" class="inputGlobal" placeholder="Estado" value={estado} onChange={handleInputEstado} onInput={handleInput} required />
+              <select name="select" className="inputGlobal" placeholder="Parentesco" value={parentesco} onChange={handleInputPar} required>
+                <option value="" selected>Selecciona un parentesco</option>
+                <option value="Hijo">Hijo/as</option>
+                <option value="Hermano">Hermano/as</option>
+                <option value="Nieto">Nieto/as</option>
+                <option value="Biznieto">Biznieto/as</option>
+                <option value="Conyuge">Conyuge</option>
+              </select>
             </div>
 
-         
 
-            
 
-   
+
+
 
             <button type="submit" className='buttonPrincipalGlobal' onClick={handleSubmit} >Siguiente</button>
 
@@ -294,4 +295,4 @@ const Form_user_contacto = () => {
 
 }
 
-export default Form_user_contacto;
+export default Form_user_emergencia;

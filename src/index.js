@@ -28,6 +28,8 @@ import Form_final from './Componentes/Insert/Form_final';
 //user
 import Form_user_personal from './Componentes/Modulos/Usuarios/Form_personal';
 import Form_user_contacto from './Componentes/Modulos/Usuarios/Form_contacto';
+import Form_user_emergencia from './Componentes/Modulos/Usuarios/Form_emergencia';
+
 
 //modulo de salud
 import Salud_dashboard from './Componentes/Salud/Salud_home';
@@ -90,7 +92,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/addUserEmergencia",
-    element: <FormEmergencia/>,
+    element: <Form_user_emergencia/>,
   },
   {
     path: "/addUserFoto",
