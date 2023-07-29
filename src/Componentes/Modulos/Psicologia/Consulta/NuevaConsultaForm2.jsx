@@ -1,28 +1,20 @@
-
-
-/*Funciones importadas*/
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> IMPORTS 
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios';
-import backendUrl from '../../../serverConfig';
-import "./styleAdd.css";
+import backendUrl from '../../../../serverConfig';
+
 import { useSpring, animated } from 'react-spring';
-import logo from '../../../GlobalStyles/images/logo.svg';
-import imagen from '../../../GlobalStyles/images/image1.png';
+import logo from '../../../../GlobalStyles/images/logo.svg';
+import imagen from '../../../../GlobalStyles/images/image1.png';
 import Swal from 'sweetalert2';
 
+/*--------------------------------------------------------  FUNCION PRINCIPAL  -------------------------------------------------------------- */
+const ModulePsicoNuevaConsultaForm = () => {
 
-
-/*----------------------------  FUNCION PRINCIPAL  ---------------------------------- */
-
-const Form_user_personal = () => {
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> DECLARACIONES 
+  //Fade para el h1
   const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
-
-  //Función que permite escribir en mayusculas solamente.
-  const handleInput = (event) => {
-    event.target.value = event.target.value.toUpperCase();
-  };
 
   //Declaraciones de estado para almacenar los datos del los inputs
   const [nombre, setNombre] = useState('');
@@ -31,22 +23,40 @@ const Form_user_personal = () => {
   const [edad, setEdad] = useState('');
   const [sexo, setSexo] = useState('');
   const [tel, setTel] = useState('');
-
   const [ID, setID] = useState('');
   const [Indice, setIndice] = useState('');
   const routeLocation = useLocation();
   const ID_Personal = routeLocation.state && routeLocation.state.ID_PERSONAL;
-
+  const ID_User = routeLocation.state && routeLocation.state.ID_USER;
+  const Nombre = routeLocation.state && routeLocation.state.Nombre;
   const [centroID, setCentro] = useState('');
-  //nunmero de usuarios
   const [ultimoUserNum, setNumUs] = useState('');
-
   const [año, setAño] = useState('');
+  let navigate = useNavigate();
+  let [email, setEmail] = useState("");
 
+  const [Fechaa, setFecha] = useState('');
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> FUNCIONES 
+  // Funciones flecha para el navigate
+  const Home = () => { navigate("/loader-Home"); }
+  const Regresar = () => { navigate(-1); }
+
+  //-----Funciones para establecer los valores a las declaraciones de estados
+  const handleInputNombre = (event) => { setNombre(event.target.value); }
+  const handleInputAp = (event) => { setAp(event.target.value); }
+  const handleInputAm = (event) => { setAm(event.target.value); }
+  const handleInputEdad = (event) => { setEdad(event.target.value); }
+  const handleInputSexo = (event) => { setSexo(event.target.value); }
+  const handleInputTel = (event) => { setTel(event.target.value); }
+
+  //Función que permite escribir en mayusculas solamente.
+  const handleInput = (event) => { event.target.value = event.target.value.toUpperCase(); };
 
   //Función que permite agregar los datos a firebase usando una función llamada addUserNew que se encuentra en services.
   const handleSubmit = (event) => {
 
+
+    
     //variables de base de datos
     const UserID = ID;
     const CentroID = centroID;
@@ -55,9 +65,11 @@ const Form_user_personal = () => {
     const ApellidoMaterno = am;
     const Edad = edad;
     const Telefono = tel;
-
     const User_ID = UserID;
-
+    const Sexo = sexo;
+    const Fecha = Fechaa;
+    
+    //construcción del formData
     const formData = {
       UserID,
       CentroID,
@@ -65,40 +77,27 @@ const Form_user_personal = () => {
       ApellidoPaterno,
       ApellidoMaterno,
       Edad,
-      Telefono
+      Telefono,
+      Sexo,
+      Fecha
     };
-
-
+    //data sirve para hacer el incremento
     const Data = {
       Indice,
       User_ID
     }
 
-
     // Enviar los datos al servidor utilizando Axios
     axios.post(backendUrl + '/api/addInformationPersonalUser', formData)
       .then(response => {
-        // Manejar la respuesta del servidor si es necesario
-
         if (response.status === 200) {
-          // Autenticación exitosa, puedes redirigir al usuario a otra página
-          //Alerta(icono, titulo, texto) ('Inicio de sesión exitoso');
-          //            navigate("/loader-DashboardSU");
-
-          //navigate("/loader-DashboardSU");
-
-
-          // increment a user
+          //hacer el incremento de ususarios
           axios.post(backendUrl + '/api/IncrementUSerNum', Data)
             .then(response => {
-              // Manejar la respuesta del servidor si es necesario
-              console.log(response.data);
-              if (response.status === 200) {
-                // Autenticación exitosa, puedes redirigir al usuario a otra página
-                //Alerta(icono, titulo, texto) ('Inicio de sesión exitoso');
-                //            navigate("/loader-DashboardSU");
+              if (response.status === 200) {             
                 AlertaTimer('success', 'Sección completada', 1000);
-                navigate('/addUserContacto', { state: { ID_USER: ID } });
+                navigate('/addUserContacto', { state: { ID_USER: UserID } });
+                
               } else {
                 // Autenticación fallida
                 Alerta('error', 'Sin éxito', 'Falló al registrar la información');
@@ -108,10 +107,6 @@ const Form_user_personal = () => {
               // Manejar errores si ocurre alguno
               console.error(error);
             });
-
-
-
-
         } else {
           // Autenticación fallida
           Alerta('error', 'Sin éxito', 'Falló al registrar la información');
@@ -121,15 +116,9 @@ const Form_user_personal = () => {
         // Manejar errores si ocurre alguno
         console.error(error);
       });
-
-
-
-
-
   }
 
-
-
+  //Funciones para las alertas
   function Alerta(icono, titulo, texto) {
     Swal.fire({
       icon: icono,
@@ -139,6 +128,7 @@ const Form_user_personal = () => {
       confirmButtonText: 'Aceptar'
     })
   }
+
   function AlertaTimer(icono, titulo, tiempo) {
     Swal.fire({
       position: 'center',
@@ -149,34 +139,35 @@ const Form_user_personal = () => {
     })
   }
 
-  //-----Funciones para establecer los valores a las declaraciones de estados
-  const handleInputNombre = (event) => { setNombre(event.target.value); }
-  const handleInputAp = (event) => { setAp(event.target.value); }
-  const handleInputAm = (event) => { setAm(event.target.value); }
-  const handleInputEdad = (event) => { setEdad(event.target.value); }
-  const handleInputSexo = (event) => { setSexo(event.target.value); }
-  const handleInputTel = (event) => { setTel(event.target.value); }
-
-  let navigate = useNavigate();
-  let [email, setEmail] = useState("");
-
+  //Función para crear el ID de usuario
   function CrearID(idCentro, indice, ultimosDigitosAño) {
-    
-    
+
+
     //id de personal = ID_Centro + P + Año + Numero de usuario
     const ID = idCentro + "U" + ultimosDigitosAño + indice;
     setID(ID);
   }
 
-  const fetchCentro = async () => {
 
-
-  };
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> USE EFFECT() 
   useEffect(() => {
+    //Obtener la fecha y su ultimo digito del año
     const currentDate = new Date();
-    setAño(currentDate.getFullYear()  % 100)
-    const ID_generado ="";
+    setAño(currentDate.getFullYear() % 100)
+    const ID_generado = "";
+
+
+    const fechaActual = new Date();
+
+    // Obtén el día, mes y año por separado
+    const dia = fechaActual.getDate();
+    const mes = fechaActual.getMonth() + 1; // Los meses comienzan en 0, por lo que sumamos 1
+    const anio = fechaActual.getFullYear();
+    
+    // Obtén la fecha en formato deseado (por ejemplo, dd/mm/yyyy)
+    const fechaFormateada = dia+"/"+mes+"/"+anio;
+    setFecha(fechaFormateada);
+
     //-----------------------------------------------> Obtener el numero de usuarios
     const fetchNumUser = async () => {
       try {
@@ -185,10 +176,7 @@ const Form_user_personal = () => {
         if (response.ok) {
           const numUs = responseData.Indice; // Reemplaza "numUs" con el nombre de la propiedad adecuada en "responseData"
           setNumUs(numUs);//obten el numero de usuario ultimo
-          setIndice(numUs+1);
-
-          //crear id
-
+          setIndice(numUs + 1);
           try {
             // Hacer una solicitud POST al punto final de inicio de sesión en el servidor
             const response = await fetch(backendUrl + '/api/GetCentroID', {
@@ -203,24 +191,13 @@ const Form_user_personal = () => {
               const responseData = await response.json();
               const idCentro = responseData.Centro; // Reemplaza "numUs" con el nombre de la propiedad adecuada en "responseData"
               setCentro(idCentro);//obten el numero de usuario ultimo
-              setID(idCentro + "U" + (currentDate.getFullYear()  % 100) + (numUs+1));
-              //alert(ID)
-              
-              //CrearID(idCentro, Indice);
-              //crear id
-
-              //
-
-             
-
+              setID(idCentro + "U" + (currentDate.getFullYear() % 100) + (numUs + 1));
             }
             // Verificar el estado de la respuesta
-
           } catch (error) {
             // Manejar errores de solicitud
             //setError('An error occurred');
           }
-
         } else {
           console.error('Error al obtener los datos de usuarios');
         }
@@ -231,21 +208,14 @@ const Form_user_personal = () => {
 
     //------------------------------------------------->obtener centro
 
-   
+
     fetchNumUser();
 
   }, [navigate]);
 
-  const Home = () => { 
-    navigate("/loader-Home");
-  }
-
-  const Regresar = () => {
-    navigate(-1);
-  }
 
   //ID - > es el id de usuario
-  //------------------------------------------------------------ >  RETURN()
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> RETURN () 
   return (
     <body>
       <div className="left-panel">
@@ -263,21 +233,20 @@ const Form_user_personal = () => {
           <div className='optionBtn' >
             <label className='txtBTN' onClick={Regresar}>Regresar</label>
           </div>
-
         </div>
         <div className='contentImage'>
           <img src={imagen} className='imagen' />
         </div>
       </div>
 
-
-
-
       <div className="right-panel">
         <div className="right-panel-content">
+
           <div className='formContainer'>
-            <animated.h1 style={fade} className="titleForm">Información personal</animated.h1>
-    
+            <animated.h1 style={fade} className="titleForm">Información personal </animated.h1>
+    <h1>{ID_Personal}</h1>
+    <h1>{ID_User}</h1>
+    <h1>{Nombre}</h1>
             <div className='containerInputLabel'>
               <label className='labelInput'>Ingresa el nombre:</label>
               <input type="text" class="inputGlobal" placeholder="Nombre(s)" value={nombre} onChange={handleInputNombre} onInput={handleInput} required />
@@ -302,8 +271,8 @@ const Form_user_personal = () => {
               <label className='labelInput'>Selecciona el sexo:</label>
               <select name="select" className="inputGlobal" value={sexo} onChange={handleInputSexo} required>
                 <option value="" selected>Seleccionar Sexo</option>
-                <option value="Masculino" >Masculino</option>
-                <option value="Femenino" >Femenino</option>
+                <option value="Masculino" >MASCULINO</option>
+                <option value="Femenino" >FEMENINO</option>
               </select>
             </div>
 
@@ -313,34 +282,16 @@ const Form_user_personal = () => {
             </div>
 
             <button type="submit" className='buttonPrincipalGlobal' onClick={handleSubmit} >Siguiente</button>
-
-
-
-
           </div>
+
         </div>
 
       </div>
 
-
-
-
-
-
-
-
-
-
       <div className="">
-
-
-
       </div>
-
-
     </body>
   );
-
 }
 
-export default Form_user_personal;
+export default ModulePsicoNuevaConsultaForm;

@@ -1,31 +1,20 @@
-
-
-/*Funciones importadas*/
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> IMPORTS 
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios';
-import backendUrl from '../../../serverConfig';
-import "./styleAdd.css";
+import backendUrl from '../../../../serverConfig';
+import "../styleAdd.css";
 import { useSpring, animated } from 'react-spring';
-import logo from '../../../GlobalStyles/images/logo.svg';
-import imagen from '../../../GlobalStyles/images/image1.png';
+import logo from '../../../../GlobalStyles/images/logo.svg';
+import imagen from '../../../../GlobalStyles/images/image1.png';
 import Swal from 'sweetalert2';
 import { FaCheck } from 'react-icons/fa';
 
-
-
-
-/*----------------------------  FUNCION PRINCIPAL  ---------------------------------- */
-
+/*--------------------------------------------------------  FUNCION PRINCIPAL  -------------------------------------------------------------- */
 const Form_user_emergencia = () => {
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> DECLARACIONES 
   const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
-
-  //Función que permite escribir en mayusculas solamente.
-  const handleInput = (event) => {
-    event.target.value = event.target.value.toUpperCase();
-  };
-
   //Declaraciones de estado para almacenar los datos del los inputs
   const [nombre, setNombre] = useState('');
   const [ap, setAp] = useState('');
@@ -33,79 +22,69 @@ const Form_user_emergencia = () => {
   const [edad, setEdad] = useState('');
   const [sexo, setSexo] = useState('');
   const [tel, setTel] = useState('');
-    const [parentesco, setPar] = useState('');
-  
+  const [parentesco, setPar] = useState('');
   const [ID, setID] = useState('');
   const [Indice, setIndice] = useState('');
   const routeLocation = useLocation();
   const ID_recibido = routeLocation.state && routeLocation.state.ID_USER;
-
-
-
+  let navigate = useNavigate();
+  let [email, setEmail] = useState("");
   const [calle, setCalle] = useState('');
   const [col, setCol] = useState('');
   const [cp, setCp] = useState('');
   const [ciudad, setCiudad] = useState('');
   const [estado, setEstado] = useState('');
   const [delegacion, setDelegacion] = useState('');
-
-
   const [centroID, setCentro] = useState('');
   //nunmero de usuarios
   const [ultimoUserNum, setNumUs] = useState('');
-
   const [año, setAño] = useState('');
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> FUNCIONES 
+
+  //funciones para el navigate
+  const Home = () => { navigate("/loader-Home"); }
+  const Regresar = () => { navigate(-1); }
+
+  //Función que permite escribir en mayusculas solamente.
+  const handleInput = (event) => { event.target.value = event.target.value.toUpperCase(); };
+
   //-----Funciones para establecer los valores a las declaraciones de estados
-  const handleInputNombre = (event) => {
-    setNombre(event.target.value);
-  }
-  const handleInputAp = (event) => {
-    setAp(event.target.value);
-  }
-  const handleInputAm = (event) => {
-    setAm(event.target.value);
-  }
-  const handleInputTel = (event) => {
-    setTel(event.target.value);
-  }
-  const handleInputPar = (event) => {
-    setPar(event.target.value);
-  }
+  const handleInputNombre = (event) => { setNombre(event.target.value); }
+  const handleInputAp = (event) => { setAp(event.target.value); }
+  const handleInputAm = (event) => { setAm(event.target.value); }
+  const handleInputTel = (event) => { setTel(event.target.value); }
+  const handleInputPar = (event) => { setPar(event.target.value); }
+  const handleInputSexo = (event) => { setSexo(event.target.value); }
 
-  //Función que permite agregar los datos a firebase usando una función llamada addUserNew que se encuentra en services.
+  //Función que permite agregar los datos conectandose a un endpoint
   const handleSubmit = (event) => {
-
-
 
     //variables de base de datos
     const UserID = ID_recibido;
-    const Calle = calle;
-    const Colonia = col;
-    const CodigoPostal = cp;
-    const Delegacion = delegacion;
 
 
     const User_ID = UserID;
-
+    const Nombre = nombre;
+    const ApellidoPaterno = ap;
+    const ApellidoMaterno = am;
+    const Telefono = tel;
+    const Parentesco = parentesco;
+    				
     const formData = {
       UserID,
-      Calle,
-      Colonia,
-      Colonia,
-      CodigoPostal,
-      Delegacion
+      Nombre,	
+      ApellidoPaterno,	
+      ApellidoMaterno,	
+      Telefono,	
+      Parentesco
     };
 
-
-    const Data = {
-      Indice,
-      User_ID
-    }
+   
 
 
     // Enviar los datos al servidor utilizando Axios
-    axios.post(backendUrl + '/api/addInformationContactUser', formData)
+    axios.post(backendUrl + '/api/addInformationEmergencyUser', formData)
       .then(response => {
         // Manejar la respuesta del servidor si es necesario
 
@@ -116,8 +95,8 @@ const Form_user_emergencia = () => {
 
           //redigir y pasar el ID
           //navigate("/loader-DashboardSU");
-          Alerta('success', 'Completado', 'Se ha registrado correctamente');
-          navigate('/addUserEmergencia', { state: { ID_USER: ID_recibido } });
+          AlertaTimer('success', 'Sección completada', 1000);
+          navigate('/addUserFoto', { state: { ID_USER: ID_recibido } });
 
         } else {
           // Autenticación fallida
@@ -136,8 +115,7 @@ const Form_user_emergencia = () => {
 
   }
 
-
-
+  //funciones de alerta
   function Alerta(icono, titulo, texto) {
     Swal.fire({
       icon: icono,
@@ -157,44 +135,14 @@ const Form_user_emergencia = () => {
     })
   }
 
-
-
-
-
-  const handleInputSexo = (event) => { setSexo(event.target.value); }
-
-
-  let navigate = useNavigate();
-  let [email, setEmail] = useState("");
-
-  function CrearID(idCentro, indice, ultimosDigitosAño) {
-
-
-    //id de personal = ID_Centro + P + Año + Numero de usuario
-    const ID = idCentro + "U" + ultimosDigitosAño + indice;
-    setID(ID);
-  }
-
-  const fetchCentro = async () => {
-
-
-  };
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> USE EFFECT() 
   useEffect(() => {
-
 
   }, [navigate]);
 
-  const Home = () => {
-    navigate("/loader-Home");
-  }
 
-  const Regresar = () => {
-    navigate(-1);
-  }
 
-  //ID - > es el id de usuario
-  //------------------------------------------------------------ >  RETURN()
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> RETURN () 
   return (
     <body>
       <div className="left-panel">
@@ -218,37 +166,34 @@ const Form_user_emergencia = () => {
         </div>
       </div>
 
-
-
-
       <div className="right-panel">
         <div className="right-panel-content">
           <div className='formContainer'>
             <animated.h1 style={fade} className="titleForm">Información de emer</animated.h1>
-            <h1>{ID_recibido}</h1>
+          
 
             <div className='containerInputLabel'>
-              <label className='labelInput'>Ingresa la calle:</label>
+              <label className='labelInput'>Ingresa el nombre:</label>
               <input type="text" class="inputGlobal" placeholder="Nombre(s)" value={nombre} onChange={handleInputNombre} onInput={handleInput} required />
             </div>
 
             <div className='containerInputLabel'>
-              <label className='labelInput'>Ingresa la colonia:</label>
+              <label className='labelInput'>Ingresa Apellido Paterno:</label>
               <input type="text" class="inputGlobal" placeholder="Apellido Paterno" value={ap} onChange={handleInputAp} onInput={handleInput} required />
             </div>
 
             <div className='containerInputLabel'>
-              <label className='labelInput'>Ingresa el delegacion:</label>
-              <input type="number" class="inputGlobal" placeholder="Apellido Materno" value={am} onChange={handleInputAm} onInput={handleInput} required />
+              <label className='labelInput'>Ingresa Apellido Materno:</label>
+              <input type="text" class="inputGlobal" placeholder="Apellido Materno" value={am} onChange={handleInputAm} onInput={handleInput} required />
             </div>
 
             <div className='containerInputLabel'>
-              <label className='labelInput'>Ingresa la ciudad:</label>
-              <input type="number" class="inputGlobal" placeholder="Teléfono" pattern="[0-9]{10}" value={tel} onChange={handleInputTel} onInput={handleInput} required />
+              <label className='labelInput'>Ingresa Telefono:</label>
+              <input type="text" class="inputGlobal" placeholder="Teléfono" pattern="[0-9]{10}" value={tel} onChange={handleInputTel} onInput={handleInput} required />
             </div>
 
             <div className='containerInputLabel'>
-              <label className='labelInput'>Ingresa el estado:</label>
+              <label className='labelInput'>Selecciona el parentesco:</label>
               <select name="select" className="inputGlobal" placeholder="Parentesco" value={parentesco} onChange={handleInputPar} required>
                 <option value="" selected>Selecciona un parentesco</option>
                 <option value="Hijo">Hijo/as</option>
@@ -259,37 +204,14 @@ const Form_user_emergencia = () => {
               </select>
             </div>
 
-
-
-
-
-
             <button type="submit" className='buttonPrincipalGlobal' onClick={handleSubmit} >Siguiente</button>
-
-
-
-
           </div>
         </div>
 
       </div>
 
-
-
-
-
-
-
-
-
-
       <div className="">
-
-
-
       </div>
-
-
     </body>
   );
 

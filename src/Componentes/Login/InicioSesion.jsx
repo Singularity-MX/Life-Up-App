@@ -61,7 +61,7 @@ function InicioSesion() {
     const password = SHA256(password2).toString();
     //-------------> Pasar el Hash de la contraseña
     //alert('user: ' + email + ' pass: ' + password);
-  
+    //alert(email +" -> " +password)
     try {
       // Hacer una solicitud POST al punto final de inicio de sesión en el servidor
       const response = await fetch(backendUrl + '/api/loginNormal', {
@@ -80,11 +80,13 @@ function InicioSesion() {
         const role = responseData.role;
         const id_personal= responseData.ID;
         
+        navigate('/MenuApp' , { state: { ID_PERSONAL: id_personal, Rol: role} });
         // Manejar la lógica basada en roles
+      /*  
         if (role === 'Administración') {
           // Redirigir a la página de administración
-          navigate('/MenuAdmin' , { state: { ID_PERSONAL: id_personal } });
-          //alert('admin ID: '+ id_personal);
+          
+          alert('admin ID: '+ id_personal);
         } else if (role === 'Psicología') {
           alert('psico');
           // Redirigir a la página de psicología
@@ -106,6 +108,8 @@ function InicioSesion() {
           // Manejar un rol desconocido
           // setError('Unknown role');
         }
+
+        */
       } else {
         if (response.status === 401) {
           errorPassword();

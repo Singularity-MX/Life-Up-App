@@ -26,10 +26,14 @@ import Form_Foto from './Componentes/Insert/Form_foto';
 import Form_final from './Componentes/Insert/Form_final';
 
 //user
-import Form_user_personal from './Componentes/Modulos/Usuarios/Form_personal';
-import Form_user_contacto from './Componentes/Modulos/Usuarios/Form_contacto';
-import Form_user_emergencia from './Componentes/Modulos/Usuarios/Form_emergencia';
+import Form_user_personal from './Componentes/Modulos/Usuarios/Insert/Form_personal';
+import Form_user_contacto from './Componentes/Modulos/Usuarios/Insert/Form_contacto';
+import Form_user_emergencia from './Componentes/Modulos/Usuarios/Insert/Form_emergencia';
+import Form_user_photo from './Componentes/Modulos/Usuarios/Insert/Form_photo';
+import Form_user_finally from './Componentes/Modulos/Usuarios/Insert/Form_finally';
 
+//delete
+import ModuleUserDelete from './Componentes/Modulos/Usuarios/Delete/Delete';
 
 //modulo de salud
 import Salud_dashboard from './Componentes/Salud/Salud_home';
@@ -63,9 +67,22 @@ import DeleteUser from './Componentes/AdminUsers/DeleteUserForm';
 import EditSuperUsuario from './Componentes/AdminUsers/EditUser';
 
 //menus roles
-import MenuAdmin from './Componentes/ROLES_MENUS/Administracion/Dashboard_Admin';
-import MenuPsico from './Componentes/ROLES_MENUS/Psicologia/Dashboard_Psicologia';
+import MenuAdmin from './Componentes/ROLES_MENU/Administracion/Dashboard_Admin';
+import MenuPsico from './Componentes/ROLES_MENU/Psicologia/Dashboard_Psicologia';
 import MenuUsers from './Componentes/Modulos/Usuarios/Menu-usuarios';
+
+import MenuApplication from './Componentes/Menu/MenuApp';
+import MenuPsicologia from './Componentes/Modulos/Psicologia/Menu-psicologia';
+import MenuEnfermeria from './Componentes/Modulos/Enfermeria/Menu-enfermeria';
+import MenuTalleres from './Componentes/Modulos/Talleres/Menu-talleres';
+import MenuEstadistica from './Componentes/Modulos/Estadistica/Menu-estadistica';
+
+//psico
+import ModulePsicoNuevaConsultaID from './Componentes/Modulos/Psicologia/Consulta/NuevaConsultaForm1';
+import ModulePsicoNuevaConsultaForm from './Componentes/Modulos/Psicologia/Consulta/NuevaConsultaForm2';
+//widgets
+import WidgetPersonalInformation from './Componentes/Modulos/Widgets/CardUserPersonal';
+import TestWidgets from './Componentes/Modulos/Widgets/Graficos/testWidgets';
 
 const router = createBrowserRouter([
   {
@@ -96,11 +113,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/addUserFoto",
-    element: <Form_Foto/>,
+    element: <Form_user_photo/>,
   },
   {
     path: "/formFinal",
-    element: <Form_final/>,
+    element: <Form_user_finally/>,
   },
 //modulo de slaud
 {
@@ -168,6 +185,7 @@ const router = createBrowserRouter([
   path: "/LoginSU",
   element: <LoginSU/>,
 },
+
 {
   path: "/DashboardRoles",
   element: <PanelAdmin/>,
@@ -195,11 +213,58 @@ const router = createBrowserRouter([
   path: "/MenuPsico",
   element: <MenuPsico/>,
 },
+
+
+
+
 {
   path: "/MenuUsers",
   element: <MenuUsers/>,
 },
+{
+  path: "/MenuApp",
+  element: <MenuApplication/>,
+},
+{
+  path: "/MenuPsicologia",
+  element: <MenuPsicologia/>,
+},
+{
+  path: "/MenuEnfermeria",
+  element: <MenuEnfermeria/>,
+},
+{
+  path: "/MenuTalleres",
+  element: <MenuTalleres/>,
+},
+{
+  path: "/MenuEstadistica",
+  element: <MenuEstadistica/>,
+},
+{
+  path: "/MouleUserDelete",
+  element: <ModuleUserDelete/>,
+},
 
+///psico
+{
+  path: "/PsicologiaNewConsultID",
+  element: <ModulePsicoNuevaConsultaID/>,
+},
+{
+  path: "/Psicologia-NewConsult-Form",
+  element: <ModulePsicoNuevaConsultaForm/>,
+},
+
+///////////////////////////////widgets
+{
+  path: "/testWidgetUserInfo",
+  element: <WidgetPersonalInformation/>,
+},
+{
+  path: "/testWidgets",
+  element: <TestWidgets/>,
+},
   /*--------------------------------------------------RUTAS PARA ACCESO CON LOADER*/
   {
     path: "/loader-Home",
