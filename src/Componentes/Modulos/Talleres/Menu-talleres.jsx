@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate, useLocation  } from "react-router-dom";
 import backendUrl from '../../../serverConfig';
-
+import axios from 'axios';
 import '../../../GlobalStyles/Resources.css';
 
 import logo from '../../../GlobalStyles/images/logo.svg';
@@ -17,6 +17,8 @@ const MenuTalleres = () => {
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
     const [copiedPersonalID, setCopiedPersonalID] = useState('');
+
+    const [IDTaller, setIdTaller] = useState('');
 
     const handleRowClick = (personalID) => {
         // Copiar al portapapeles
@@ -39,7 +41,7 @@ const MenuTalleres = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch(backendUrl + '/api/tableUsers');
+                const response = await fetch(backendUrl + '/api/tableTalleres');
                 const responseData = await response.json();
                 if (response.ok) {
                     setUsers(responseData);
@@ -51,7 +53,23 @@ const MenuTalleres = () => {
             }
         };
 
+        const getTalleresInfoID = async () => {
+            axios.get(backendUrl + '/api/getIDTalleres')
+            .then(response => {
+              const data = response.data;
+              const numeroTaller = data.NumeroTaller;
+              setIdTaller(numeroTaller);
+              alert(numeroTaller);
+            })
+            .catch(error => {
+              // Manejar errores si ocurre alguno
+              console.error(error);
+            });
+          };
+
+
         fetchUsers();
+        getTalleresInfoID();
     }, []);
 
     //usuarios
@@ -68,28 +86,42 @@ const MenuTalleres = () => {
         navigate("/EditUserPersonal");
     }
 
+
+
+
+     const AddTaller = () => {
+        navigate("/Taller-Add-Form", { state: { NumTaller: IDTaller } });
+    }
+     const ModifyTaller = () => {
+        navigate("/");
+    }
+     const DeleteTaller = () => {
+        navigate("/Taller-Delete");
+    }
+
+
     return (
         <body>
             <div className="left-panel">
                 <img src={logo} className='logo' />
                 <div className='contTitleLeft' >
                     
-                    <label className='labelPanelLeft'><strong>Talleres</strong></label>
+                    <label className='labelPanelLeft'><strong>Talleres y actividades</strong></label>
                     <div className='line'></div>
                 </div>
                 <div className='contMenu' >
-                <div className='optionBtn' onClick={InsertUser}>
-                        <label className='txtBTN'>Agregar usuario</label>
+                <div className='optionBtn' onClick={AddTaller}>
+                        <label className='txtBTN'>Agregar </label>
                     </div>
-                    <div className='optionBtn' onClick={"#"}>
-                        <label className='txtBTN'>Editar usuario</label>
+                    <div className='optionBtn' onClick={ModifyTaller}>
+                        <label className='txtBTN'>Editar </label>
                     </div>
-                    <div className='optionBtn' onClick={ModifyUser}>
-                        <label className='txtBTN'>Eliminar usuario</label>
+                    <div className='optionBtn' onClick={DeleteTaller}>
+                        <label className='txtBTN'>Eliminar </label>
                     </div>
 
                     <div className='optionBtn' onClick={regresar}>
-                        <label className='txtBTN'>Volver</label>
+                        <label className='txtBTN'>Volver al menu</label>
                     </div>
          
                 </div>
@@ -119,26 +151,26 @@ const MenuTalleres = () => {
 
                             <thead>
                                 <tr>
-                                    <th>ID de Usuario</th>
-                                    <th>Centro</th>
+                                    <th>ID de Taller</th>
                                     <th>Nombre</th>
-                                    <th>Apellido Paterno</th>
-                                    <th>Apellido Materno</th>
-                                    <th>Edad</th>
-                                    <th>Telefono</th>
+                                    <th>Centro</th>
+                                    <th>Instructor</th>
+                                    <th>Duración</th>
+                                    <th>Días</th>
+                                    
 
                                 </tr>
                             </thead>
                             <tbody>
                                 {users.map((user) => (
-                                    <tr key={user.UserID} onClick={() => handleRowClick(user.UserID)}>
-                                         <td>{user.UserID}</td>
-                                        <td>{user.CentroID}</td>
+                                    <tr key={user.TallerID} onClick={() => handleRowClick(user.TallerID)}>
+                                         <td>{user.TallerID}</td>
                                         <td>{user.Nombre}</td>
-                                        <td>{user.ApellidoPaterno}</td>
-                                        <td>{user.ApellidoMaterno}</td>
-                                        <td>{user.Edad}</td>
-                                        <td>{user.Telefono}</td>
+                                        <td>{user.CentroID}</td>
+                                        <td>{user.Instructor}</td>
+                                        <td>{user.Duracion}</td>
+                                        <td>{user.Dias}</td>
+                                        
                                         
                                     </tr>
                                 ))}

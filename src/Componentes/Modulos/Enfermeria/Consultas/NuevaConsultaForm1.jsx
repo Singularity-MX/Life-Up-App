@@ -3,10 +3,9 @@ import { PDFDocument, rgb } from 'pdf-lib';
 import backendUrl from '../../../../serverConfig';
 import axios from 'axios';
 
-import { useNavigate, useLocation } from "react-router-dom";
 
 import Swal from 'sweetalert2';
-
+import { useNavigate,useLocation } from "react-router-dom";
 import { button, TextField } from '@mui/material';
 import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 
@@ -19,14 +18,11 @@ import '../../../../GlobalStyles/Resources.css';
 import logo from '../../../../GlobalStyles/images/logo.svg';
 import imagen from '../../../../GlobalStyles/images/image1.png';
 
-const ModuleUserDelete = () => {
-  const routeLocation = useLocation();
-    const ID = routeLocation.state && routeLocation.state.ID_PERSONAL;
-    const Rol = routeLocation.state && routeLocation.state.Rol;
+const ModuleSaludNewConsultaID= () => {
   const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
 
   //////////////////////////////////////////////////////////////---------------> Variables a utilizar
-  const [PersonalID, setPersonalId] = useState('');
+  
   const [Nombre, setNombre] = useState('');
   const [AP, setAP] = useState('');
   const [AM, setAM] = useState('');
@@ -41,29 +37,27 @@ const ModuleUserDelete = () => {
 
   const [Indice, setIndice] = useState('');
   const [User_ID, setUserID] = useState('');
-
+  const routeLocation = useLocation();
   const navigate = useNavigate();
 
 
 
-
+  const ID_Personal = routeLocation.state && routeLocation.state.ID_PERSONAL;
 
 
   //////////////////////////////////////////////////////////////---------------> Metodo para hacer el envío del formulario
   const handleSubmit = () => {
-
+    
     // Envía los datos al servidor
     // Crear un objeto con los datos del formulario
-    const formID = {
-      PersonalID
-    }
+
 
  
 
     //CEDIF-01P2310
 
     const requestData = {
-      ID: PersonalID
+      ID: User_ID
     };
 
     axios.post(backendUrl + '/api/UserInfoSearch', requestData)
@@ -85,20 +79,19 @@ const ModuleUserDelete = () => {
             //alert(item.Email); // Acceder a una propiedad específica de cada elemento
 
             Swal.fire({
-              title: 'Información encontrada',
-              text: 'Antes de eliminar al usuario verifica sus datos por favor.',
+              title: 'Usuario encontrada',
+              text: 'Se ha localizado exitosamente',
               showDenyButton: false,
               showCancelButton: false,
-              confirmButtonText: 'Revisar',
+              confirmButtonText: 'Continuar ',
               denyButtonText: 'No, cancelar',
             }).then((result) => {
               /* Read more about isConfirmed, isDenied below */
               if (result.isConfirmed) {
                 //Swal.fire('Eliminado', '', 'success')
                 //eliminar
-                msgDelete(PersonalID,item.Nombre, item.ApellidoPaterno, item.ApellidoMaterno);
-        
-        
+                
+                navigate("/Salud-Consulta-Create" , { state: { ID_USER: User_ID, ID_PERSONAL: ID_Personal, Nombre: (item.Nombre+" "+item.ApellidoPaterno+" "+item.ApellidoMaterno)} });
         
         
               } else if (result.isDenied) {
@@ -135,7 +128,7 @@ const ModuleUserDelete = () => {
         if (response.status === 200) {
           AlertaTimer('success', 'Completado', 'Se ha eliminado correctamente', 1500);
 
-          navigate(-1,  { state: { ID_PERSONAL: ID, Rol: Rol} });
+          navigate(-1);
         } else {
           // Autenticación fallida
           Alerta('error', 'Sin éxito', 'Falló al eliminar la información');
@@ -193,9 +186,11 @@ const ModuleUserDelete = () => {
     })
   }
 
- 
+  const GoFormCosulta = () => {
+    navigate("/Psicologia-NewConsult-Form");
+  }
 
-  const Regresar = () => { navigate(-1, { state: { ID_PERSONAL: ID, Rol: Rol} }); }
+  const Regresar = () => { navigate(-1); }
 
   //////////////////////////////////////////////////////////////---------------RETURN()-------------//////////////////////////////////////////////////////////////////////////////////
 
@@ -204,7 +199,7 @@ const ModuleUserDelete = () => {
       <div className="left-panel">
         <img src={logo} className='logo' />
         <div className='contTitleLeft' >
-          <label className='labelPanelLeft'>Eliminar usuarios</label>
+          <label className='labelPanelLeft'>Crear nueva consulta</label>
           <div className='line'></div>
         </div>
         <div className='contMenu' >
@@ -224,11 +219,11 @@ const ModuleUserDelete = () => {
       <div className="right-panel">
         <div className="right-panel-content">
           <div className='formContainer'>
-            <animated.h1 style={fade} className="titleForm">Eliminar usuarios</animated.h1>
+            <animated.h1 style={fade} className="titleForm">Buscar usuario</animated.h1>
 
             <div className='containerInputLabel'>
               <label className='labelInput'>Ingresa el ID del Usuario</label>
-              <input class="inputGlobal" placeholder="CDIF-0123" type="text" value={PersonalID} onChange={e => setPersonalId(e.target.value)} required />
+              <input class="inputGlobal" placeholder="ID" type="text" value={User_ID} onChange={e => setUserID(e.target.value)} required />
             </div>
 
 
@@ -247,4 +242,4 @@ const ModuleUserDelete = () => {
   );
 };
 
-export default ModuleUserDelete;
+export default ModuleSaludNewConsultaID;

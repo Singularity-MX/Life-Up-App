@@ -10,7 +10,7 @@ import imagen from '../../../../GlobalStyles/images/image1.png';
 import Swal from 'sweetalert2';
 
 /*--------------------------------------------------------  FUNCION PRINCIPAL  -------------------------------------------------------------- */
-const ModulePsicoNuevaConsultaForm = () => {
+const ModuleSaludNewExpedienteCreate = () => {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> DECLARACIONES 
   //Fade para el h1
@@ -38,9 +38,21 @@ const ModulePsicoNuevaConsultaForm = () => {
   const [Fecha, setFecha] = useState('');
 
 
-const [motivo, setMotivo]= useState("");
-const [objetivos, setObjetivos]= useState("");
-const [recomendaciones, setRecomendaciones]= useState("");
+  const [motivo, setMotivo] = useState("");
+  const [objetivos, setObjetivos] = useState("");
+  const [recomendaciones, setRecomendaciones] = useState("");
+
+
+
+  
+  const [padecimientos, setPadecimientos] = useState('');
+  const [alergias, setAlergias] = useState('');
+  const [sangre, setSangre] = useState('');
+
+  
+  const [selectDesactivado, setSelectDesactivado] = useState(false);
+
+  const [selectDesactivadoAlergias, setSelectDesactivadoAlergias] = useState(false);
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> FUNCIONES 
   // Funciones flecha para el navigate
   const Home = () => { navigate("/loader-Home"); }
@@ -57,6 +69,20 @@ const [recomendaciones, setRecomendaciones]= useState("");
   const handleInputSexo = (event) => { setSexo(event.target.value); }
   const handleInputTel = (event) => { setTel(event.target.value); }
 
+
+  function handleCheckboxChange(event) {
+    setSelectDesactivado(event.target.checked);
+    setPadecimientos("NINGUNO");
+    console.log(padecimientos);
+  }
+
+  function handleCheckboxChangeAlergias(event) {
+    setSelectDesactivadoAlergias(event.target.checked);
+    setAlergias("NINGUNO");
+    console.log(alergias);
+  }
+
+
   //Función que permite escribir en mayusculas solamente.
   const handleInput = (event) => { event.target.value = event.target.value.toUpperCase(); };
 
@@ -64,31 +90,31 @@ const [recomendaciones, setRecomendaciones]= useState("");
   const handleSubmit = (event) => {
 
 
-    
+
     //variables de base de datos
     const UserID = ID_User;
     const Motivo = motivo;
-    const Objetivos = objetivos;
-    const Recomendaciones = recomendaciones;
+
+    const Padecimientos = padecimientos;
+    const Alergias = alergias;
     const PersonalID = ID_Personal;
-    
+
     //construcción del formData
     const formData = {
       UserID,
-      Motivo,
-      Objetivos,
-      Recomendaciones,
-      Fecha,
-      PersonalID
+      PersonalID,
+      Alergias,
+      Padecimientos
+
     };
 
 
-      axios.post(backendUrl + '/api/Psicologia-Insert-NewConsult', formData)
+    axios.post(backendUrl + '/api/Salud-Insert-NewExpedient', formData)
       .then(response => {
-        if (response.status === 200) {             
+        if (response.status === 200) {
           AlertaTimer('success', 'Información completada', 1000);
-          navigate('/MenuPsicologia' , { state: { ID_PERSONAL: ID_Personal } });
-          
+          navigate('/MenuEnfermeria', { state: { ID_PERSONAL: ID_Personal } });
+
         } else {
           // Autenticación fallida
           Alerta('error', 'Sin éxito', 'Falló al registrar la información');
@@ -131,7 +157,7 @@ const [recomendaciones, setRecomendaciones]= useState("");
   }
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> USE EFFECT() 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> USE EFFECT() 
   useEffect(() => {
     //Obtener la fecha y su ultimo digito del año
     const currentDate = new Date();
@@ -145,9 +171,9 @@ const [recomendaciones, setRecomendaciones]= useState("");
     const dia = fechaActual.getDate();
     const mes = fechaActual.getMonth() + 1; // Los meses comienzan en 0, por lo que sumamos 1
     const anio = fechaActual.getFullYear();
-    
+
     // Obtén la fecha en formato deseado (por ejemplo, dd/mm/yyyy)
-    const fechaFormateada = dia+"/"+mes+"/"+anio;
+    const fechaFormateada = dia + "/" + mes + "/" + anio;
     setFecha(fechaFormateada);
 
     //-----------------------------------------------> Obtener el numero de usuarios
@@ -196,6 +222,18 @@ const [recomendaciones, setRecomendaciones]= useState("");
   }, [navigate]);
 
 
+  const handleInputPad = (event) => {
+    setPadecimientos(event.target.value);
+  }
+
+  const handleInputAlergias = (event) => {
+    setAlergias(event.target.value);
+  }
+
+  const handleInputSangre = (event) => {
+    setSangre(event.target.value);
+  }
+
   //ID - > es el id de usuario
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> RETURN () 
   return (
@@ -203,10 +241,10 @@ const [recomendaciones, setRecomendaciones]= useState("");
       <div className="left-panel">
         <img src={logo} className='logo' />
         <div className='contTitleLeft' >
-          <label className='labelPanelLeft'>Nueva consulta</label>
+          <label className='labelPanelLeft'>Nuevo expediente</label>
           <div className='line'></div>
         </div>
-        
+
         <div className='contMenu' >
           <div className='optionBtn' >
             <label className='txtBTN' onClick={Regresar}>Regresar</label>
@@ -222,22 +260,54 @@ const [recomendaciones, setRecomendaciones]= useState("");
 
           <div className='formContainer'>
             <animated.h1 style={fade} className="titleForm">Información personal </animated.h1>
-    <h1>{ID_Personal}</h1>
-    <h1>{ID_User}</h1>
-    <h1>{Nombre}</h1>
+            <h1>{ID_Personal}</h1>
+            <h1>{ID_User}</h1>
+            <h1>{Nombre}</h1>
+
             <div className='containerInputLabel'>
-              <label className='labelInput'>Motivo de consulta:</label>
-              <input type="text" class="inputGlobal" placeholder="Motivo..." value={motivo} onChange={handleInputMotivo} onInput={handleInput} required />
+              <label className='labelInput'>Padecimientos:</label>
+
+              <select name="select" id="mi-select" className="inputGlobal" value={padecimientos} onChange={handleInputPad} required>
+                
+                <option value="Ninguna">Ninguna</option>
+                <option value="Diabetes">Diabetes</option>
+                <option value="Hipertensión arterial" >Hipertensión arterial</option>
+                <option value="Enfermedades cardiovasculares" >Enfermedades cardiovasculares</option>
+                <option value="Enfermedad pulmonar obstructiva crónica " >Enfermedad pulmonar obstructiva crónica </option>
+                <option value="Asma" >Asma</option>
+                <option value="Artritis" >Artritis</option>
+                <option value="Osteoporosis" >Osteoporosis</option>
+                <option value="Trastornos de salud mental" >Trastornos de salud mental</option>
+                <option value="Enfermedades renales crónicas" >Enfermedades renales crónicas</option>
+                <option value="Cáncer" >Cáncer</option>
+                <option value="Alzheimer y/u otras formas de demencia" >Enfermedad de Alzheimer y/u otras formas de demencia</option>
+                <option value="Cirrosis" >Cirrosis</option>
+                <option value="Hepatitis crónica" >Hepatitis crónica</option>
+                <option value="Esclerosis múltiple" >Esclerosis múltiple</option>
+                <option value="Fibromialgia " >Fibromialgia </option>
+              </select>
+              
             </div>
 
             <div className='containerInputLabel'>
-              <label className='labelInput'>Objetivos terapeuticos:</label>
-              <textarea type="" class="inputGlobal" placeholder="Objetivos" value={objetivos} onChange={handleInputObjetivos} onInput={handleInput} required />
+              <label className='labelInput'>Alergias:</label>
+
+              <input type="text" id="AlergiasInput" className="inputGlobal" placeholder="Alergias" value={alergias} onChange={handleInputAlergias} onInput={handleInput} required />
+
             </div>
 
             <div className='containerInputLabel'>
-              <label className='labelInput'>Recomendaciones:</label>
-              <input type="text" class="inputGlobal" placeholder="Recomendaciones" value={recomendaciones} onChange={handleInputRecom} onInput={handleInput} required />
+              <label className='labelInput'>Tipo de sangre:</label>
+              <select name="select" className="inputGlobal" value={sangre} onChange={handleInputSangre} required>
+            <option value="">Selecciona tipo de sangre</option>
+            <option value="Tipo A-">Tipo A+</option>
+            <option value="Tipo A-" >Tipo A-</option>
+            <option value="Tipo B+" >Tipo B+</option>
+            <option value="Tipo AB+" >Tipo AB+</option>
+            <option value="Tipo AB-" >Tipo AB-</option>
+            <option value="Tipo O+" >Tipo O+</option>
+            <option value="Tipo O-" >Tipo O-</option>
+          </select>
             </div>
 
             <button type="submit" className='buttonPrincipalGlobal' onClick={handleSubmit} >Enviar </button>
@@ -253,4 +323,4 @@ const [recomendaciones, setRecomendaciones]= useState("");
   );
 }
 
-export default ModulePsicoNuevaConsultaForm;
+export default ModuleSaludNewExpedienteCreate;

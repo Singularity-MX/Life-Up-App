@@ -10,7 +10,7 @@ import imagen from '../../../../GlobalStyles/images/image1.png';
 import Swal from 'sweetalert2';
 
 /*--------------------------------------------------------  FUNCION PRINCIPAL  -------------------------------------------------------------- */
-const ModulePsicoNuevaConsultaForm = () => {
+const ModuleTallerAddForm = () => {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> DECLARACIONES 
   //Fade para el h1
@@ -29,6 +29,8 @@ const ModulePsicoNuevaConsultaForm = () => {
   const ID_Personal = routeLocation.state && routeLocation.state.ID_PERSONAL;
   const ID_User = routeLocation.state && routeLocation.state.ID_USER;
   const Nombre = routeLocation.state && routeLocation.state.Nombre;
+  const numeroT = routeLocation.state && routeLocation.state.NumTaller;
+  
   const [centroID, setCentro] = useState('');
   const [ultimoUserNum, setNumUs] = useState('');
   const [año, setAño] = useState('');
@@ -37,10 +39,26 @@ const ModulePsicoNuevaConsultaForm = () => {
 
   const [Fecha, setFecha] = useState('');
 
+  const [IDTaller, setIdTaller] = useState('');
+
 
 const [motivo, setMotivo]= useState("");
 const [objetivos, setObjetivos]= useState("");
 const [recomendaciones, setRecomendaciones]= useState("");
+
+
+
+
+const [duracion, setDuracion] = useState('');
+const [lugar, setLugar] = useState('');
+const [instructor, setInstructor] = useState('');
+const [hora, setHora] = useState('');
+
+
+const [centros, setCentros] = useState([]);
+
+const [ID_Centro, setCentroId] = useState('');
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> FUNCIONES 
   // Funciones flecha para el navigate
   const Home = () => { navigate("/loader-Home"); }
@@ -60,34 +78,78 @@ const [recomendaciones, setRecomendaciones]= useState("");
   //Función que permite escribir en mayusculas solamente.
   const handleInput = (event) => { event.target.value = event.target.value.toUpperCase(); };
 
+
+  
+  const handleNombre = (event) => {
+    setNombre(event.target.value);
+}
+
+const handleLugar = (event) => {
+    setLugar(event.target.value);
+}
+const handleDuracion = (event) => {
+    setDuracion(event.target.value);
+}
+const handleInstr = (event) => {
+    setInstructor(event.target.value);
+}
+function handleTimeChange(event) {
+    setHora(event.target.value);
+}
+
+
+const [diasSeleccionados, setDiasSeleccionados] = useState([]);
+
+
+
+function handleCheckboxChange(event) {
+    const { value } = event.target;
+    const index = diasSeleccionados.indexOf(value);
+    if (index === -1) {
+        setDiasSeleccionados([...diasSeleccionados, value]);
+    } else {
+        const newDiasSeleccionados = [...diasSeleccionados];
+        newDiasSeleccionados.splice(index, 1);
+        setDiasSeleccionados(newDiasSeleccionados);
+    }
+}
+
+
   //Función que permite agregar los datos a firebase usando una función llamada addUserNew que se encuentra en services.
   const handleSubmit = (event) => {
-
-
+//taller ID
+    const Tallerid=ID_Centro+"T" + (numeroT+1);
     
+    //eliminar comillas en dias
+    const diasSinComillas = diasSeleccionados.join(',').replace(/'/g, ' ');
+
     //variables de base de datos
-    const UserID = ID_User;
-    const Motivo = motivo;
-    const Objetivos = objetivos;
-    const Recomendaciones = recomendaciones;
-    const PersonalID = ID_Personal;
-    
+
+    const TallerID = Tallerid;
+    const    Nombre	= nombre;
+    const CentroID	= ID_Centro;
+    const Instructor	= instructor;
+   const Duracion	= duracion;
+   const Dias	= diasSinComillas;
+   const Hora	= hora;
+
     //construcción del formData
     const formData = {
-      UserID,
-      Motivo,
-      Objetivos,
-      Recomendaciones,
-      Fecha,
-      PersonalID
+      TallerID,
+      Nombre,
+      CentroID,
+      Instructor,
+      Duracion,
+      Dias,
+      Hora
     };
 
 
-      axios.post(backendUrl + '/api/Psicologia-Insert-NewConsult', formData)
+      axios.post(backendUrl + '/api/Taller-Insert-NewTaller', formData)
       .then(response => {
         if (response.status === 200) {             
           AlertaTimer('success', 'Información completada', 1000);
-          navigate('/MenuPsicologia' , { state: { ID_PERSONAL: ID_Personal } });
+          navigate('/MenuTalleres' , { state: { ID_PERSONAL: ID_Personal } });
           
         } else {
           // Autenticación fallida
@@ -150,36 +212,17 @@ const [recomendaciones, setRecomendaciones]= useState("");
     const fechaFormateada = dia+"/"+mes+"/"+anio;
     setFecha(fechaFormateada);
 
+    alert(numeroT);
     //-----------------------------------------------> Obtener el numero de usuarios
-    const fetchNumUser = async () => {
+   
+
+
+    const fetchCentro = async () => {
       try {
-        const response = await fetch(backendUrl + '/api/GetNumUser');
+        const response = await fetch(backendUrl + '/api/GetCentros');
         const responseData = await response.json();
         if (response.ok) {
-          const numUs = responseData.Indice; // Reemplaza "numUs" con el nombre de la propiedad adecuada en "responseData"
-          setNumUs(numUs);//obten el numero de usuario ultimo
-          setIndice(numUs + 1);
-          try {
-            // Hacer una solicitud POST al punto final de inicio de sesión en el servidor
-            const response = await fetch(backendUrl + '/api/GetCentroID', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ ID_Personal }),
-            });
-            // Verificar el estado de la respuesta
-            if (response.status === 200) {
-              const responseData = await response.json();
-              const idCentro = responseData.Centro; // Reemplaza "numUs" con el nombre de la propiedad adecuada en "responseData"
-              setCentro(idCentro);//obten el numero de usuario ultimo
-              setID(idCentro + "U" + (currentDate.getFullYear() % 100) + (numUs + 1));
-            }
-            // Verificar el estado de la respuesta
-          } catch (error) {
-            // Manejar errores de solicitud
-            //setError('An error occurred');
-          }
+          setCentros(responseData);
         } else {
           console.error('Error al obtener los datos de usuarios');
         }
@@ -187,13 +230,30 @@ const [recomendaciones, setRecomendaciones]= useState("");
         console.error('Error al enviar la solicitud:', error.message);
       }
     };
-
     //------------------------------------------------->obtener centro
 
 
-    fetchNumUser();
-
+   
+    fetchCentro();
   }, [navigate]);
+
+
+  const msgContenido = () => {
+
+    
+    
+        let mensaje = "Nombre: " + nombre +
+    " duracion: "+ duracion+
+    " hora: "+hora+
+    " Dias ( "+ diasSeleccionados +" ) "+
+    " Instructor: " + instructor+
+    " Centro : "+ ID_Centro +
+    " ID: " ;
+    Alerta('success', 'datos', mensaje);
+  }
+
+
+
 
 
   //ID - > es el id de usuario
@@ -221,24 +281,53 @@ const [recomendaciones, setRecomendaciones]= useState("");
         <div className="right-panel-content">
 
           <div className='formContainer'>
-            <animated.h1 style={fade} className="titleForm">Información personal </animated.h1>
+            <animated.h1 style={fade} className="titleForm">Agregar taller </animated.h1>
     <h1>{ID_Personal}</h1>
     <h1>{ID_User}</h1>
     <h1>{Nombre}</h1>
             <div className='containerInputLabel'>
-              <label className='labelInput'>Motivo de consulta:</label>
-              <input type="text" class="inputGlobal" placeholder="Motivo..." value={motivo} onChange={handleInputMotivo} onInput={handleInput} required />
+              <label className='labelInput'>Nombre de taller:</label>
+              <input type="text" class="inputGlobal" placeholder="Nombre" value={nombre} onChange={handleNombre} onInput={handleInput} required />
             </div>
 
             <div className='containerInputLabel'>
-              <label className='labelInput'>Objetivos terapeuticos:</label>
-              <textarea type="" class="inputGlobal" placeholder="Objetivos" value={objetivos} onChange={handleInputObjetivos} onInput={handleInput} required />
+              <label className='labelInput'>Duración:</label>
+              <input type="number" class="inputGlobal" placeholder="Duración (Minutos)" value={duracion} onChange={handleDuracion} onInput={handleInput} required />
             </div>
 
             <div className='containerInputLabel'>
-              <label className='labelInput'>Recomendaciones:</label>
-              <input type="text" class="inputGlobal" placeholder="Recomendaciones" value={recomendaciones} onChange={handleInputRecom} onInput={handleInput} required />
+              <label className='labelInput'>Hora:</label>
+              <input type="time" class="inputGlobal" placeholder="Hora" value={hora} onChange={handleTimeChange} onInput={handleInput} required />
             </div>
+
+            <div className='containerInputLabel'>
+              <label className='labelInput'>Dias:</label>
+              <label className="lblCHK"><input className="CHKtaller" type="checkbox" value="Lunes" onChange={handleCheckboxChange} checked={diasSeleccionados.includes('Lunes')} /> Lunes</label>
+                        <label  className="lblCHK"><input type="checkbox" value="Martes" onChange={handleCheckboxChange} checked={diasSeleccionados.includes('Martes')} /> Martes</label>
+                        <label className="lblCHK"><input type="checkbox" value="Miércoles" onChange={handleCheckboxChange} checked={diasSeleccionados.includes('Miércoles')} /> Miércoles</label>
+                        <label className="lblCHK"><input type="checkbox" value="Jueves" onChange={handleCheckboxChange} checked={diasSeleccionados.includes('Jueves')} /> Jueves</label>
+                        <label className="lblCHK"><input type="checkbox" value="Viernes" onChange={handleCheckboxChange} checked={diasSeleccionados.includes('Viernes')} /> Viernes</label>
+                        <label className="lblCHK"><input type="checkbox" value="Sábado" onChange={handleCheckboxChange} checked={diasSeleccionados.includes('Sábado')} /> Sábado</label>
+                        <label className="lblCHK"><input type="checkbox" value="Domingo" onChange={handleCheckboxChange} checked={diasSeleccionados.includes('Domingo')} /> Domingo</label>
+            </div>
+            
+            <div className='containerInputLabel'>
+              <label className='labelInput'>Instructor:</label>
+              <input type="text" class="inputGlobal" placeholder="Instructor" value={instructor} onChange={handleInstr} onInput={handleInput} required />
+            </div>
+
+            <div className='containerInputLabel'>
+                <label className='labelInput'>Elige un centro:</label>
+
+                <select class="inputGlobal" value={ID_Centro} onChange={e => setCentroId(e.target.value.split(" - ")[0])} required>
+                  <option disabled selected value="">Seleccionar centro</option>
+                  {centros.map(centro => (
+                    <option key={centro.ID_Centro} value={centro.ID_Centro}>
+                      {centro.ID_Centro} - {centro.Nombre}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
             <button type="submit" className='buttonPrincipalGlobal' onClick={handleSubmit} >Enviar </button>
           </div>
@@ -253,4 +342,4 @@ const [recomendaciones, setRecomendaciones]= useState("");
   );
 }
 
-export default ModulePsicoNuevaConsultaForm;
+export default ModuleTallerAddForm;

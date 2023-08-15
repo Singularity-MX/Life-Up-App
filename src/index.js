@@ -84,6 +84,17 @@ import ModulePsicoNuevaConsultaForm from './Componentes/Modulos/Psicologia/Consu
 import WidgetPersonalInformation from './Componentes/Modulos/Widgets/CardUserPersonal';
 import TestWidgets from './Componentes/Modulos/Widgets/Graficos/testWidgets';
 
+//salud
+import ModuleSaludNewExpedienteID from './Componentes/Modulos/Enfermeria/Expediente/NuevoExpedienteForm1';
+import ModuleSaludNewExpedienteCreate from './Componentes/Modulos/Enfermeria/Expediente/NuevoExpedienteForm2';
+import ModuleSaludNewConsultaID from './Componentes/Modulos/Enfermeria/Consultas/NuevaConsultaForm1';
+import ModuleSaludNewConsultaForm from './Componentes/Modulos/Enfermeria/Consultas/NuevaConsultaForm2';
+
+
+//taller
+import ModuleTallerAddForm from './Componentes/Modulos/Talleres/Agregar/AgregarTaller';
+import ModuleTallerDelete from './Componentes/Modulos/Talleres/Eliminar/DeleteTaller';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -255,6 +266,42 @@ const router = createBrowserRouter([
   path: "/Psicologia-NewConsult-Form",
   element: <ModulePsicoNuevaConsultaForm/>,
 },
+
+////////////////////////////////////////////////----------------------salud
+
+{////////////////////////////////////////////////----------------------espediente
+  path: "/Salud-Expediente-ID",
+  element: <ModuleSaludNewExpedienteID/>,
+},
+
+{
+  path: "/Salud-Expediente-Create",
+  element: <ModuleSaludNewExpedienteCreate/>,
+},
+////////////////////////////////////////////////----------------------consultas
+{
+  path: "/Salud-Consulta-ID",
+  element: <ModuleSaludNewConsultaID/>,
+},
+{
+  path: "/Salud-Consulta-Create",
+  element: <ModuleSaludNewConsultaForm/>,
+},
+
+////////////////////////////////////////////////----------------------taller
+//add
+{
+  path: "/Taller-Add-Form",
+  element: <ModuleTallerAddForm/>,
+},
+//delte
+{
+  path: "/Taller-Delete",
+  element: <ModuleTallerDelete/>,
+},
+
+
+
 
 ///////////////////////////////widgets
 {

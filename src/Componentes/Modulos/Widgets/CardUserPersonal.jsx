@@ -192,7 +192,7 @@ const WidgetPersonalInformation = (props) => {
                     </div>
                 </div>
                 
-                <div id="QR"ref={qrCodeRef} style={{ display: 'flex' }}>
+                <div id="QR"ref={qrCodeRef} style={{ display: 'flex'}}>
                     {/* The QRCode component */}
                     <QRCode value={ID_user} size={140} />
                 </div>

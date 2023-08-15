@@ -68,6 +68,15 @@ const MenuEnfermeria = () => {
         navigate("/EditUserPersonal");
     }
 
+    const Expediente = () => {
+        navigate("/Salud-Expediente-ID",  { state: { ID_PERSONAL: ID } });
+    }
+    const Consulta = () => {
+        navigate("/Salud-Consulta-ID",  { state: { ID_PERSONAL: ID } });
+    }
+
+    
+    
     return (
         <body>
             <div className="left-panel">
@@ -78,18 +87,16 @@ const MenuEnfermeria = () => {
                     <div className='line'></div>
                 </div>
                 <div className='contMenu' >
-                <div className='optionBtn' onClick={InsertUser}>
-                        <label className='txtBTN'>Agregar usuario</label>
+                <div className='optionBtn' onClick={Expediente}>
+                        <label className='txtBTN'>Crear expediente</label>
                     </div>
-                    <div className='optionBtn' onClick={"#"}>
-                        <label className='txtBTN'>Editar usuario</label>
+                    <div className='optionBtn' onClick={Consulta}>
+                        <label className='txtBTN'>Crear consulta médica</label>
                     </div>
-                    <div className='optionBtn' onClick={ModifyUser}>
-                        <label className='txtBTN'>Eliminar usuario</label>
-                    </div>
+               
 
                     <div className='optionBtn' onClick={regresar}>
-                        <label className='txtBTN'>Volver</label>
+                        <label className='txtBTN'>Regresar</label>
                     </div>
          
                 </div>
