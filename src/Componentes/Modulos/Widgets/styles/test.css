@@ -1,0 +1,22 @@
+.bd{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(233, 233, 233);
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+   
+}
+
+
+/* Estilo para la tabla con scroll */
+.table {
+    max-height: 400px;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+

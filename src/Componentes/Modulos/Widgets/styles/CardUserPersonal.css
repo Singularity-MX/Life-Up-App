@@ -1,0 +1,122 @@
+#containerBody{
+    background-color: rgb(230, 230, 230);
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100vh;
+    
+}
+#card{
+    
+    overflow-y: scroll;
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0;
+   /* box-shadow: 2px 4px 12px 0px  rgba(0, 0, 0, 0.25);*/
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+}
+
+/*imagen*/
+
+#imageItem{
+    width: 160px;
+    height: 160px;
+    flex-shrink: 0;
+    border-radius: 92.5px;
+    margin: 30px;
+border: 7px solid #383838;
+box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+#Nombre{
+    margin-bottom: 30px;
+    color: #383838;
+    text-align: center;
+    font-family: Rubik;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+#containerItemsInfo{
+    width: 260px;
+}
+#contenedorItem{
+    display: flex;
+    flex-direction: row;
+   margin-bottom: 15px;
+    justify-content: start; /* Centrar horizontalmente */
+    align-items: center;
+    justify-content: flex-start; 
+    width: 100%;
+}
+
+
+
+#textLabel{
+    color: #414141;
+font-family: Rubik;
+font-size: 17px;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+margin: 0;
+}
+
+#parrafoFinal{
+    color: #414141;
+text-align: justify;
+font-family: Rubik;
+font-size: 13px;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+}
+
+.btn-content {
+    display: flex;
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+    height: 45px;
+}
+#QR{
+    margin-top: 2rem;
+
+}
+
+#btnQR{
+
+    color: #ffffff;
+    border: none;
+    margin-top: 3rem;
+    height: auto;
+    transition: .3s;
+    width: 200px;
+    border-radius: 9px;
+    background: #1E9DE0;
+    cursor: pointer;
+    margin-bottom: 20px;
+    
+}
+
+#btnQR:hover {
+    background-color: #3b82f6;
+    box-shadow: 0 0 0 5px #3b83f65f;
+    color: #fff;
+    scale: 1.05;
+    cursor: pointer;
+  }
+
+  #textButton{
+    margin-right: 10px; 
+    cursor: pointer;
+    
+  }
+  #iconButton {
+    margin-left: 10px; /* Ajusta el valor para separar el icono del label */
+}

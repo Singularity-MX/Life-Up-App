@@ -66,38 +66,6 @@ text-align: center;
 }
 
 
-  /*TABLE*/
-  table{
-    background-color: #fafafa;
-    transition: all 0.5s;
-    margin-top: 30px;
-    margin-bottom: 30px;
-   
-  }
-  th{
-    background-color: #00807B;
-    
-
-  }
-  td{
-    background-color: #f1f1f1;
-    cursor: pointer;
-    scale: 1.03;
-    transition: all 0.3s;
-  }
-  .fila:hover td{
-    scale: 1.03;
-    background-color: #ffffff;
-
-    font: bold;
-  }
-
-  tr{
-    background-color: #383838;
-    text-align: center;
-    transition: all 0.5s;
-
-  }
 
 
 .inputsPsico {

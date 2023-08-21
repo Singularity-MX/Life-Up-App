@@ -1,7 +1,5 @@
 /*ESTILOS PRINCIPALES DE CONTENEDORES DEL DASHBOARD*/
-body{
-  background-color: #00807B;
-}
+
 .bodyContentPsico{
   background-color: #e0e0e0;
  width: 100vw;
@@ -355,36 +353,6 @@ will-change: transform;
 
 .btn_Oculto:active {
   transform: translateY(-1px);
-}
-
-
-/*TABLE*/
-table{
-  background-color: #fafafa;
-  transition: all 0.5s;
-  margin-top: 30px;
-  margin-bottom: 30px;
- 
-}
-th{
-  background-color: #00807B;
-  
-
-}
-td{
-  background-color: #ffffff;
-  cursor: pointer;
-  scale: 1.05;
-}
-.fila:hover{
-  scale: 1.05;
-}
-
-tr{
-  background-color: #383838;
-  text-align: center;
-  transition: all 0.5s;
-
 }
 
 .titleValorPsico{

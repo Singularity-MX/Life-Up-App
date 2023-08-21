@@ -1,0 +1,70 @@
+.ParrafoInformacionFinal{
+    color: rgb(26, 26, 26);
+    margin: 4px;
+}
+
+#containerDashboard{
+  background-color: black;
+  width: 100%;
+
+  padding: 10px;
+}
+
+
+
+
+.containerTotal {  
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "WIDGET-1 WIDGET-2 CARD"
+    "TABLA TABLA CARD"
+    "TABLA TABLA CARD";
+  height: 100%;
+}
+
+.WIDGET-1 { 
+  grid-area: WIDGET-1; 
+  margin: 3px;
+  background-color: #f0f0f0;
+  box-shadow: 2px 4px 5px 0px  rgba(0, 0, 0, 0.2);
+  
+/* Estilo del borde izquierdo */
+
+}
+
+.WIDGET-2 { 
+  grid-area: WIDGET-2; 
+  margin: 3px;
+  background-color: rgb(240, 240, 240);
+  box-shadow: 2px 4px 5px 0px  rgba(0, 0, 0, 0.2);
+ 
+}
+
+.CARD { 
+  margin: 3px;
+  grid-area: CARD; 
+  background-color: #f0f0f0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 2px 4px 5px 0px  rgba(0, 0, 0, 0.2);
+  
+}
+
+.TABLA { 
+  grid-area: TABLA; 
+  background-color: rgb(240, 240, 240);
+  margin: 3px;
+  box-shadow: 2px 4px 5px 0px  rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  text-align: center;
+}

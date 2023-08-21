@@ -25,6 +25,16 @@ import FormEmergencia from './Componentes/Insert/Form_emergencia';
 import Form_Foto from './Componentes/Insert/Form_foto';
 import Form_final from './Componentes/Insert/Form_final';
 
+//user
+import Form_user_personal from './Componentes/Modulos/Usuarios/Insert/Form_personal';
+import Form_user_contacto from './Componentes/Modulos/Usuarios/Insert/Form_contacto';
+import Form_user_emergencia from './Componentes/Modulos/Usuarios/Insert/Form_emergencia';
+import Form_user_photo from './Componentes/Modulos/Usuarios/Insert/Form_photo';
+import Form_user_finally from './Componentes/Modulos/Usuarios/Insert/Form_finally';
+
+//delete
+import ModuleUserDelete from './Componentes/Modulos/Usuarios/Delete/Delete';
+
 //modulo de salud
 import Salud_dashboard from './Componentes/Salud/Salud_home';
 import Form_salud from './Componentes/Salud/form_captura';
@@ -48,6 +58,43 @@ import DashboardBuscar from './Componentes/BuscarUsuarios/Buscar_dashboard';
 
 //estadis
 import DashboardEstadistica from './Componentes/Estadistica/dashboardEstadistica';
+
+//ADMIN SUPER USUARIOS
+import LoginSU from './Componentes/AdminUsers/LoginSU';
+import PanelAdmin from './Componentes/AdminUsers/PanelSU';
+import Formulario from './Componentes/AdminUsers/addUser';
+import DeleteUser from './Componentes/AdminUsers/DeleteUserForm';
+import EditSuperUsuario from './Componentes/AdminUsers/EditUser';
+
+//menus roles
+import MenuAdmin from './Componentes/ROLES_MENU/Administracion/Dashboard_Admin';
+import MenuPsico from './Componentes/ROLES_MENU/Psicologia/Dashboard_Psicologia';
+import MenuUsers from './Componentes/Modulos/Usuarios/Menu-usuarios';
+
+import MenuApplication from './Componentes/Menu/MenuApp';
+import MenuPsicologia from './Componentes/Modulos/Psicologia/Menu-psicologia';
+import MenuEnfermeria from './Componentes/Modulos/Enfermeria/Menu-enfermeria';
+import MenuTalleres from './Componentes/Modulos/Talleres/Menu-talleres';
+import MenuEstadistica from './Componentes/Modulos/Estadistica/Menu-estadistica';
+
+//psico
+import ModulePsicoNuevaConsultaID from './Componentes/Modulos/Psicologia/Consulta/NuevaConsultaForm1';
+import ModulePsicoNuevaConsultaForm from './Componentes/Modulos/Psicologia/Consulta/NuevaConsultaForm2';
+//widgets
+import WidgetPersonalInformation from './Componentes/Modulos/Widgets/CardUserPersonal';
+import TestWidgets from './Componentes/Modulos/Widgets/Graficos/testWidgets';
+
+//salud
+import ModuleSaludNewExpedienteID from './Componentes/Modulos/Enfermeria/Expediente/NuevoExpedienteForm1';
+import ModuleSaludNewExpedienteCreate from './Componentes/Modulos/Enfermeria/Expediente/NuevoExpedienteForm2';
+import ModuleSaludNewConsultaID from './Componentes/Modulos/Enfermeria/Consultas/NuevaConsultaForm1';
+import ModuleSaludNewConsultaForm from './Componentes/Modulos/Enfermeria/Consultas/NuevaConsultaForm2';
+
+
+//taller
+import ModuleTallerAddForm from './Componentes/Modulos/Talleres/Agregar/AgregarTaller';
+import ModuleTallerDelete from './Componentes/Modulos/Talleres/Eliminar/DeleteTaller';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -62,25 +109,26 @@ const router = createBrowserRouter([
     path: "/home",
     element: <HomeRoute/>,
   },
+  ////////////////////////////////////-> usuarios modulo
   {
     path: "/addUserPersonal",
-    element: <Form_personal/>,
+    element: <Form_user_personal/>,
   },
   {
     path: "/addUserContacto",
-    element: <FormContacto/>,
+    element: <Form_user_contacto/>,
   },
   {
     path: "/addUserEmergencia",
-    element: <FormEmergencia/>,
+    element: <Form_user_emergencia/>,
   },
   {
     path: "/addUserFoto",
-    element: <Form_Foto/>,
+    element: <Form_user_photo/>,
   },
   {
     path: "/formFinal",
-    element: <Form_final/>,
+    element: <Form_user_finally/>,
   },
 //modulo de slaud
 {
@@ -143,6 +191,127 @@ const router = createBrowserRouter([
   element: <DashboardEstadistica/>,
 },
 
+// ADMIN SUIPER USUARIOS
+{
+  path: "/LoginSU",
+  element: <LoginSU/>,
+},
+
+{
+  path: "/DashboardRoles",
+  element: <PanelAdmin/>,
+  
+},
+{
+  path: "/FormularioPersonal",
+  element: <Formulario/>,
+},
+{
+  path: "/DeleteUserPersonal",
+  element: <DeleteUser/>,
+},
+{
+  path: "/EditUserPersonal",
+  element: <EditSuperUsuario/>,
+},
+
+///MENU ROLES DE USUARIOS
+{
+  path: "/MenuAdmin",
+  element: <MenuAdmin/>,
+},
+{
+  path: "/MenuPsico",
+  element: <MenuPsico/>,
+},
+
+
+
+
+{
+  path: "/MenuUsers",
+  element: <MenuUsers/>,
+},
+{
+  path: "/MenuApp",
+  element: <MenuApplication/>,
+},
+{
+  path: "/MenuPsicologia",
+  element: <MenuPsicologia/>,
+},
+{
+  path: "/MenuEnfermeria",
+  element: <MenuEnfermeria/>,
+},
+{
+  path: "/MenuTalleres",
+  element: <MenuTalleres/>,
+},
+{
+  path: "/MenuEstadistica",
+  element: <MenuEstadistica/>,
+},
+{
+  path: "/MouleUserDelete",
+  element: <ModuleUserDelete/>,
+},
+
+///psico
+{
+  path: "/PsicologiaNewConsultID",
+  element: <ModulePsicoNuevaConsultaID/>,
+},
+{
+  path: "/Psicologia-NewConsult-Form",
+  element: <ModulePsicoNuevaConsultaForm/>,
+},
+
+////////////////////////////////////////////////----------------------salud
+
+{////////////////////////////////////////////////----------------------espediente
+  path: "/Salud-Expediente-ID",
+  element: <ModuleSaludNewExpedienteID/>,
+},
+
+{
+  path: "/Salud-Expediente-Create",
+  element: <ModuleSaludNewExpedienteCreate/>,
+},
+////////////////////////////////////////////////----------------------consultas
+{
+  path: "/Salud-Consulta-ID",
+  element: <ModuleSaludNewConsultaID/>,
+},
+{
+  path: "/Salud-Consulta-Create",
+  element: <ModuleSaludNewConsultaForm/>,
+},
+
+////////////////////////////////////////////////----------------------taller
+//add
+{
+  path: "/Taller-Add-Form",
+  element: <ModuleTallerAddForm/>,
+},
+//delte
+{
+  path: "/Taller-Delete",
+  element: <ModuleTallerDelete/>,
+},
+
+
+
+
+///////////////////////////////widgets
+{
+  path: "/testWidgetUserInfo",
+  element: <WidgetPersonalInformation/>,
+},
+{
+  path: "/testWidgets",
+  element: <TestWidgets/>,
+},
   /*--------------------------------------------------RUTAS PARA ACCESO CON LOADER*/
   {
     path: "/loader-Home",
@@ -152,7 +321,17 @@ const router = createBrowserRouter([
     path: "/loader-Login",
     element:  <Loader to="/login" delay={3000} />,
   },
+  {
+    path: "/loader-DashboardSU",
+    element:  <Loader to="/DashboardRoles" delay={1000} />,
+  },
+/*--------------------------------------------------rutas menu roles*/
+  {
+    path: "/loader-MenuAdmin",
+    element:  <Loader to="/MenuAdmin" delay={1000} />,
+  },
 
+  
 
 
 ]);

@@ -1,6 +1,6 @@
 
 import React from "react";
-import './Insertar.css';
+
 import Header from "../Header";
 import imagen from "../images/User_add/hogar.png";
 import { useNavigate } from "react-router-dom";
@@ -54,7 +54,6 @@ return (
       <form onSubmit={handleSubmit} className="Formulario_PsicoForm">
         <div className="containerTitleFormulario_PsicoForm"><h1 className="title-form">DATOS DE CONTACTO</h1></div>
         
-       
             
         <input type="text" className="inputsPsico" placeholder="Calle y número" value={calle} onChange={handleInputCalle} onInput={handleInput} required />
               <input type="text" className="inputsPsico" placeholder="Colonia" value={col} onChange={handleInputCol} onInput={handleInput} required />
