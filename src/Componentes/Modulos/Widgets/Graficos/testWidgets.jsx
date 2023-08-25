@@ -11,9 +11,18 @@ import backendUrl from '../../../../serverConfig';
 import axios from 'axios';
 import GridCell from './GridCell';
 // <LineChart />
+import { useSpring, animated } from 'react-spring';
 
 /*--------------------------------------------------------  FUNCION PRINCIPAL  -------------------------------------------------------------- */
 const TestWidgets = (props) => {
+
+  const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
+
+  const slide = useSpring({
+    from: { transform: 'translateX(100%)' },
+    to: { transform: 'translateX(0)' },
+  });
+
   const [dato, setDato] = useState('CEDIF-01');
   const [respuesta, setRes] = useState('');
   const [rol, setRol] = useState('');
@@ -139,11 +148,29 @@ lineas
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> RETURN () 
   return (
-    <div class="bd">
-   
-      </div >
-     
-      );
+    <div id='body'>
+
+      <div id='contenedor_img'>
+        <div id='contentHeader'><embed type="image/svg+xml" alt="SVG" src="https://cdn-us.icons8.com/docs/mgJd1Ewo7U2qOmtDFpJYhQ/OANR1KxWG0GiAeq0TWSrnQ.svg" />
+        </div>
+        <img id="image" src="https://lcdn-us.icons8.com/c/mgJd1Ewo7U2qOmtDFpJYhQ/cfe4a919a662e33c6355231a9c176db47f50aecc.png" />
+      </div>
+
+
+      <animated.div style={slide} id="contenedor_form">
+        <div id='contenedor_Menu_top'>
+          <div id='Option'><p>Usuarios</p></div>
+        </div>
+        <embed type="image/svg+xml" alt="Shape" src="https://cdn-us.icons8.com/docs/mgJd1Ewo7U2qOmtDFpJYhQ/22G6_ZDBzUil3QL39d8Gug.svg" />
+        <h1>Iniciar Sesión</h1>
+        <p>¡Inicia sesión para acceder a todas las funciones!</p>
+        <input id="inpt_Login" type='text' placeholder='Correo electrónico' />
+        <input id="inpt_Login" type='text' placeholder='Contraseña' />
+        <button className='buttonLogin'>Iniciar Sesión</button>
+      </animated.div>
+    </div >
+
+  );
 };
 
-      export default TestWidgets;
+export default TestWidgets;
