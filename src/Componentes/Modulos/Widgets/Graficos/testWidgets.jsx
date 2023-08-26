@@ -13,15 +13,51 @@ import GridCell from './GridCell';
 // <LineChart />
 import { useSpring, animated } from 'react-spring';
 
+
+import LogoLogin from '../../../../GlobalStyles/images/IconLogoLifeUp.png';
+import imgLogin1 from '../../../../GlobalStyles/images/imgLogin1.svg';
 /*--------------------------------------------------------  FUNCION PRINCIPAL  -------------------------------------------------------------- */
 const TestWidgets = (props) => {
+  const [isVisible, setIsVisible] = useState(false);
 
   const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
+  const zoom = useSpring({ transform: 'scale(1)', from: { transform: 'scale(0.5)' } });
+
+  const zoomWithDelay = useSpring({
+    transform: 'scale(1)',
+    from: { transform: 'scale(0.5)' },
+    config: { delay: 2000 } // Agregar un retraso de 1000ms (1 segundo)
+  });
 
   const slide = useSpring({
     from: { transform: 'translateX(100%)' },
     to: { transform: 'translateX(0)' },
   });
+
+  const fadeInUp = useSpring({
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+    from: { opacity: 0, transform: 'translateY(20px)' }
+  });
+  
+
+  const [isAnimating, setIsAnimating] = useState(false);
+
+
+  const firstAnimation = useSpring({
+    opacity: isAnimating ? 1 : 0,
+    from: { opacity: 0 },
+    onRest: () => {
+      setIsAnimating(false); // Cambiar el estado para activar la segunda animación
+    }
+  });
+
+  const secondAnimation = useSpring({
+    transform: isAnimating ? 'scale(1)' : 'scale(0.5)',
+    from: { transform: 'scale(0.5)' },
+    config: { delay: 2000 }
+  });
+
 
   const [dato, setDato] = useState('CEDIF-01');
   const [respuesta, setRes] = useState('');
@@ -151,18 +187,21 @@ lineas
     <div id='body'>
 
       <div id='contenedor_img'>
-        <div id='contentHeader'><embed type="image/svg+xml" alt="SVG" src="https://cdn-us.icons8.com/docs/mgJd1Ewo7U2qOmtDFpJYhQ/OANR1KxWG0GiAeq0TWSrnQ.svg" />
+        <div id='contentHeader'><embed type="image/svg+xml" alt="SVG" src="https://cdn-us.icons8.com/docs/mgJd1Ewo7U2qOmtDFpJYhQ/OANR1KxWG0GiAeq0TWSrnQ.svg" id='Logo'/>
         </div>
-        <img id="image" src="https://lcdn-us.icons8.com/c/mgJd1Ewo7U2qOmtDFpJYhQ/cfe4a919a662e33c6355231a9c176db47f50aecc.png" />
+        <animated.img style={fade} id="image" src={imgLogin1} preload="true" />
+      
       </div>
 
 
       <animated.div style={slide} id="contenedor_form">
         <div id='contenedor_Menu_top'>
-          <div id='Option'><p>Usuarios</p></div>
+          <div id='Option' onClick={"#"}><p>Administrador</p></div>
         </div>
-        <embed type="image/svg+xml" alt="Shape" src="https://cdn-us.icons8.com/docs/mgJd1Ewo7U2qOmtDFpJYhQ/22G6_ZDBzUil3QL39d8Gug.svg" />
-        <h1>Iniciar Sesión</h1>
+        <img src={LogoLogin} id='IconoLoginForm'/> 
+
+        <animated.h1 style={fade} id="TitleLogin">Iniciar Sesión</animated.h1>
+        
         <p>¡Inicia sesión para acceder a todas las funciones!</p>
         <input id="inpt_Login" type='text' placeholder='Correo electrónico' />
         <input id="inpt_Login" type='text' placeholder='Contraseña' />
