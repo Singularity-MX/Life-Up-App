@@ -9,6 +9,7 @@ import logo from '../../../../GlobalStyles/images/logo.svg';
 import imagen from '../../../../GlobalStyles/images/image1.png';
 import Swal from 'sweetalert2';
 
+//
 /*--------------------------------------------------------  FUNCION PRINCIPAL  -------------------------------------------------------------- */
 const Form_user_personal = () => {
 
