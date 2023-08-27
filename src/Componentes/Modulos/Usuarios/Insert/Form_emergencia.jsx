@@ -162,14 +162,14 @@ const Form_user_emergencia = () => {
 
         </div>
         <div className='contentImage'>
-          <img src={imagen} className='imagen' />
+         <img src={""} className='imagen' />
         </div>
       </div>
 
       <div className="right-panel">
         <div className="right-panel-content">
           <div className='formContainer'>
-            <animated.h1 style={fade} className="titleForm">Información de emer</animated.h1>
+            <animated.h1 style={fade} className="titleForm">Información de emergencia</animated.h1>
           
 
             <div className='containerInputLabel'>

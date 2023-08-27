@@ -3,10 +3,10 @@ import Swal from 'sweetalert2';
 import firebase from "../../firebase";
 
 import React from "react";
-import './Insertar.css';
+//import './Insertar.css';
 import logo from '../images/Home/general.png';
 import Header from "../Header";
-import imagen from "../images/User_add/foto.png";
+//import imagen from "../images/User_add/foto.png";
 import {useNavigate} from "react-router-dom";
 /*Funciones importadas*/
 

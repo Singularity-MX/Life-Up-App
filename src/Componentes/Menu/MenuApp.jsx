@@ -8,7 +8,14 @@ import '../../GlobalStyles/Resources.css';
 import logo from '../../GlobalStyles/images/logo.svg';
 import imagen from '../../GlobalStyles/images/image1.png';
 
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Importar los estilos del carrusel
 
+import './carrousell.css';
+
+import img1 from '../../GlobalStyles/images/carrousell/1.png';
+import img2 from '../../GlobalStyles/images/carrousell/2.png';
+import img3 from '../../GlobalStyles/images/carrousell/3.png';
 const MenuApplication = () => {
     const routeLocation = useLocation();
     const ID =  routeLocation.state && routeLocation.state.ID_PERSONAL;
@@ -110,11 +117,11 @@ const MenuApplication = () => {
                     </div>
                 </div>
                 <div className='contentImage'>
-                    <img src={imagen} className='imagen' />
+                   <img src={""} className='imagen' />
                 </div>
             </div>
 
-
+            
 
 
             <div className="right-panel">
@@ -130,8 +137,21 @@ const MenuApplication = () => {
                     </div>
 
                     <div className='table_container'>
-                        <h1 className='titleForm'>menu app: {Rol} </h1>
-                     
+                        <h1 className='titleForm'>Tu rol es { Rol} </h1>
+                        <Carousel autoPlay={true} interval={4000} infiniteLoop={true}>
+      <div>
+        <img src={img1} alt="Imagen 1" />
+        <p className="legend">Leyenda de la imagen 1</p>
+      </div>  
+      <div>
+        <img src={img2} alt="Imagen 2" />
+        <p className="legend">Leyenda de la imagen 2</p>
+      </div>
+      <div>
+        <img src={img3} alt="Imagen 3" />
+        <p className="legend">Leyenda de la imagen 3</p>
+      </div>
+    </Carousel>
                     </div>
                 </div>
             </div>

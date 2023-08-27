@@ -311,7 +311,7 @@ const Medicacion = medic;
           </div>
         </div>
         <div className='contentImage'>
-          <img src={imagen} className='imagen' />
+         <img src={""} className='imagen' />
         </div>
       </div>
 

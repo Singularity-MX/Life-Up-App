@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 const Form_user_personal = () => {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> DECLARACIONES 
+
   //Fade para el h1
   const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
 
@@ -233,7 +234,7 @@ const Form_user_personal = () => {
           </div>
         </div>
         <div className='contentImage'>
-          <img src={imagen} className='imagen' />
+         <img src={""} className='imagen' />
         </div>
       </div>
 

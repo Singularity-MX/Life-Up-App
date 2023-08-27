@@ -59,7 +59,7 @@ const MenuTalleres = () => {
               const data = response.data;
               const numeroTaller = data.NumeroTaller;
               setIdTaller(numeroTaller);
-              alert(numeroTaller);
+              //alert(numeroTaller);
             })
             .catch(error => {
               // Manejar errores si ocurre alguno
@@ -126,7 +126,7 @@ const MenuTalleres = () => {
          
                 </div>
                 <div className='contentImage'>
-                    <img src={imagen} className='imagen' />
+                   <img src={""} className='imagen' />
                 </div>
             </div>
 

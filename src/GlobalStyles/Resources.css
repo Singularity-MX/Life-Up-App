@@ -17,7 +17,7 @@
 }
 .inputGlobal:focus{
 background-color: rgb(255, 255, 255);
-border: 2px solid #1E9DE0;
+border: 2px solid #418d99;
 outline: none;
 
 }
@@ -80,7 +80,7 @@ outline: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .table thead {
-  background-color: #1E9DE0; /* Color de fondo del encabezado */
+  background-color: #418d99; /* Color de fondo del encabezado */
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }

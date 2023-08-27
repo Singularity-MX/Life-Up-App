@@ -314,12 +314,16 @@ const router = createBrowserRouter([
 },
   /*--------------------------------------------------RUTAS PARA ACCESO CON LOADER*/
   {
+    path: "/loader",
+    element:  <Loader />,
+  },
+  {
     path: "/loader-Home",
     element:  <Loader to="/home" delay={2000} />,
   },
   {
     path: "/loader-Login",
-    element:  <Loader to="/login" delay={3000} />,
+    element:  <Loader to="/login" delay={1000} />,
   },
   {
     path: "/loader-DashboardSU",

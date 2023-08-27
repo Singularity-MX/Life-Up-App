@@ -146,7 +146,7 @@ const MenuPsicologia = () => {
     //obtener el json de ffechas
     const getDistribucionFechas = async () => {
         try {
-            const response = await fetch(backendUrl + '/api/widgets-Get-Fechas');
+            const response = await fetch(backendUrl + '/api/widgets-Get-Psicologia');
             const responseData = await response.json();
             if (response.ok) {
                 setDatosFechas(responseData);
@@ -197,7 +197,7 @@ const MenuPsicologia = () => {
          
                 </div>
                 <div className='contentImage'>
-                    <img src={imagen} className='imagen' />
+                   <img src={""} className='imagen' />
                 </div>
             </div>
 

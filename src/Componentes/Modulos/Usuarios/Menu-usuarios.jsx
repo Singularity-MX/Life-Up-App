@@ -116,7 +116,7 @@ const MenuUsers = () => {
 
     function InsertUser() { navigate("/addUserPersonal", { state: { ID_PERSONAL: ID, Rol: Rol } }); }
 
-    const DeleteUser = () => { navigate("/MouleUserDelete"); }
+    const DeleteUser = () => { navigate("/MouleUserDelete" , { state: { ID_PERSONAL: ID, Rol: Rol } }); }
 
     function GoLogOut() { navigate("/loader-Login"); }
 
@@ -193,7 +193,7 @@ const MenuUsers = () => {
                     </div>
                 </div>
                 <div className='contentImage'>
-                    <img src={imagen} className='imagen' />
+                   <img src={""} className='imagen' />
                 </div>
             </div>
             <div className="right-panel">

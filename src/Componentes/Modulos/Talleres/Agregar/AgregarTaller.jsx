@@ -212,7 +212,7 @@ function handleCheckboxChange(event) {
     const fechaFormateada = dia+"/"+mes+"/"+anio;
     setFecha(fechaFormateada);
 
-    alert(numeroT);
+    
     //-----------------------------------------------> Obtener el numero de usuarios
    
 
@@ -273,7 +273,7 @@ function handleCheckboxChange(event) {
           </div>
         </div>
         <div className='contentImage'>
-          <img src={imagen} className='imagen' />
+         <img src={""} className='imagen' />
         </div>
       </div>
 
