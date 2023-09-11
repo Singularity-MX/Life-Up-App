@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import backendUrl from '../../serverConfig';
 
 import '../../GlobalStyles/Resources.css';
@@ -16,10 +16,14 @@ import './carrousell.css';
 import img1 from '../../GlobalStyles/images/carrousell/1.png';
 import img2 from '../../GlobalStyles/images/carrousell/2.png';
 import img3 from '../../GlobalStyles/images/carrousell/3.png';
+import img4 from '../../GlobalStyles/images/carrousell/4.png';
+import img5 from '../../GlobalStyles/images/carrousell/5.png';
+import img6 from '../../GlobalStyles/images/carrousell/6.png';
+import img7 from '../../GlobalStyles/images/carrousell/7.png';
 const MenuApplication = () => {
     const routeLocation = useLocation();
-    const ID =  routeLocation.state && routeLocation.state.ID_PERSONAL;
-    const Rol =  routeLocation.state && routeLocation.state.Rol;
+    const ID = routeLocation.state && routeLocation.state.ID_PERSONAL;
+    const Rol = routeLocation.state && routeLocation.state.Rol;
 
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
@@ -61,19 +65,19 @@ const MenuApplication = () => {
 
     //usuarios
     function GoUser() {
-        navigate('/MenuUsers' , { state: { ID_PERSONAL: ID, Rol: Rol} });
+        navigate('/MenuUsers', { state: { ID_PERSONAL: ID, Rol: Rol } });
     }
     function GoPsicologia() {
-        navigate('/MenuPsicologia' , { state: { ID_PERSONAL: ID, Rol: Rol} });
+        navigate('/MenuPsicologia', { state: { ID_PERSONAL: ID, Rol: Rol } });
     }
     function GoEnfermeria() {
-        navigate('/MenuEnfermeria' , { state: { ID_PERSONAL: ID, Rol: Rol} });
+        navigate('/MenuEnfermeria', { state: { ID_PERSONAL: ID, Rol: Rol } });
     }
     function GoTalleres() {
-        navigate('/MenuTalleres' , { state: { ID_PERSONAL: ID, Rol: Rol} });
+        navigate('/MenuTalleres', { state: { ID_PERSONAL: ID, Rol: Rol } });
     }
     function GoEstadistica() {
-        navigate('/MenuEstadistica' , { state: { ID_PERSONAL: ID, Rol: Rol} });
+        navigate('/MenuEstadistica', { state: { ID_PERSONAL: ID, Rol: Rol } });
     }
 
 
@@ -86,7 +90,7 @@ const MenuApplication = () => {
     const ModifyUser = () => {
         navigate("");
     }
-    
+
     return (
         <body>
             <div className="left-panel">
@@ -96,7 +100,7 @@ const MenuApplication = () => {
                     <div className='line'></div>
                 </div>
                 <div className='contMenu' >
-                <div className='optionBtn' onClick={GoUser}>
+                    <div className='optionBtn' onClick={GoUser}>
                         <label className='txtBTN'>Usuarios</label>
                     </div>
                     <div className='optionBtn' onClick={GoPsicologia}>
@@ -117,11 +121,11 @@ const MenuApplication = () => {
                     </div>
                 </div>
                 <div className='contentImage'>
-                   <img src={""} className='imagen' />
+                    <img src={""} className='imagen' />
                 </div>
             </div>
 
-            
+
 
 
             <div className="right-panel">
@@ -137,21 +141,38 @@ const MenuApplication = () => {
                     </div>
 
                     <div className='table_container'>
-                        <h1 className='titleForm'>Tu rol es { Rol} </h1>
-                        <Carousel autoPlay={true} interval={4000} infiniteLoop={true}>
-      <div>
-        <img src={img1} alt="Imagen 1" />
-        <p className="legend">Leyenda de la imagen 1</p>
-      </div>  
-      <div>
-        <img src={img2} alt="Imagen 2" />
-        <p className="legend">Leyenda de la imagen 2</p>
-      </div>
-      <div>
-        <img src={img3} alt="Imagen 3" />
-        <p className="legend">Leyenda de la imagen 3</p>
-      </div>
-    </Carousel>
+                        <h1 className='titleForm'>Tu rol es {Rol} </h1>
+                        <Carousel autoPlay={true} interval={10000} infiniteLoop={true}>
+                            <div>
+                                <img src={img1} alt="Imagen 1" />
+
+                            </div>
+                            <div>
+                                <img src={img2} alt="Imagen 2" />
+
+                            </div>
+                            <div>
+                                <img src={img3} alt="Imagen 3" />
+
+                            </div>
+                            <div>
+                                <img src={img4} alt="Imagen 4" />
+
+                            </div>
+                            <div>
+                                <img src={img5} alt="Imagen 5" />
+
+                            </div>
+                            <div>
+                                <img src={img6} alt="Imagen 6" />
+
+                            </div>
+                            <div>
+                                <img src={img7} alt="Imagen 7" />
+
+                            </div>
+
+                        </Carousel>
                     </div>
                 </div>
             </div>

@@ -20,6 +20,7 @@ const MenuPsicologia = () => {
     const ID =  routeLocation.state && routeLocation.state.ID_PERSONAL;
     const Rol =  routeLocation.state && routeLocation.state.Rol;
     const [users, setUsers] = useState([]);
+    const [psicologiaData, setPsicologia] = useState([]);
     const navigate = useNavigate();
     const [copiedPersonalID, setCopiedPersonalID] = useState('');
 
@@ -33,6 +34,7 @@ const MenuPsicologia = () => {
     const [URL_photo, setPhotoUrl] = useState("https://cdn-icons-png.flaticon.com/512/149/149071.png");
     const [datosSexo, setDatosSexos] = useState("Telefono");
     const [datosFechas, setDatosFechas] = useState("Telefono");
+    
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-----------> FUNCIONES 
   
     const handleRowClick = (personalID) => {
@@ -129,6 +131,21 @@ const MenuPsicologia = () => {
             console.error('Error al enviar la solicitud:', error.message);
         }
     };
+
+    const fetchConsultaPsicologia = async () => {
+        try {
+            const response = await fetch(backendUrl + '/api/tablePsicologia');
+            const responseData = await response.json();
+            if (response.ok) {
+                setPsicologia(responseData);
+            } else {
+                console.error('Error al obtener los datos de usuarios');
+            }
+        } catch (error) {
+            console.error('Error al enviar la solicitud:', error.message);
+        }
+    };
+
     //Obtener el json de sexos
     const getDistribucionSexo = async () => {
         try {
@@ -158,6 +175,7 @@ const MenuPsicologia = () => {
         }
     };
 
+    fetchConsultaPsicologia();
     getDistribucionSexo();
     getDistribucionFechas();
     fetchUsers();
@@ -269,6 +287,34 @@ const MenuPsicologia = () => {
                                         <td>{user.ApellidoPaterno}</td>
                                         <td>{user.ApellidoMaterno}</td>
                                         <td>{user.Fecha}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+
+                        <h1 className='titleForm'>Consultas</h1>
+                        <table className='table'>
+                            <thead>
+                                <tr>
+                                    <th>Actions</th>
+                                   <th>Numero</th>
+                                    <th>User ID</th>
+                                    <th>Motivo</th>
+                                    <th>Objetivos</th>
+                                    <th>Recomendaciones</th>                               
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {psicologiaData.map((psicoData) => (
+                                    <tr key={psicologiaData.Numero} onClick={() => handleRowClick(psicoData.UserID)}>
+                                        <td onClick={() => handleCopied(psicoData.UserID)}><FaCopy /> </td>
+                                        <td>{psicoData.Numero}</td>
+                                        <td>{psicoData.UserID}</td>
+                                        <td>{psicoData.Motivo}</td>
+                                        <td>{psicoData.Objetivo}</td>
+                                        <td>{psicoData.Recomendaciones}</td>
+                                        <td>{psicoData.Fecha}</td>
                                     </tr>
                                 ))}
                             </tbody>
